@@ -11,8 +11,7 @@ import Profile from './profile/Profile'
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <NavBar />
+      <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/categories' element={<Categories />} />
@@ -21,8 +20,8 @@ const App = () => {
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
-      </BrowserRouter>
     </>
   )
 }
