@@ -30,7 +30,7 @@ const Categories = () => {
           <Link to={`/quizzes/${category}`}>{category}</Link>
         </p>
       ))}
-      <RandomCat />
+      <RandomCat categories={categories}/>
     </>
   )
 }
