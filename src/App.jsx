@@ -8,15 +8,17 @@ import LogIn from './login/LogIn'
 import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
+import CategoryQuizzes from './categories/CategoryQuizzes'
 
-const App = () => {
+const App = (props) => {
   return (
     <>
       <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/categories' element={<Categories />} />
           <Route path='/quizzes' element={<Quizzes />} />
+          <Route path='/categories' element={<Categories />} />
+          <Route path='/categories/:category/:id' element={<CategoryQuizzes />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<QuizForm />} />
           <Route path='/leaderboard' element={<Leaderboard />} />

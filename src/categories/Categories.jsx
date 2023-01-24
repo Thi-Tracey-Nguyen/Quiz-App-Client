@@ -27,7 +27,7 @@ const Categories = () => {
       <h2>Categories</h2>
       {categories.length === 0 ? 'Loading...' : categories.map((category, index) => (
         <p key={index}>
-          <Link to={`/quizzes/${category}`}>{category}</Link>
+          <Link to={`/categories/${category}`}>{category}</Link>
         </p>
       ))}
       <RandomCat categories={categories}/>

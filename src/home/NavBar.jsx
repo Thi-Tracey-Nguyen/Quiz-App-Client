@@ -18,6 +18,7 @@ const NavBar = () => {
                 Quizzes
               </Link>
               <ul className="dropdown-menu">
+                <li><Link className="dropdown-item" to="/quizzes">All Quizzes</Link></li>
                 <li><Link className="dropdown-item" to="/categories">Categories</Link></li>
                 <li><Link className="dropdown-item" to="/make-a-quiz">Make a quiz</Link></li>
                 <li><Link className="dropdown-item" to="/edit-a-quiz">Edit a quiz</Link></li>
