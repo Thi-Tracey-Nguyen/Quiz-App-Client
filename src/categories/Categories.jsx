@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Categories = () => {
 
@@ -9,6 +10,8 @@ const Categories = () => {
       const res = await fetch('https://opentdb.com/api.php?amount=10')
       const data = await res.json()
       const questions = data.results
+
+      // see if this bit could be shortened
       const cat = []
       for (const question of questions) {
         cat.push(question.category)
@@ -21,7 +24,11 @@ const Categories = () => {
   return (
     <>
       <h2>Categories</h2>
-      {categories.map((category, index) => <p key={index}>{category}</p>)}
+      {categories.map((category, index) => (
+        <p key={index}>
+          <Link to={`/quizzes/${category}`}>{category}</Link>
+        </p>
+      ))}
     </>
   )
 }
