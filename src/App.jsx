@@ -7,6 +7,7 @@ import Leaderboard from './leaderboard/Leaderboard'
 import LogIn from './login/LogIn'
 import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
+import Quizzes from './categories/Quizzes'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/categories' element={<Categories />} />
+          <Route path='/quizzes' element={<Quizzes />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<QuizForm />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
