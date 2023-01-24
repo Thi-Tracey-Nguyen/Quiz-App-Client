@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import RandomCat from './RandomCat'
 
 const Categories = () => {
 
@@ -24,11 +25,12 @@ const Categories = () => {
   return (
     <>
       <h2>Categories</h2>
-      {categories.map((category, index) => (
+      {categories.length === 0 ? 'Loading...' : categories.map((category, index) => (
         <p key={index}>
           <Link to={`/quizzes/${category}`}>{category}</Link>
         </p>
       ))}
+      <RandomCat />
     </>
   )
 }
