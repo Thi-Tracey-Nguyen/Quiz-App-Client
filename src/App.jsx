@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
 import Home from './home/Home'
 import NavBar from './home/NavBar'
 import Categories from './categories/Categories'
@@ -9,6 +9,8 @@ import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
 import CategoryQuizzes from './categories/CategoryQuizzes'
+import ShowQuestions from './take-a-quiz/ShowQuestions'
+import ShowQuiz from './take-a-quiz/ShowQuiz'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
@@ -31,6 +33,16 @@ const App = () => {
     getCategories()
     getQuizzes()
   }, [])
+
+  //HOC for ShowQuiz
+  const ShowQuizWrapper = () => {
+    const { quizId } = useParams()
+    
+    // get quiz object from quizId
+    const quiz = quizzes.find(quiz => quiz._id === quizId)
+
+    return quiz ? <ShowQuiz quiz={quiz} /> : <h4>Loading... </h4>
+  }
   
   return (
     <>
@@ -40,6 +52,7 @@ const App = () => {
           <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
           <Route path='/categories' element={<Categories categories={categories} />} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
+          <Route path='/quizzes/:quizId' element={<ShowQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<QuizForm />} />
           <Route path='/leaderboard' element={<Leaderboard />} />

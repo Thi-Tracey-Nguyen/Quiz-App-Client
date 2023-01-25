@@ -20,7 +20,7 @@ const CategoryQuizzes = ({ quizzes, categories }) => {
 				<ul>
 						{quizzesByCat.map((quizByCat, index) => (
 						<li key={index}>
-								<Link to={`/categories/${categoryName}`}>{quizByCat.title}</Link>
+								<Link to={`/quizzes/${quizByCat._id}`}>{quizByCat.title}</Link>
 						</li>
 						))}
 				</ul>
