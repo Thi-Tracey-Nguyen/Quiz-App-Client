@@ -1,21 +1,26 @@
-import React, { useParams, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
 const CategoryQuizzes = ({ quizzes, categories }) => {
-  const { category } = useParams()
-	const { id } = useParams()
-  
-	const cat = categories[id] 
-	const quiz = quizzes[category]
-    
+
+  const { categoryName } = useParams()
+
+	// replace %20 in the URL's category name to space to match name in db
+	let categoryNameConverted = categoryName.replaceAll('%20', ' ')
+
+	// get the category object from the category name
+	const cat = categories.find(category => category.name === categoryNameConverted)
 	
+	// get quizzes whose category matches categry id
+	const quizzesByCat = quizzes.filter(quiz => quiz.category === cat._id)
+
 	return (
 		<>
-			<h1>Quizzes of {category.name} category</h1>
+			<h4>Quizzes of {categoryNameConverted} category</h4>
 				<ul>
-						{quizzes.map((quiz, index) => (
+						{quizzesByCat.map((quizByCat, index) => (
 						<li key={index}>
-								<Link to={`/categories/${category}/${index}`}>{quiz.title}</Link>
+								<Link to={`/categories/${categoryName}`}>{quizByCat.title}</Link>
 						</li>
 						))}
 				</ul>

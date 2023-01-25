@@ -14,21 +14,21 @@ const App = () => {
   const [ categories, setCategories ] = useState([])
   const [quizzes, setQuizzes] = useState([])
 
-  useEffect(() => {
-    async function getCategories() {
-      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories')
-      const data = await res.json()
-      setCategories(data)
-    }
-    getCategories()
-  }, [])
+
+  async function getCategories() {
+    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories')
+    const data = await res.json()
+    setCategories(data)
+  }
+  
+  async function getQuizzes() {
+    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
+    const data = await res.json()
+    setQuizzes(data)
+  }
 
   useEffect(() => {
-    async function getQuizzes() {
-      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
-      const data = await res.json()
-      setQuizzes(data)
-    }
+    getCategories()
     getQuizzes()
   }, [])
   
@@ -39,7 +39,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
           <Route path='/categories' element={<Categories categories={categories} />} />
-          <Route path='/categories/:category/:id' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
+          <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<QuizForm />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
