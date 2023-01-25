@@ -1,11 +1,11 @@
 import React from 'react'
-import ShowQuestions from './ShowQuestions'
+import ShowQuestion from './ShowQuestion'
 
 const ShowQuiz = ({ quiz }) => {
   return (
     <>
       <h1>{quiz.title}</h1>
-      <ShowQuestions quiz={quiz} />
+      <ShowQuestion quiz={quiz} />
     </>
     
   )

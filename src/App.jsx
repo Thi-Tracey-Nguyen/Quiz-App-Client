@@ -9,7 +9,7 @@ import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
 import CategoryQuizzes from './categories/CategoryQuizzes'
-import ShowQuestions from './take-a-quiz/ShowQuestions'
+import ShowQuestion from './take-a-quiz/ShowQuestion'
 import ShowQuiz from './take-a-quiz/ShowQuiz'
 
 const App = () => {
