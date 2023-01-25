@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 
 const ShowQuestions = ({ quiz }) => {
 
-  // const [ index, setIndex ] = useState(0)
-  const question = quiz.questions[0]
+  const [ index, setIndex ] = useState(0)
+  const question = quiz.questions[index]
 
-  // const handleClick = (e) => {
-  //   setIndex(index ++)
-  // }
+  const handleClick = (e) => {
+    setIndex(index+1)
+  }
 
   return (
     <>
@@ -15,7 +15,7 @@ const ShowQuestions = ({ quiz }) => {
       <p>{question.correctAnswer}</p>
       {question.incorrectAnswers.map((answer, index) => <p key={index}>{answer}</p>
       )}
-      <button>Next</button>
+      <button onClick={ handleClick }>Next</button>
     </>
   )
 }
