@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './home/Home'
 import NavBar from './home/NavBar'
@@ -10,15 +10,36 @@ import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
 import CategoryQuizzes from './categories/CategoryQuizzes'
 
-const App = (props) => {
+const App = () => {
+  const [ categories, setCategories ] = useState([])
+  const [quizzes, setQuizzes] = useState([])
+
+  useEffect(() => {
+    async function getCategories() {
+      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories')
+      const data = await res.json()
+      setCategories(data)
+    }
+    getCategories()
+  }, [])
+
+  useEffect(() => {
+    async function getQuizzes() {
+      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
+      const data = await res.json()
+      setQuizzes(data)
+    }
+    getQuizzes()
+  }, [])
+  
   return (
     <>
       <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/quizzes' element={<Quizzes />} />
-          <Route path='/categories' element={<Categories />} />
-          <Route path='/categories/:category/:id' element={<CategoryQuizzes />} />
+          <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
+          <Route path='/categories' element={<Categories categories={categories} />} />
+          <Route path='/categories/:category/:id' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<QuizForm />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
