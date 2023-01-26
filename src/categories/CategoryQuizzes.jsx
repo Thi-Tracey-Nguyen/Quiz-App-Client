@@ -11,7 +11,7 @@ const CategoryQuizzes = ({ quizzes, categories }) => {
 	// get the category object from the category name
 	const cat = categories.find(category => category.name === categoryNameConverted)
 	
-	// get quizzes whose category matches categry id
+	// get quizzes whose category matches category id
 	const quizzesByCat = quizzes.filter(quiz => quiz.category === cat._id)
 
 	return (
