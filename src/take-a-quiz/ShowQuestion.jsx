@@ -15,7 +15,7 @@ const ShowQuestions = ({ quiz }) => {
       <p>{question.correctAnswer}</p>
       {question.incorrectAnswers.map((answer, index) => <p key={index}>{answer}</p>
       )}
-      <button onClick={ handleClick }>Next</button>
+      { index < quiz.questions.length-1 ? <button onClick={ handleClick }>Next</button> : <h4>End of quiz</h4>}
     </>
   )
 }
