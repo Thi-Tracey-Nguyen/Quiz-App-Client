@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
 import Home from './home/Home'
 import NavBar from './home/NavBar'
+import Footer from './home/Footer'
 import Categories from './categories/Categories'
 import Leaderboard from './leaderboard/Leaderboard'
 import LogIn from './login/LogIn'
@@ -48,7 +49,7 @@ const App = () => {
     <>
       <NavBar />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home quizzes={quizzes}/>} />
           <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
           <Route path='/categories' element={<Categories categories={categories} />} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
@@ -60,6 +61,7 @@ const App = () => {
           <Route path='/profile' element={<Profile />} />
           <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
+      <Footer />
     </>
   )
 }
