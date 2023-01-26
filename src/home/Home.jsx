@@ -12,9 +12,11 @@ const Home = ({ quizzes }) => {
       </div>
         <ul> 
           {slicedQuizzes.length === 0 ? 'Loading...' : slicedQuizzes.map((quiz, index) => (
-            <p key={index}>
-              <Link to={`quizzes/${quiz.title}`}>{quiz.title}</Link>
-            </p>
+              <div key={index}>
+                <Link to={`quizzes/${quiz.title}`}>{quiz.title}</Link>
+                <p>Author: {quiz.author}</p>
+                <p>{quiz.questions.length} questions</p>
+              </div>
           ))}
         </ul>
     </>
