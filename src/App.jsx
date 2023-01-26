@@ -12,6 +12,7 @@ import Quizzes from './categories/Quizzes'
 import CategoryQuizzes from './categories/CategoryQuizzes'
 import ShowQuestion from './take-a-quiz/ShowQuestion'
 import ShowQuiz from './take-a-quiz/ShowQuiz'
+import EditQuizzes from './edit-a-quiz/EditQuizzes'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
@@ -55,7 +56,7 @@ const App = () => {
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           <Route path='/quizzes/:quizId' element={<ShowQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
-          <Route path='/edit-a-quiz' element={<QuizForm />} />
+          <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
           <Route path='/profile' element={<Profile />} />
