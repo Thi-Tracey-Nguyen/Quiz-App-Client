@@ -18,21 +18,21 @@ const App = () => {
   const [ categories, setCategories ] = useState([])
   const [quizzes, setQuizzes] = useState([])
 
-
-  async function getCategories() {
-    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories')
-    const data = await res.json()
-    setCategories(data)
-  }
-  
-  async function getQuizzes() {
-    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
-    const data = await res.json()
-    setQuizzes(data)
-  }
+  useEffect(() => {
+    async function getCategories() {
+      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories')
+      const data = await res.json()
+      setCategories(data)
+    }
+    getCategories()
+  }, [])
 
   useEffect(() => {
-    getCategories()
+    async function getQuizzes() {
+      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
+      const data = await res.json()
+      setQuizzes(data)
+    }
     getQuizzes()
   }, [])
 
