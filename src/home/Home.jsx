@@ -13,7 +13,7 @@ const Home = ({ quizzes }) => {
         <ul> 
           {slicedQuizzes.length === 0 ? 'Loading...' : slicedQuizzes.map((quiz, index) => (
               <div key={index}>
-                <Link to={`quizzes/${quiz.title}`}>{quiz.title}</Link>
+                <Link to={`quizzes/${quiz._id}`}>{quiz.title}</Link>
                 <p>Author: {quiz.author}</p>
                 <p>{quiz.questions.length} questions</p>
               </div>
