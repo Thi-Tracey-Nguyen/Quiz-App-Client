@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import ReturnToTop from '../UI/ReturnToTop'
 import RandomCat from './RandomCat'
 
 const Categories = ({ categories }) => {
@@ -12,6 +13,9 @@ const Categories = ({ categories }) => {
         </p>
       ))}
       <RandomCat categories={categories}/>
+      <div>
+        <ReturnToTop />
+      </div>
     </>
   )
 }

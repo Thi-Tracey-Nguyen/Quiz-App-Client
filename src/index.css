@@ -68,3 +68,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.return-to-top {
+  position:fixed;
+  bottom: 10;
+  right: 10;
+  background-color: #3c36367f;
+  border-radius: 100%;
+  width: 55px;
+  height: 50px;
+  border: solid black 1px;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import RandomQuiz from './RandomQuiz'
 import ShowQuiz from '../take-a-quiz/ShowQuiz'
+import ReturnToTop from '../UI/ReturnToTop'
 
 const Quizzes = ({ quizzes }) => {
   return (
@@ -15,6 +16,7 @@ const Quizzes = ({ quizzes }) => {
         ))}
         <RandomQuiz quizzes={quizzes}/>
       </ul>
+      <ReturnToTop />
     </>
   )
 }
