@@ -10,9 +10,9 @@ import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
 import CategoryQuizzes from './categories/CategoryQuizzes'
-// import ShowQuestion from './take-a-quiz/ShowQuestion'
 import EditQuizzes from './edit-a-quiz/EditQuizzes'
 import Result from './result/Result'
+// import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
 
 const App = () => {
@@ -37,17 +37,20 @@ const App = () => {
     getQuizzes()
   }, [])
 
-  //HOC for ShowQuestion to access quizId in the URL
-  // const ShowQuestionWrapper = () => {
-  //   const { quizId } = useParams()
-    
-  //   // get quiz object from quizId
-  //   const quiz = quizzes.find(quiz => quiz._id === quizId)
-
-  //   return quiz ? <ShowQuestion quiz={quiz} /> : <h4>Loading... </h4>
-  // }
+  //HOC for TakeAQuiz to access quizId in the URL
+  // const { quizId } = useParams()
+  // console.log(useParams())
   
-  // HOC for TakeAQuiz to access quizId in the URL
+  // // get quiz object from quizId
+  // const quiz = quizzes.find(quiz => quiz._id === quizId)
+  // console.log(quizId)
+
+  // const [index, setIndex] = useState(0)
+  // // const question = quiz.questions[index]
+  
+  
+  
+  // HOC for ShowQuestion to access quizId in the URL
   const TakeAQuizWrapper = () => {
     const { quizId } = useParams()
     
@@ -56,7 +59,19 @@ const App = () => {
 
     return quiz ? <TakeAQuiz quiz={quiz} /> : <h4>Loading... </h4>
   }
-  
+
+  // take a quiz
+   
+  const [ answers, setAnswers ] = useState([])
+  // const [ points, setPoints ] = useState(0)
+
+  // callback function to get answer from ShowQuestion (passing props from child -> parent)
+  function getData(data) {
+    setAnswers([...answers, data])
+  }
+
+
+
   return (
     <>
       <NavBar />
@@ -65,7 +80,7 @@ const App = () => {
           <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
           <Route path='/categories' element={<Categories categories={categories} />} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
-          {/* <Route path='/quizzes/:quizId' element={<ShowQuestionWrapper />} /> */}
+          {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
