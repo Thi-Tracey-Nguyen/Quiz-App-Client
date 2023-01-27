@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ShowQuiz from '../take-a-quiz/ShowQuiz'
 
 const EditQuizzes = ({ quizzes }) => {
   return (
@@ -8,9 +9,7 @@ const EditQuizzes = ({ quizzes }) => {
       <ul> 
           {quizzes.length === 0 ? 'Loading...' : quizzes.map((quiz, index) => (
               <div key={index}>
-                <Link to={`quizzes/${quiz.title}`}>{quiz.title}</Link>
-                <p>Author: {quiz.author}</p>
-                <p>{quiz.questions.length} questions</p>
+                <ShowQuiz quiz={quiz}/>
                 <ul>
                     <Link to={`quizzes/${quiz.title}/edit`}>Edit</Link>
                     <Link to={`quizzes/${quiz.title}/delete`}>Delete</Link>
