@@ -1,36 +1,77 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import Timer from './Timer'
 
-const ShowQuestions = ({ quiz }) => {
+const ShowQuestion = ({ quiz, onChange }) => {
 
-  const [ index, setIndex ] = useState(0)  
+  const [answer, setAnswer] = useState('')
+  const [ index, setIndex ] = useState(0)
+
   const question = quiz.questions[index]
-  const [timeLeft, setTimeLeft] = useState(20)
-  const [timerId, setTimerId] = useState(null)
 
-  useEffect(() => {
-    if (timeLeft > 0) {
-      const id = setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
-      setTimerId(id)
-    }
-  }, [timeLeft]);
-
-  const handleClick = (e) => {
+  const handleClickNext = (e) => {
     setIndex(index+1)
-    clearTimeout(timerId)
-    setTimeLeft(20)
+    onChange(answer)
   }
-  
+
+  const handleChange = (e) => {
+    setAnswer(e.target.value)
+  }
+
   return (
-    <>
-      <h1>{quiz.title}</h1>
+    <> 
       <h3 >{question.question}</h3>
-      <h2>Time left: {timeLeft}</h2>            
-      <p>{question.correctAnswer}</p>
-      {question.incorrectAnswers.map((answer, index) => <p key={index}>{answer}</p>
-      )}
-      { index < quiz.questions.length-1 ? <button onClick={ handleClick }>Next  </button> : <h4>End of quiz  </h4>}
+      <div>         
+        <input 
+          type='radio'
+          name={answer}
+          value={question.correctAnswer} 
+          onChange={handleChange} 
+          key='0'
+          checked={answer === question.correctAnswer}
+        /> {question.correctAnswer} <br />
+
+        <input 
+          type='radio'
+          name={answer}
+          value={question.incorrectAnswers[0]} 
+          onChange={handleChange} 
+          key='1'
+          checked={answer === question.incorrectAnswers[0]}
+        /> {question.incorrectAnswers[0]} <br />
+
+        <input 
+          type='radio'
+          name={answer}
+          value={question.incorrectAnswers[1]} 
+          onChange={handleChange} 
+          key='2'
+          checked={answer === question.incorrectAnswers[1]}
+        /> {question.incorrectAnswers[1]} <br />
+
+        <input 
+          type='radio'
+          name={answer}
+          value={question.incorrectAnswers[2]} 
+          onChange={handleChange} 
+          key='correctAnswer'
+          checked={answer === question.incorrectAnswers[2]}
+        /> {question.incorrectAnswers[2]} <br />
+      </div>
+        { index < quiz.questions.length-1 ? 
+          <button onClick={ handleClickNext }> Next </button> : 
+          <button onClick={ handleClickNext }> 
+            <Link to='/result' > Submit </Link> 
+          </button>
+        }
+        {/* {question.incorrectAnswers.map((incorrectAnswer, index) => (
+          <>
+            <input type='radio' value={incorrectAnswer} key={index} name={answer} />
+            <label>{incorrectAnswer}</label> <br />
+          </>
+        ))} */}
     </>
   )
 }
 
-export default ShowQuestions
+export default ShowQuestion

@@ -10,8 +10,10 @@ import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
 import CategoryQuizzes from './categories/CategoryQuizzes'
-import ShowQuestion from './take-a-quiz/ShowQuestion'
+// import ShowQuestion from './take-a-quiz/ShowQuestion'
 import EditQuizzes from './edit-a-quiz/EditQuizzes'
+import Result from './result/Result'
+import TakeAQuiz from './take-a-quiz/TakeAQuiz'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
@@ -36,13 +38,23 @@ const App = () => {
   }, [])
 
   //HOC for ShowQuestion to access quizId in the URL
-  const ShowQuestionWrapper = () => {
+  // const ShowQuestionWrapper = () => {
+  //   const { quizId } = useParams()
+    
+  //   // get quiz object from quizId
+  //   const quiz = quizzes.find(quiz => quiz._id === quizId)
+
+  //   return quiz ? <ShowQuestion quiz={quiz} /> : <h4>Loading... </h4>
+  // }
+  
+  // HOC for TakeAQuiz to access quizId in the URL
+  const TakeAQuizWrapper = () => {
     const { quizId } = useParams()
     
     // get quiz object from quizId
     const quiz = quizzes.find(quiz => quiz._id === quizId)
 
-    return quiz ? <ShowQuestion quiz={quiz} /> : <h4>Loading... </h4>
+    return quiz ? <TakeAQuiz quiz={quiz} /> : <h4>Loading... </h4>
   }
   
   return (
@@ -53,12 +65,14 @@ const App = () => {
           <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
           <Route path='/categories' element={<Categories categories={categories} />} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
-          <Route path='/quizzes/:quizId' element={<ShowQuestionWrapper />} />
+          {/* <Route path='/quizzes/:quizId' element={<ShowQuestionWrapper />} /> */}
+          <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/result' element={<Result />} />
           <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
       <Footer />
