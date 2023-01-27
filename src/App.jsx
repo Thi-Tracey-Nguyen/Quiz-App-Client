@@ -11,7 +11,6 @@ import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
 import CategoryQuizzes from './categories/CategoryQuizzes'
 import ShowQuestion from './take-a-quiz/ShowQuestion'
-import ShowQuiz from './take-a-quiz/ShowQuiz'
 import EditQuizzes from './edit-a-quiz/EditQuizzes'
 
 const App = () => {
@@ -36,14 +35,14 @@ const App = () => {
     getQuizzes()
   }, [])
 
-  //HOC for ShowQuiz
-  const ShowQuizWrapper = () => {
+  //HOC for ShowQuestion to access quizId in the URL
+  const ShowQuestionWrapper = () => {
     const { quizId } = useParams()
     
     // get quiz object from quizId
     const quiz = quizzes.find(quiz => quiz._id === quizId)
 
-    return quiz ? <ShowQuiz quiz={quiz} /> : <h4>Loading... </h4>
+    return quiz ? <ShowQuestion quiz={quiz} /> : <h4>Loading... </h4>
   }
   
   return (
@@ -54,7 +53,7 @@ const App = () => {
           <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
           <Route path='/categories' element={<Categories categories={categories} />} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
-          <Route path='/quizzes/:quizId' element={<ShowQuizWrapper />} />
+          <Route path='/quizzes/:quizId' element={<ShowQuestionWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
