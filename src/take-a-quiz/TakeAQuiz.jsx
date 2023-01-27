@@ -7,19 +7,19 @@ const TakeAQuiz= ({ quiz }) => {
 
  
   const [ answers, setAnswers ] = useState([])
+  // const [ points, setPoints ] = useState(0)
 
-  // function to compare user answer against correct answer t
-  // funtcion to calculate point 
-
-
-  
   // callback function to get answer from ShowQuestion (passing props from child -> parent)
   function getData(data) {
     setAnswers([...answers, data])
   }
-  
+
   console.log(answers)
-  // Function to check if the answer is correct
+
+  // function to calculate points 
+  // function calculatePoints(answer) {
+  //   if (answer === quiz)
+  // }
 
   return (
     <> 

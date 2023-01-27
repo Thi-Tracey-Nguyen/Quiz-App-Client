@@ -4,19 +4,37 @@ import Timer from './Timer'
 
 const ShowQuestion = ({ quiz, onChange }) => {
 
-  const [answer, setAnswer] = useState('')
   const [ index, setIndex ] = useState(0)
+  const [answer, setAnswer] = useState('')
+  // const [answers, setAnswers] = useState([])
+  const [points, setPoints] = useState(0)
+
 
   const question = quiz.questions[index]
 
-  const handleClickNext = (e) => {
-    setIndex(index+1)
-    onChange(answer)
-  }
-
+  // when a radio button is chosen, set the target value as the answer
   const handleChange = (e) => {
     setAnswer(e.target.value)
   }
+  
+  // when Next is clicked, move to the next question and add answer to answers array
+  const handleClickNext = (e) => {
+    setIndex(index+1)
+    onChange(answer)
+    setAnswer('')
+
+    // calculate points
+    if (answer === question.correctAnswer) {
+      setPoints(points + 1)
+    }
+  }
+
+  const handleClickQuit = (e) => {
+    alert('Your progress will be lost.')
+  }
+
+  console.log(points)
+
 
   return (
     <> 
@@ -61,15 +79,12 @@ const ShowQuestion = ({ quiz, onChange }) => {
         { index < quiz.questions.length-1 ? 
           <button onClick={ handleClickNext }> Next </button> : 
           <button onClick={ handleClickNext }> 
-            <Link to='/result' > Submit </Link> 
+            <Link to='/result'> Submit </Link> 
           </button>
         }
-        {/* {question.incorrectAnswers.map((incorrectAnswer, index) => (
-          <>
-            <input type='radio' value={incorrectAnswer} key={index} name={answer} />
-            <label>{incorrectAnswer}</label> <br />
-          </>
-        ))} */}
+        <button>
+          <Link to='/quizzes'> Quit </Link>
+        </button>
     </>
   )
 }
