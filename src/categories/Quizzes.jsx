@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import RandomQuiz from './RandomQuiz'
+import ShowQuiz from '../take-a-quiz/ShowQuiz'
 
 const Quizzes = ({ quizzes }) => {
   return (
@@ -8,9 +9,9 @@ const Quizzes = ({ quizzes }) => {
       <h1>All Quizzes</h1>
       <ul>
         {quizzes.length === 0 ? 'Loading...' : quizzes.map((quiz, index) => (
-          <p key={index}>
-            <Link to={`/quizzes/${quiz._id}`}>{quiz.title}</Link>
-          </p>
+          <div key={index}>
+            <ShowQuiz quiz={quiz}/>
+          </div>
         ))}
         <RandomQuiz quizzes={quizzes}/>
       </ul>
