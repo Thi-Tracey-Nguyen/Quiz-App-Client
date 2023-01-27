@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import ShowQuiz from '../take-a-quiz/ShowQuiz'
 
 const CategoryQuizzes = ({ quizzes, categories }) => {
 
@@ -19,9 +20,9 @@ const CategoryQuizzes = ({ quizzes, categories }) => {
 			<h4>Quizzes of {categoryNameConverted} category</h4>
 				<ul>
 						{quizzesByCat.map((quizByCat, index) => (
-						<li key={index}>
-								<Link to={`/quizzes/${quizByCat._id}`}>{quizByCat.title}</Link>
-						</li>
+						<div key={index}>
+								<ShowQuiz quiz={quizByCat}/>
+						</div>
 						))}
 				</ul>
 		</>
