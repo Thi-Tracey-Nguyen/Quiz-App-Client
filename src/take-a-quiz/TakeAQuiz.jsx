@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Timer from './Timer'
 // import ShowQuestion from './ShowQuestion'
 
-const TakeAQuiz= ({ quiz }) => {
+const TakeAQuiz= ({ quiz, onChange }) => {
 
   const [ index, setIndex ] = useState(0)
   const [ answer, setAnswer ] = useState('')
@@ -12,28 +12,43 @@ const TakeAQuiz= ({ quiz }) => {
 
   const question = quiz.questions[index]
   
-
   // when a radio button is chosen, set the target value as the answer
   const handleChange = (e) => {
     setAnswer(e.target.value)
   }
   
+  //this function calculate points
+  const calculatePoints = (answers, quiz) => {
+    for (let i=0; i<answers.length-1; i++) {
+      if (answers[i] === quiz.questions[i].correctAnswer) {
+        setPoints(points+1)
+      }
+  }}
+  
   // // when Next is clicked, move to the next question and add answer to answers array
   const handleClickNext = (e) => {
-    setIndex(index+1)
-    // onChange(answer)
-    setAnswer('')
-    setAnswers([...answers, answer])
-
-    //calculate points
-    if (answer === question.correctAnswer) {
-      setPoints(points + 1)
+    if (index < quiz.questions.length-1) {
+      setIndex(index+1)
+      // onChange(answer)
+      // setAnswer(choice)
+      setAnswers([...answers, answer])
+    } else if (index === quiz.questions.length-1) {
+      setAnswers([...answers, answer])
     }
   }
 
-  console.log(answer)
-  console.log(answers)
-  console.log(points)
+  
+
+  //pass points to parent component (App) upon submission
+  const handleSubmit = (e) => {
+    answers.push(answer)
+    setAnswers(answers)
+    console.log(answers)
+    onChange(answers)
+    console.log(points)
+  }
+
+
 
   return (
     <> 
@@ -77,24 +92,20 @@ const TakeAQuiz= ({ quiz }) => {
           checked={answer === question.incorrectAnswers[2]}
         /> {question.incorrectAnswers[2]} <br />
       </div>
+
         { index < quiz.questions.length-1 ? 
           <button onClick={ handleClickNext }> Next </button> : 
-          (
           <>
-            <button onClick={ handleClickNext }> 
-              <Link to='/result'> Submit </Link> 
+            <button onClick={ handleSubmit }> 
+              <Link to={`/result/${quiz._id}`}> Submit </Link>
             </button>
-            <p>Your points are {points}</p>
           </>
-          )
         }
         <button>
           <Link to='/quizzes'> Quit </Link>
         </button>
     </>
   )
-
-  // return <h4>{quiz.title}</h4>
 }
 
 export default TakeAQuiz

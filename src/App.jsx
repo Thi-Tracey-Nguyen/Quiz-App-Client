@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useParams, useNavigate } from 'react-router-dom'
 import Home from './home/Home'
 import NavBar from './home/NavBar'
 import Footer from './home/Footer'
@@ -18,6 +18,7 @@ import TakeAQuiz from './take-a-quiz/TakeAQuiz'
 const App = () => {
   const [ categories, setCategories ] = useState([])
   const [quizzes, setQuizzes] = useState([])
+  // const nav = useNavigate()
 
   useEffect(() => {
     async function getCategories() {
@@ -37,6 +38,8 @@ const App = () => {
     getQuizzes()
   }, [])
 
+  const [answers, setAnswers] = useState([])
+
   //HOC for TakeAQuiz to access quizId in the URL
   // const { quizId } = useParams()
   // console.log(useParams())
@@ -48,7 +51,12 @@ const App = () => {
   // const [index, setIndex] = useState(0)
   // // const question = quiz.questions[index]
   
-  
+  //this function gets points sent from TakeAQuiz component (child to parent)
+  function getAnswers(data) {
+    setAnswers(data)
+    console.log(data)
+    // nav(`/result/${quizId}`)
+  }
   
   // HOC for ShowQuestion to access quizId in the URL
   const TakeAQuizWrapper = () => {
@@ -57,20 +65,28 @@ const App = () => {
     // get quiz object from quizId
     const quiz = quizzes.find(quiz => quiz._id === quizId)
 
-    return quiz ? <TakeAQuiz quiz={quiz} /> : <h4>Loading... </h4>
+    return quiz ? <TakeAQuiz quiz={quiz} onChange={getAnswers} /> : <h4>Loading... </h4>
+  }
+
+  // HOC for Result to access quizId in the URL
+  const ResultWrapper = () => {
+    const { quizId } = useParams()
+    
+    // get quiz object from quizId
+    const quiz = quizzes.find(quiz => quiz._id === quizId)
+
+    return quiz ? <Result quiz={quiz} answers={answers} /> : <h4>Loading... </h4>
   }
 
   // take a quiz
    
-  const [ answers, setAnswers ] = useState([])
-  // const [ points, setPoints ] = useState(0)
+  // const [ answers, setAnswers ] = useState([])
+  // // const [ points, setPoints ] = useState(0)
 
   // callback function to get answer from ShowQuestion (passing props from child -> parent)
-  function getData(data) {
-    setAnswers([...answers, data])
-  }
-
-
+  // function getData(data) {
+  //   setAnswers([...answers, data])
+  // }
 
   return (
     <>
@@ -87,7 +103,7 @@ const App = () => {
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
           <Route path='/profile' element={<Profile />} />
-          <Route path='/result' element={<Result />} />
+          <Route path='/result/:quizId' element={<ResultWrapper />} />
           <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
       <Footer />
