@@ -14,6 +14,7 @@ import EditQuizzes from './edit-a-quiz/EditQuizzes'
 import Result from './result/Result'
 // import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
+import AddQuestionsForm from './make-a-quiz/AddQuestionsForm'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
