@@ -112,11 +112,7 @@ const TakeAQuiz= ({ quiz, onChange }) => {
 
         { index < quiz.questions.length-1 ? 
           <button onClick={ handleClickNext }> Next </button> : 
-          <>
-            <button onClick={ handleSubmit }> 
-              <Link to={`/result/${quiz._id}`}> Submit </Link>
-            </button>
-          </>
+          <button onClick={ handleSubmit }> Submit </button>
         }
         <button>
           <Link to='/quizzes'> Quit </Link>
