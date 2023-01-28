@@ -89,6 +89,30 @@ const App = () => {
   //   setAnswers([...answers, data])
   // }
 
+  // Add a new quiz to the API
+  const addQuiz = async (category, title, author, questions, image) => {
+    // Add a new quiz
+    const newQuiz = {
+      category: category,
+      title: title,
+      author: author,
+      questions: questions,
+      image: image
+    }
+    // Post new quiz to the API
+    const createdQuiz = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newQuiz)
+    })
+    const data = await createdQuiz.json()
+    // Add newly created quiz data to the state
+    setQuizzes(quizzes.push(newQuiz), data)
+  }
+
   return (
     <>
       <NavBar />
