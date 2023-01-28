@@ -1,59 +1,76 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Timer from './Timer'
-// import ShowQuestion from './ShowQuestion'
+import { Link, useNavigate } from 'react-router-dom'
 
 const TakeAQuiz= ({ quiz, onChange }) => {
 
   const [ index, setIndex ] = useState(0)
   const [ answer, setAnswer ] = useState('')
   const [ answers, setAnswers ] = useState([])
-  const [ points, setPoints ] = useState(0)
+  const [ timeLeft, setTimeLeft ] = useState(8)
+  const nav = useNavigate()
 
   const question = quiz.questions[index]
   
+  // countdown timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (timeLeft > 0) {
+        setTimeLeft(timeLeft -1)
+      } else {
+        if (index < quiz.questions.length-1) {
+          setAnswer('')
+          // setIndex(index+1)
+          // setAnswers([...answers, answer])
+          setTimeLeft(8)
+          handleClickNext()
+        } else {
+          setAnswer('')
+          handleSubmit()
+        }
+      }
+    }, 1000)
+    return () => clearInterval(timer)
+  })
+
+  //function to reset timer
+  const restartTimer = () => {
+    setTimeLeft(8)
+  }
+
+
   // when a radio button is chosen, set the target value as the answer
   const handleChange = (e) => {
     setAnswer(e.target.value)
   }
   
-  //this function calculate points
-  const calculatePoints = (answers, quiz) => {
-    for (let i=0; i<answers.length-1; i++) {
-      if (answers[i] === quiz.questions[i].correctAnswer) {
-        setPoints(points+1)
-      }
-  }}
   
-  // // when Next is clicked, move to the next question and add answer to answers array
+  // when Next is clicked, move to the next question and add answer to answers array
   const handleClickNext = (e) => {
+
+    restartTimer() //restart timer when user moves to next question
+
+    //check if index is within range
     if (index < quiz.questions.length-1) {
-      setIndex(index+1)
-      // onChange(answer)
-      // setAnswer(choice)
-      setAnswers([...answers, answer])
+      setIndex(index+1) // move to next question 
+      setAnswers([...answers, answer]) // add selected answer to answers array
     } else if (index === quiz.questions.length-1) {
-      setAnswers([...answers, answer])
+      setAnswers([...answers, answer]) // if question is the last question, only update setAnswers
     }
   }
 
-  
 
-  //pass points to parent component (App) upon submission
+  //pass points to parent component (App) upon submission (child -> parent)
   const handleSubmit = (e) => {
-    answers.push(answer)
+    answers.push(answer) // setAnswers([...answers, answer]) does not add the answer before moving to result page
     setAnswers(answers)
-    console.log(answers)
     onChange(answers)
-    console.log(points)
+    nav(`/result/${quiz._id}`)
   }
-
-
 
   return (
     <> 
+      <h1>Timer: {timeLeft}</h1>
       <h1>{quiz.title}</h1>
-      {/* <ShowQuestion onChange={getData} quiz={quiz} /> */}
       <h4>{question.question}</h4>
       <div>         
         <input 
@@ -95,11 +112,7 @@ const TakeAQuiz= ({ quiz, onChange }) => {
 
         { index < quiz.questions.length-1 ? 
           <button onClick={ handleClickNext }> Next </button> : 
-          <>
-            <button onClick={ handleSubmit }> 
-              <Link to={`/result/${quiz._id}`}> Submit </Link>
-            </button>
-          </>
+          <button onClick={ handleSubmit }> Submit </button>
         }
         <button>
           <Link to='/quizzes'> Quit </Link>
