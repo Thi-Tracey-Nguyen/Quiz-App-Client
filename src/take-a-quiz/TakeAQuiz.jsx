@@ -10,7 +10,7 @@ const TakeAQuiz= ({ quiz, onChange }) => {
   const nav = useNavigate()
 
   const question = quiz.questions[index]
-  
+
   // countdown timer
   useEffect(() => {
     const timer = setInterval(() => {
@@ -19,8 +19,6 @@ const TakeAQuiz= ({ quiz, onChange }) => {
       } else {
         if (index < quiz.questions.length-1) {
           setAnswer('')
-          // setIndex(index+1)
-          // setAnswers([...answers, answer])
           setTimeLeft(8)
           handleClickNext()
         } else {
@@ -37,12 +35,10 @@ const TakeAQuiz= ({ quiz, onChange }) => {
     setTimeLeft(8)
   }
 
-
   // when a radio button is chosen, set the target value as the answer
   const handleChange = (e) => {
     setAnswer(e.target.value)
   }
-  
   
   // when Next is clicked, move to the next question and add answer to answers array
   const handleClickNext = (e) => {
@@ -58,7 +54,6 @@ const TakeAQuiz= ({ quiz, onChange }) => {
     }
   }
 
-
   //pass points to parent component (App) upon submission (child -> parent)
   const handleSubmit = (e) => {
     answers.push(answer) // setAnswers([...answers, answer]) does not add the answer before moving to result page
@@ -67,53 +62,68 @@ const TakeAQuiz= ({ quiz, onChange }) => {
     nav(`/result/${quiz._id}`)
   }
 
+  //this section is for answers shuffling
+
+  //create an array of all the answers (correct and incorrect) to shuffle answers
+  const answersArray = [question.correctAnswer]
+  question.incorrectAnswers.forEach(incorrectAnswer => answersArray.push(incorrectAnswer))
+  
+  // set seededAnswers as state
+  const [seededAnswers, setSeededAnswers] = useState([answersArray])
+
+  // wrap in an useEffect to prevent re-running everytime the page re-renders due to timer
+  useEffect(() => {
+
+    //this function shuffles elements in an array
+    function shuffle(array) {
+      let currentIndex = array.length,  randomIndex;
+    
+      // While there remain elements to shuffle.
+      while (currentIndex != 0) {
+    
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+    
+      return array;
+    }
+
+    // call shuffle on answersArray
+    const shuffledArray = shuffle(answersArray)
+    setSeededAnswers(shuffledArray)
+  }, [index]) // shuffle answers when index changes (for next question)
+
   return (
     <> 
       <h1>Timer: {timeLeft}</h1>
       <h1>{quiz.title}</h1>
       <h4>{question.question}</h4>
-      <div>         
-        <input 
-          type='radio'
-          name={answer}
-          value={question.correctAnswer} 
-          onChange={handleChange} 
-          key='0'
-          checked={answer === question.correctAnswer}
-        /> {question.correctAnswer} <br />
 
-        <input 
-          type='radio'
-          name={answer}
-          value={question.incorrectAnswers[0]} 
-          onChange={handleChange} 
-          key='1'
-          checked={answer === question.incorrectAnswers[0]}
-        /> {question.incorrectAnswers[0]} <br />
-
-        <input 
-          type='radio'
-          name={answer}
-          value={question.incorrectAnswers[1]} 
-          onChange={handleChange} 
-          key='2'
-          checked={answer === question.incorrectAnswers[1]}
-        /> {question.incorrectAnswers[1]} <br />
-
-        <input 
-          type='radio'
-          name={answer}
-          value={question.incorrectAnswers[2]} 
-          onChange={handleChange} 
-          key='3'
-          checked={answer === question.incorrectAnswers[2]}
-        /> {question.incorrectAnswers[2]} <br />
+      <div>
+        {seededAnswers.map((seededAnswer, index) => (
+          <>
+            <input 
+              type='radio'
+              name={answer}
+              value={seededAnswer}
+              onChange={handleChange}
+              key={index}
+              checked={answer === seededAnswer}
+            /> {seededAnswer} <br />
+          </> 
+        ))}         
       </div>
 
         { index < quiz.questions.length-1 ? 
           <button onClick={ handleClickNext }> Next </button> : 
           <button onClick={ handleSubmit }> Submit </button>
         }
+
         <button>
           <Link to='/quizzes'> Quit </Link>
         </button>
