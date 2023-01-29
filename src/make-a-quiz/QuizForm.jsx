@@ -68,7 +68,7 @@ const QuizForm = ({ addQuiz }) => {
         </Link>
       </button> 
       <button type='submit'>
-        <Link to={`/add-questions`}>
+        <Link to={`/add-questions/${title}`}>
           Next
         </Link>
       </button>

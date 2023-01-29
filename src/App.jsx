@@ -113,6 +113,39 @@ const App = () => {
     setQuizzes(quizzes.push(newQuiz), data)
   }
 
+  // Add a new question to the Quiz
+  const addQuestion = async (quizId, question, image, correctAnswer, incorrectAnswers) => {
+    // Add a new question
+    const newQuestion = {
+      quizId: AddQuestionWrapper(), // How will this fetch the quiz ID from previous page?
+      question: question,
+      image: image,
+      correctAnswer: correctAnswer,
+      incorrectAnswers: incorrectAnswers
+    }
+    // Post new question to quiz in the API
+    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newQuestion)
+    })
+    const data = await createdQuestion.json()
+    // I think what we need to do here is push this question to the quiz questions array
+    setQuizzes(questions.push(newQuestion), data)
+  }
+  
+  // HOC for AddQuestionsForm to access quizTitle in the URL
+  const AddQuestionWrapper = () => {
+    const { quizTitle } = useParams()
+    
+    // get quiz ObjectId from quizTitle
+    const quiz = quizzes.find(quiz => quiz.title === quizTitle)
+    return quiz._id
+  }
+
   return (
     <>
       <NavBar />
@@ -124,6 +157,7 @@ const App = () => {
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm />} />
+          <Route path='/add-questions/:quizTitle' element={<AddQuestionsForm />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
