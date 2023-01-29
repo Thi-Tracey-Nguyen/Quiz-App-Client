@@ -13,12 +13,16 @@ const RandomCat = ({ categories }) => {
 
   return (
     <>
-      <p>Can't choose?</p>
-      <button>
-        <Link to={`/categories/${category.name}`}>
-          Random Category
-        </Link>
-      </button>
+      { category ? (
+      <>
+        <p>Can't choose?</p>
+        <button>
+          <Link to={`/categories/${category.name}`}>
+            Random Category
+          </Link>
+        </button>
+      </>
+      ) : '' }
     </>
   )
 }
