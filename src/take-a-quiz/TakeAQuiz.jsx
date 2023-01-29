@@ -10,7 +10,13 @@ const TakeAQuiz= ({ quiz, onChange }) => {
   const nav = useNavigate()
 
   const question = quiz.questions[index]
+
+  //create an array of all the answers (correct and incorrect)
+  const answersArray = [question.correctAnswer]
+  question.incorrectAnswers.forEach(incorrectAnswer => answersArray.push(incorrectAnswer))
   
+  const [seededAnswers, setSeededAnswers] = useState([answersArray])
+
   // countdown timer
   useEffect(() => {
     const timer = setInterval(() => {
@@ -19,8 +25,6 @@ const TakeAQuiz= ({ quiz, onChange }) => {
       } else {
         if (index < quiz.questions.length-1) {
           setAnswer('')
-          // setIndex(index+1)
-          // setAnswers([...answers, answer])
           setTimeLeft(8)
           handleClickNext()
         } else {
@@ -37,12 +41,10 @@ const TakeAQuiz= ({ quiz, onChange }) => {
     setTimeLeft(8)
   }
 
-
   // when a radio button is chosen, set the target value as the answer
   const handleChange = (e) => {
     setAnswer(e.target.value)
   }
-  
   
   // when Next is clicked, move to the next question and add answer to answers array
   const handleClickNext = (e) => {
@@ -58,7 +60,6 @@ const TakeAQuiz= ({ quiz, onChange }) => {
     }
   }
 
-
   //pass points to parent component (App) upon submission (child -> parent)
   const handleSubmit = (e) => {
     answers.push(answer) // setAnswers([...answers, answer]) does not add the answer before moving to result page
@@ -67,47 +68,92 @@ const TakeAQuiz= ({ quiz, onChange }) => {
     nav(`/result/${quiz._id}`)
   }
 
+  //this section shuffle answers 
+  
+
+  // wrap in an useEffect to prevent re-running everytime the page re-renders due to timer
+  useEffect(() => {
+
+    //this function shuffles elements in an array
+    function shuffle(array) {
+      let currentIndex = array.length,  randomIndex;
+    
+      // While there remain elements to shuffle.
+      while (currentIndex != 0) {
+    
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+    
+      return array;
+    }
+
+    // call shuffle on answersArray
+    const shuffledArray = shuffle(answersArray)
+    setSeededAnswers(shuffledArray)
+  }, [index])
+  
+  // console.log(answersArray)
+
   return (
     <> 
       <h1>Timer: {timeLeft}</h1>
       <h1>{quiz.title}</h1>
       <h4>{question.question}</h4>
-      <div>         
+      <div>
+        {/* {shuffle(answersArray).map((randomAnswer, index) => (
+          <>
+            <input 
+              type='radio'
+              name={answer}
+              value={randomAnswer}
+              onChange={handleChange}
+              key={index}
+              checked={answer === randomAnswer}
+            /> {randomAnswer} <br />
+          </> 
+        )
+        )}          */}
         <input 
           type='radio'
           name={answer}
-          value={question.correctAnswer} 
+          value={seededAnswers[0]} 
           onChange={handleChange} 
           key='0'
-          checked={answer === question.correctAnswer}
-        /> {question.correctAnswer} <br />
+          checked={answer === seededAnswers[0]}
+        /> {seededAnswers[0]} <br />
 
         <input 
           type='radio'
           name={answer}
-          value={question.incorrectAnswers[0]} 
+          value={seededAnswers[1]} 
           onChange={handleChange} 
           key='1'
-          checked={answer === question.incorrectAnswers[0]}
-        /> {question.incorrectAnswers[0]} <br />
+          checked={answer === seededAnswers[1]}
+        /> {seededAnswers[1]} <br />
 
         <input 
           type='radio'
           name={answer}
-          value={question.incorrectAnswers[1]} 
+          value={seededAnswers[2]} 
           onChange={handleChange} 
           key='2'
-          checked={answer === question.incorrectAnswers[1]}
-        /> {question.incorrectAnswers[1]} <br />
+          checked={answer === seededAnswers[2]}
+        /> {seededAnswers[2]} <br />
 
         <input 
           type='radio'
           name={answer}
-          value={question.incorrectAnswers[2]} 
+          value={seededAnswers[3]} 
           onChange={handleChange} 
           key='3'
-          checked={answer === question.incorrectAnswers[2]}
-        /> {question.incorrectAnswers[2]} <br />
+          checked={answer === seededAnswers[3]}
+        /> {seededAnswers[3]} <br />
       </div>
 
         { index < quiz.questions.length-1 ? 
