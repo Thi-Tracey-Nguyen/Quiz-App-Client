@@ -3,7 +3,19 @@ import { Link } from 'react-router-dom'
 import ReturnToTop from '../UI/ReturnToTop'
 import RandomCat from './RandomCat'
 
-const Categories = ({ categories }) => {
+const Categories = () => {
+
+  const [ categories, setCategories ] = useState([])
+  
+  useEffect(() => {
+    async function getCategories() {
+      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories')
+      const data = await res.json()
+      setCategories(data)
+    }
+    getCategories()
+  }, [])
+
   return (
     <>
       <h2>Categories</h2>
