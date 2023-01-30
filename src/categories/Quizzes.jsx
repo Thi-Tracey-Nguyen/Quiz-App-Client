@@ -1,9 +1,20 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import RandomQuiz from './RandomQuiz'
 import ShowQuiz from '../take-a-quiz/ShowQuiz'
 import ReturnToTop from '../UI/ReturnToTop'
 
-const Quizzes = ({ quizzes }) => {
+const Quizzes = () => {
+
+  const [quizzes, setQuizzes] = useState([])
+
+  useEffect(() => {
+    async function getQuizzes() {
+      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
+      const data = await res.json()
+      setQuizzes(data)
+    }
+    getQuizzes()
+  }, [])
 
   return (
     <>
