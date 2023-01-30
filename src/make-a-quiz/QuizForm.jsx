@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const QuizForm = ({ addQuiz }) => {
+const QuizForm = ({ addQuiz, categories }) => {
+  const [cat, setCat] = useState('')
   const [category, setCategory] = useState('')
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
@@ -9,8 +10,14 @@ const QuizForm = ({ addQuiz }) => {
   const [image, setImage] = useState('')
 
   // Function to submit the new quiz to the API
-  function submitQuiz(e) {
+  async function submitQuiz(e) {
     e.preventDefault()
+    const foundCat = await categories.find(el => el.name === cat)
+    if (foundCat) {
+      setCategory(foundCat._id)
+    } else {
+      console.log('There\'s been an error submitting the quiz')
+    }
     addQuiz(category, title, author, questions, image)
   }
   
@@ -38,12 +45,12 @@ const QuizForm = ({ addQuiz }) => {
         <label>Category:
           <input 
             type='text' 
-            value={category} 
-            onChange={(e) => setCategory(e.target.value)} 
+            value={cat} 
+            onChange={(e) => setCat(e.target.value)} 
           />
         </label>
       </div>
-      <div className='category-name-form'>
+      {/* <div className='category-name-form'>
         <label>Category name:
           <input 
             type='text' 
@@ -51,7 +58,7 @@ const QuizForm = ({ addQuiz }) => {
             onChange={(e) => setCategory(e.target.value)} 
           />
         </label>
-      </div>
+      </div> */}
       <div className='category-img-form'>
         <label>Category image:
           <input 
@@ -67,10 +74,8 @@ const QuizForm = ({ addQuiz }) => {
           Quit
         </Link>
       </button> 
-      <button type='submit'>
-        <Link to={`/add-questions/${title}`}>
+      <button>
           Next
-        </Link>
       </button>
     </form>
   )

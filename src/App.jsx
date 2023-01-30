@@ -110,7 +110,7 @@ const App = () => {
     })
     const data = await createdQuiz.json()
     // Add newly created quiz data to the state
-    setQuizzes(quizzes.push(newQuiz), data)
+    setQuizzes(quizzes.push(data))
   }
 
   // Add a new question to the Quiz
@@ -134,7 +134,7 @@ const App = () => {
     })
     const data = await createdQuestion.json()
     // I think what we need to do here is push this question to the quiz questions array
-    setQuizzes(questions.push(newQuestion), data)
+    setQuizzes(questions.push(data))
   }
   
   // HOC for AddQuestionsForm to access quizTitle in the URL
@@ -156,8 +156,8 @@ const App = () => {
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
-          <Route path='/make-a-quiz' element={<QuizForm />} />
-          <Route path='/add-questions/:quizTitle' element={<AddQuestionsForm />} />
+          <Route path='/make-a-quiz' element={<QuizForm addQuiz={addQuiz} categories={categories}/>} />
+          <Route path='/add-questions/:quizId' element={<AddQuestionsForm />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
