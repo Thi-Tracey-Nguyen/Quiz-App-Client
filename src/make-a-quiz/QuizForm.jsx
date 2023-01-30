@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const QuizForm = ({ addQuiz, categories }) => {
-  const [cat, setCat] = useState('')
   const [category, setCategory] = useState('')
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
@@ -11,20 +10,19 @@ const QuizForm = ({ addQuiz, categories }) => {
 
   // Function to submit the new quiz to the API
   async function submitQuiz(e) {
-    e.preventDefault()
-    const foundCat = await categories.find(el => el.name === cat)
-    if (foundCat) {
-      setCategory(foundCat._id)
+    if (category === '' || 'Select...') {
+      alert('You need to select a category')
     } else {
-      console.log('There\'s been an error submitting the quiz')
+      e.preventDefault()
+      addQuiz(category, title, author, questions, image)
+      console.log(category)
     }
-    addQuiz(category, title, author, questions, image)
   }
-  
+
   return (
     <form onSubmit={submitQuiz} className='container'>
       <div className='quiz-name-form'>
-        <label>Quiz name:
+        <label>Quiz title:
           <input 
             type='text' 
             value={title} 
@@ -32,22 +30,25 @@ const QuizForm = ({ addQuiz, categories }) => {
           />
         </label>
       </div>
-      <div className='created-by-form'>
-        <label>Created by:
-          <input 
-            type='text' 
+      <div className='author-form'>
+        <label>Author:
+          <input  
+            type='text'
             value={author} 
-            onChange={(e) => setAuthor(e.target.value)} 
-          />
+            onChange={(e) => setAuthor(e.target.value)}
+          /> 
         </label>
       </div>
-      <div className='category-form'>
+      <div className='category-dropdown-form'>
         <label>Category:
-          <input 
-            type='text' 
-            value={cat} 
-            onChange={(e) => setCat(e.target.value)} 
-          />
+          <select 
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option>Select...</option>
+            {categories.map((cat, index) => 
+              <option key={index}>{cat.name}</option>
+            )}
+          </select>
         </label>
       </div>
       {/* <div className='category-name-form'>
