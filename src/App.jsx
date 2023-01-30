@@ -14,6 +14,7 @@ import EditQuizzes from './edit-a-quiz/EditQuizzes'
 import Result from './result/Result'
 // import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
+import AddQuestionsForm from './make-a-quiz/AddQuestionsForm'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
@@ -88,6 +89,63 @@ const App = () => {
   //   setAnswers([...answers, data])
   // }
 
+  // Add a new quiz to the API
+  const addQuiz = async (category, title, author, questions, image) => {
+    // Add a new quiz
+    const newQuiz = {
+      category: category,
+      title: title,
+      author: author,
+      questions: questions,
+      image: image
+    }
+    // Post new quiz to the API
+    const createdQuiz = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newQuiz)
+    })
+    const data = await createdQuiz.json()
+    // Add newly created quiz data to the state
+    setQuizzes(quizzes.push(data))
+  }
+
+  // Add a new question to the Quiz
+  const addQuestion = async (quizId, question, image, correctAnswer, incorrectAnswers) => {
+    // Add a new question
+    const newQuestion = {
+      quizId: AddQuestionWrapper(), // How will this fetch the quiz ID from previous page?
+      question: question,
+      image: image,
+      correctAnswer: correctAnswer,
+      incorrectAnswers: incorrectAnswers
+    }
+    // Post new question to quiz in the API
+    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newQuestion)
+    })
+    const data = await createdQuestion.json()
+    // I think what we need to do here is push this question to the quiz questions array
+    setQuizzes(questions.push(data))
+  }
+  
+  // HOC for AddQuestionsForm to access quizTitle in the URL
+  const AddQuestionWrapper = () => {
+    const { quizTitle } = useParams()
+    
+    // get quiz ObjectId from quizTitle
+    const quiz = quizzes.find(quiz => quiz.title === quizTitle)
+    return quiz._id
+  }
+
   return (
     <>
       <NavBar />
@@ -98,7 +156,8 @@ const App = () => {
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
-          <Route path='/make-a-quiz' element={<QuizForm />} />
+          <Route path='/make-a-quiz' element={<QuizForm addQuiz={addQuiz} categories={categories}/>} />
+          <Route path='/add-questions/:quizId' element={<AddQuestionsForm />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
