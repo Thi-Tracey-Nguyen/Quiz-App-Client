@@ -10,12 +10,11 @@ const QuizForm = ({ addQuiz, categories }) => {
 
   // Function to submit the new quiz to the API
   async function submitQuiz(e) {
-    if (category === '' || 'Select...') {
+    e.preventDefault()
+    if (!category) {
       alert('You need to select a category')
     } else {
-      e.preventDefault()
       addQuiz(category, title, author, questions, image)
-      console.log(category)
     }
   }
 
