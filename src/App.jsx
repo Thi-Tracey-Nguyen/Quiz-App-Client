@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useParams, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useParams, useNavigate, redirect } from 'react-router-dom'
 import Home from './home/Home'
 import NavBar from './home/NavBar'
 import Footer from './home/Footer'
@@ -19,6 +19,7 @@ import AddQuestionsForm from './make-a-quiz/AddQuestionsForm'
 const App = () => {
   const [ categories, setCategories ] = useState([])
   const [quizzes, setQuizzes] = useState([])
+  const [questions, setQuestions] = useState([])
   // const nav = useNavigate()
 
   useEffect(() => {
@@ -37,6 +38,15 @@ const App = () => {
       setQuizzes(data)
     }
     getQuizzes()
+  }, [])
+
+  useEffect(() => {
+    async function getQuestions() {
+      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions')
+      const data = await res.json()
+      setQuestions(data)
+    }
+    getQuestions()
   }, [])
 
   const [answers, setAnswers] = useState([])
@@ -111,15 +121,25 @@ const App = () => {
     const data = await createdQuiz.json()
     // Add newly created quiz data to the state
     setQuizzes(quizzes.push(data))
+    navToNewQuiz(data)
+    // if (data) {
+    //   return redirect(`/add-questions/${data.title}`)
+    // }
+  }
+
+  function navToNewQuiz(data) {
+    const title = data.title
+    const quiz = quizzes.find(quiz => quiz.title === title)
+    console.log(quiz._id)
+    return redirect(`/add-questions/${quiz._id}`)
   }
 
   // Add a new question to the Quiz
-  const addQuestion = async (quizId, question, image, correctAnswer, incorrectAnswers) => {
+  const addQuestion = async (quizId, question, correctAnswer, incorrectAnswers) => {
     // Add a new question
     const newQuestion = {
-      quizId: AddQuestionWrapper(), // How will this fetch the quiz ID from previous page?
+      quizId: quizId, // How will this fetch the quiz ID from previous page?
       question: question,
-      image: image,
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers
     }
@@ -134,17 +154,17 @@ const App = () => {
     })
     const data = await createdQuestion.json()
     // I think what we need to do here is push this question to the quiz questions array
-    setQuizzes(questions.push(data))
+    setQuestions(questions.push(data))
   }
   
   // HOC for AddQuestionsForm to access quizTitle in the URL
-  const AddQuestionWrapper = () => {
-    const { quizTitle } = useParams()
+  // const AddQuestionWrapper = () => {
+  //   const { quizId } = useParams()
     
-    // get quiz ObjectId from quizTitle
-    const quiz = quizzes.find(quiz => quiz.title === quizTitle)
-    return quiz._id
-  }
+  //   // get quiz ObjectId from quizTitle
+  //   const quiz = quizzes.find(quiz => quiz._id === quizId)
+  //   return quiz ? <AddQuestionsForm addQuestion={addQuestion} quiz={quiz} questions={questions} quizzes={quizzes}/> : <h4>Loading... </h4>
+  // }
 
   return (
     <>
@@ -157,7 +177,7 @@ const App = () => {
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm addQuiz={addQuiz} categories={categories}/>} />
-          <Route path='/add-questions/:quizId' element={<AddQuestionsForm />} />
+          <Route path='/add-questions/:quizId' element={<AddQuestionsForm addQuestion={addQuestion}/>} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
