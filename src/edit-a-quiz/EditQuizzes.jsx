@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import ShowQuiz from "../take-a-quiz/ShowQuiz"
-import AddQuestionsForm from "../make-a-quiz/AddQuestionsForm"
+import QuestionsForm from "../make-a-quiz/QuestionsForm"
 
 
 const EditQuizzes = ({ quizzes }) => {
@@ -41,7 +41,7 @@ const EditQuizzes = ({ quizzes }) => {
 
   const handleConfirmEdit = () => {
     console.log('calling handleEditQuiz :', selectedQuizEdit._id)    
-    //return <AddQuestionsForm quizId={selectedQuizEdit._id} />
+    //return <QuestionsForm quizId={selectedQuizEdit._id} />
     //setSelectedQuizEdit(null)    
     //setShowConfirmEdit(true) 
     //navigateTo('/edit-a-quiz/')

@@ -59,7 +59,7 @@ const QuizForm = ({ addQuiz, categories }) => {
           />
         </label>
       </div> */}
-      <div className='category-img-form'>
+      {/* <div className='category-img-form'>
         <label>Category image:
           <input 
             type='text' 
@@ -67,7 +67,7 @@ const QuizForm = ({ addQuiz, categories }) => {
             onChange={(e) => setImage(e.target.value)} 
           />
         </label>
-      </div>
+      </div> */}
       <br/>
       <button>
         <Link to={'/'}>

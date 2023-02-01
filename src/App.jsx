@@ -14,13 +14,15 @@ import EditQuizzes from './edit-a-quiz/EditQuizzes'
 import Result from './result/Result'
 // import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
-import AddQuestionsForm from './make-a-quiz/AddQuestionsForm'
+import QuestionsForm from './make-a-quiz/QuestionsForm'
+import ResetQuestionForm from './make-a-quiz/AddQuestion'
+import AddQuestion from './make-a-quiz/AddQuestion'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
   const [quizzes, setQuizzes] = useState([])
   const [questions, setQuestions] = useState([])
-  // const nav = useNavigate()
+  const nav = useNavigate()
 
   useEffect(() => {
     async function getCategories() {
@@ -119,21 +121,22 @@ const App = () => {
       body: JSON.stringify(newQuiz)
     })
     const data = await createdQuiz.json()
-    // Add newly created quiz data to the state
+    // Update quizzes state with the new quiz
     setQuizzes(quizzes.push(data))
+    // Navigate to add questions to the new quiz
     navToNewQuiz(data)
-    // if (data) {
-    //   return redirect(`/add-questions/${data.title}`)
-    // }
   }
 
+  // Uses the new quiz data to get the ID of the new quiz from the DB
   function navToNewQuiz(data) {
     const title = data.title
+    // Find the quiz in the DB where the title matches the quiz just created
     const quiz = quizzes.find(quiz => quiz.title === title)
-    console.log(quiz._id)
-    return redirect(`/add-questions/${quiz._id}`)
+    // Use the ID of that quiz to navigate to the correct Add Questions page
+    nav(`/add-questions/${quiz._id}`)
   }
 
+  const [questionArray, setQuestionArray] = useState([])
   // Add a new question to the Quiz
   const addQuestion = async (quizId, question, correctAnswer, incorrectAnswers) => {
     // Add a new question
@@ -143,27 +146,30 @@ const App = () => {
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers
     }
-    // Post new question to quiz in the API
-    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+    setQuestionArray(...questionArray, newQuestion)
+    console.log(questionArray)
+  }
+
+  const postQuestions = async () => {
+    const returnedQuestionArray = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newQuestion)
+      body: JSON.stringify(questionArray)
     })
-    const data = await createdQuestion.json()
-    // I think what we need to do here is push this question to the quiz questions array
+    const data = await returnedQuestionArray.json()
     setQuestions(questions.push(data))
   }
   
-  // HOC for AddQuestionsForm to access quizTitle in the URL
+  // HOC for QuestionsForm to access quizTitle in the URL
   // const AddQuestionWrapper = () => {
   //   const { quizId } = useParams()
     
   //   // get quiz ObjectId from quizTitle
   //   const quiz = quizzes.find(quiz => quiz._id === quizId)
-  //   return quiz ? <AddQuestionsForm addQuestion={addQuestion} quiz={quiz} questions={questions} quizzes={quizzes}/> : <h4>Loading... </h4>
+  //   return quiz ? <QuestionsForm addQuestion={addQuestion} quiz={quiz} questions={questions} quizzes={quizzes}/> : <h4>Loading... </h4>
   // }
 
   return (
@@ -177,7 +183,7 @@ const App = () => {
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm addQuiz={addQuiz} categories={categories}/>} />
-          <Route path='/add-questions/:quizId' element={<AddQuestionsForm addQuestion={addQuestion}/>} />
+          <Route path='/add-questions/:quizId' element={<AddQuestion addQuestion={addQuestion} postQuestions={postQuestions} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
