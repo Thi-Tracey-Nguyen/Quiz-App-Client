@@ -146,7 +146,9 @@ const App = () => {
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers
     }
-    setQuestionArray(...questionArray, newQuestion)
+    console.log(newQuestion)
+    console.log(JSON.stringify(newQuestion))
+    setQuestionArray(questionArray.push(newQuestion))
     console.log(questionArray)
   }
 
@@ -183,7 +185,7 @@ const App = () => {
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm addQuiz={addQuiz} categories={categories}/>} />
-          <Route path='/add-questions/:quizId' element={<AddQuestion addQuestion={addQuestion} postQuestions={postQuestions} />} />
+          <Route path='/add-questions/:quizId' element={<AddQuestion addQuestion={addQuestion} postQuestions={postQuestions} questionArray={questionArray} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />

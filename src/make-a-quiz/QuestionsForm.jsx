@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReturnToTop from '../UI/ReturnToTop'
 import { Link, useParams } from 'react-router-dom'
 
-const QuestionsForm = ({ addQuestion, postQuestions }) => {
+const QuestionsForm = ({ addQuestion, postQuestions, questionArray }) => {
   const { quizId } = useParams('')
   const [question, setQuestion] = useState('')
   const [correctAnswer, setCorrectAnswer] = useState('')
@@ -14,8 +14,7 @@ const QuestionsForm = ({ addQuestion, postQuestions }) => {
   // Function to submit the new quiz to the API
   function submitOneQuestion(e) {
     e.preventDefault()
-    setIncorrectAnswers(incorrectAnswers.push([incorrectAns1, incorrectAns2, incorrectAns3]))
-    console.log(incorrectAnswers)
+    setIncorrectAnswers(incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
     addQuestion(quizId, question, correctAnswer, incorrectAnswers)
   }
 
@@ -69,7 +68,7 @@ const QuestionsForm = ({ addQuestion, postQuestions }) => {
         </button> 
       </form>
         <button onClick={submitAllQuestions}>
-          <Link to={`/quizzes/${quizId}`}>
+          <Link to={'/quizzes'}>
             Save and publish
           </Link>
         </button>
