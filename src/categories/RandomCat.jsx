@@ -17,7 +17,7 @@ const RandomCat = ({ categories }) => {
     <>
       { category ? (
       <>
-        <h1>Can't choose?</h1>
+        <p>Can't choose?</p>
         <button>
           <Link to={`/categories/${category.name}`}>
             Random Category
