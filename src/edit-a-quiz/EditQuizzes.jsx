@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import ShowQuiz from "../take-a-quiz/ShowQuiz"
+import ShowQuiz from "../categories/ShowQuiz"
 import QuestionsForm from "../make-a-quiz/QuestionsForm"
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ShowQuiz = ({ quiz, quizzes }) => {
+const ShowQuiz = ({ quiz }) => {
 	return (
     <>
       <img src={quiz.image} alt='Alt text for quiz image'/>

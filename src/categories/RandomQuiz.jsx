@@ -9,15 +9,15 @@ const RandomQuiz = ({ quizzes }) => {
     return array[index]
   }
 
-  const randQuiz = randomQuiz(quizzes)
+  const quiz = randomQuiz(quizzes)
 
   return (
     <>
-      { randQuiz ? (
+      { quiz ? (
         <>
           <p>Can't choose?</p>
           <button>
-            <Link to={`/quizzes/${randQuiz._id}`}>
+            <Link to={`/quizzes/${quiz._id}`}>
               Random Quiz
             </Link>
           </button>

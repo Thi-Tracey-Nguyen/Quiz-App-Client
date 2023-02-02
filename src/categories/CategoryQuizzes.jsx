@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import ShowQuiz from '../take-a-quiz/ShowQuiz'
+import ShowQuiz from './ShowQuiz'
 
 const CategoryQuizzes = ({ quizzes, categories }) => {
 
