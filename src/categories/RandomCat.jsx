@@ -5,10 +5,8 @@ const RandomCat = ({ categories }) => {
 
   // function to get a random category from the categories array
   function randomCat(array) { 
-    if(array !== undefined) {
     const index = Math.floor(Math.random()*(array.length)) //generate a random index
     return array[index]
-    }
   }
 
   const category = randomCat(categories)
