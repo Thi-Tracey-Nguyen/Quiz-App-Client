@@ -5,8 +5,10 @@ const RandomQuiz = ({ quizzes }) => {
 
   // function to get a random quiz from the quizzes array
   function randomQuiz(array) { 
+    if(array !== undefined) {
     const index = Math.floor(Math.random()*(array.length)) //generate a random index
     return array[index]
+   }
   }
 
   const quiz = randomQuiz(quizzes)
