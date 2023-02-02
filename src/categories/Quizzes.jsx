@@ -10,7 +10,7 @@ const Quizzes = ({ quizzes }) => {
       <h1>All Quizzes</h1>
       {quizzes.length === 0 ? 'Loading...' : quizzes.map((quiz, index) => (
         <div key={index}>
-          <ShowQuiz quiz={quiz}/>
+          <ShowQuiz quizzes={quizzes}/>
         </div>
       ))}
       <RandomQuiz quizzes={quizzes} />

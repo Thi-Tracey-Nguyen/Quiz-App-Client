@@ -101,69 +101,7 @@ const App = () => {
   //   setAnswers([...answers, data])
   // }
 
-  // Add a new quiz to the API
-  const addQuiz = async (category, title, author, questions, image) => {
-    // Add a new quiz
-    const newQuiz = {
-      category: category,
-      title: title,
-      author: author,
-      questions: questions,
-      image: image
-    }
-    // Post new quiz to the API
-    const createdQuiz = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newQuiz)
-    })
-    const data = await createdQuiz.json()
-    // Update quizzes state with the new quiz
-    setQuizzes(quizzes.push(data))
-    // Navigate to add questions to the new quiz
-    navToNewQuiz(data)
-  }
-
-  // Uses the new quiz data to get the ID of the new quiz from the DB
-  function navToNewQuiz(data) {
-    const title = data.title
-    // Find the quiz in the DB where the title matches the quiz just created
-    const quiz = quizzes.find(quiz => quiz.title === title)
-    // Use the ID of that quiz to navigate to the correct Add Questions page
-    nav(`/add-questions/${quiz._id}`)
-  }
-
-  const [questionArray, setQuestionArray] = useState([])
-  // Add a new question to the Quiz
-  const addQuestion = async (quizId, question, correctAnswer, incorrectAnswers) => {
-    // Add a new question
-    const newQuestion = {
-      quizId: quizId, // How will this fetch the quiz ID from previous page?
-      question: question,
-      correctAnswer: correctAnswer,
-      incorrectAnswers: incorrectAnswers
-    }
-    console.log(newQuestion)
-    console.log(JSON.stringify(newQuestion))
-    setQuestionArray(questionArray.push(newQuestion))
-    console.log(questionArray)
-  }
-
-  const postQuestions = async () => {
-    const returnedQuestionArray = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(questionArray)
-    })
-    const data = await returnedQuestionArray.json()
-    setQuestions(questions.push(data))
-  }
+  
   
   // HOC for QuestionsForm to access quizTitle in the URL
   // const AddQuestionWrapper = () => {
@@ -184,8 +122,8 @@ const App = () => {
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
-          <Route path='/make-a-quiz' element={<QuizForm addQuiz={addQuiz} categories={categories}/>} />
-          <Route path='/add-questions/:quizId' element={<AddQuestion addQuestion={addQuestion} postQuestions={postQuestions} questionArray={questionArray} />} />
+          <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
+          <Route path='/add-questions/:quizId' element={<AddQuestion questions={questions} setQuestions={setQuestions} quizzes={quizzes} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
