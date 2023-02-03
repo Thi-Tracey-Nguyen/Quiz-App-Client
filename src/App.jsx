@@ -123,7 +123,7 @@ const App = () => {
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
-          <Route path='/add-questions/:quizId' element={<AddQuestion questions={questions} setQuestions={setQuestions} quizzes={quizzes} />} />
+          <Route path='/add-questions/:quizId' element={<AddQuestion questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />

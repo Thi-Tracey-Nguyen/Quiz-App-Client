@@ -3,8 +3,8 @@ import ReturnToTop from '../UI/ReturnToTop'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
 const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
-  const { title } = useParams('')
-  const [ quizId, setQuizId ] = useState('')
+  const { quizId } = useParams()
+  // const [quizId, setQuizId] = useState('')
   const [question, setQuestion] = useState('')
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [incorrectAnswers, setIncorrectAnswers] = useState([])
@@ -16,27 +16,36 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
   const nav = useNavigate()
   
   // Function to use quiz title to get ID
-  function getQuizId() {
-    // Find the quiz in the DB where the title matches the quiz just created
-    const quiz = quizzes.find(quiz => quiz.title === title)
-    // Use the ID of that quiz to navigate to the correct Add Questions page
-    setQuizId(quizId, title)
-    console.log(quizId)
-  }
+  // function getQuizId() {
+  //   const convertedTitle = title.replaceAll('%20', ' ')
+  //   // Find the quiz in the DB where the title matches the quiz just created
+  //   const quiz = quizzes.find(quiz => quiz.title === convertedTitle)
+  //   // Use the ID of that quiz to navigate to the correct Add Questions page
+  //   setQuizId(quiz._id)
+  //   console.log(quizId)
+  // }
 
   // Function to create and store a new question object
-  function submitQuestion(e) {
-    e.preventDefault()
+  // function submitQuestion(e) {
+  //   e.preventDefault()
+  //   setIncorrectAnswers(incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
+  //   addQuestion(quizId, question, correctAnswer, incorrectAnswers)
+  // }
+
+  // function submitAllQuestions(e) {
+  //   e.preventDefault()
+  //   postQuestions(questionArray)
+  // }
+
+  function getParams() {
     setIncorrectAnswers(incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
+    console.log(incorrectAnswers)
     addQuestion(quizId, question, correctAnswer, incorrectAnswers)
   }
 
-  function submitAllQuestions(e) {
-    e.preventDefault()
-    postQuestions(questionArray)
-  }
 
   const addQuestion = async (quizId, question, correctAnswer, incorrectAnswers) => {
+    // getQuizId()
     // Add a new question
     const newQuestion = {
       quizId: quizId,
@@ -44,26 +53,30 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers
     }
-    setQuestionArray([...questionArray, newQuestion])
-  }
-
-  const postQuestions = async () => {
-    const returnedQuestionArray = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+    console.log(newQuestion)
+    // Post new question to API
+    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(questionArray)
+      body: JSON.stringify(newQuestion)
     })
-    const data = await returnedQuestionArray.json()
-    setQuestions(...questions, data)
+    
+    const data = await createdQuestion.json()
+    const updatedQuestions = questions.push(data)
+    setQuestions(updatedQuestions)
     nav('/')
   }
+
+  // const postQuestions = async () => {
+    
+  // }
   
   return (
     <> 
-      <form onSubmit={submitQuestion} className='container'>
+      <form onSubmit={getParams} className='container'>
         <div className='question-form'>
           <label>Question:
             <input 
@@ -105,11 +118,11 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
           Add new question
         </button> 
       </form>
-        <button onClick={submitAllQuestions}>
+        {/* <button onClick={submitAllQuestions}>
           <Link to={'/quizzes'}>
             Save and publish
           </Link>
-        </button>
+        </button> */}
         <br/>
         <button>
           <Link to={'/'}>

@@ -41,22 +41,27 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
     })
     const data = await createdQuiz.json()
     // Update quizzes state with the new quiz
-    setQuizzes([...quizzes, data])
+    const updatedQuizzes = quizzes.push(data)
+    setQuizzes(updatedQuizzes)
     // Navigate to add questions to the new quiz
-    // const findTitle = await data.title
-    // let quiz = await quizzes.find(quiz => quiz.title === findTitle)
-    // console.log(quiz)
+    navToNewQuiz(data)
+    // const findTitle = data.title
+    // const quiz = quizzes.find(quiz => quiz.title === findTitle)
+    // console.log(quizzes)
     // nav(`/add-questions/${quiz._id}`)
-    nav(`/add-questions/${data.title}`)
+    // const convertedTitle = await data.title.replaceAll(' ', '%20')
+    // console.log(convertedTitle)
+    // nav(`/add-questions/${convertedTitle}`)
+    // console.log(convertedTitle)
   }
 
-  // // // Uses the new quiz data to get the ID of the new quiz from the DB
-  // async function navToNewQuiz(data) {
-  //   // Find the quiz in the DB where the title matches the quiz just created
-  //   const quiz = await quizzes.find(quiz => quiz.title === data.title)
-  //   // Use the ID of that quiz to navigate to the correct Add Questions page
-  //   nav(`/add-questions/${quiz.title}`)
-  // }
+  // // Uses the new quiz data to get the ID of the new quiz from the DB
+  function navToNewQuiz(data) {
+    // Find the quiz in the DB where the title matches the quiz just created
+    const quiz = quizzes.find(quiz => quiz.title === data.title)
+    // Use the ID of that quiz to navigate to the correct Add Questions page
+    nav(`/add-questions/${quiz._id}`)
+  }
 
   return (
     <form onSubmit={submitQuiz} className='container'>
