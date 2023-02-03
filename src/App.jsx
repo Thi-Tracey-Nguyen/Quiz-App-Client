@@ -15,8 +15,6 @@ import Result from './result/Result'
 // import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
 import QuestionsForm from './make-a-quiz/QuestionsForm'
-import ResetQuestionForm from './make-a-quiz/AddQuestion'
-import AddQuestion from './make-a-quiz/AddQuestion'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
@@ -123,7 +121,7 @@ const App = () => {
           {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
-          <Route path='/add-questions/:quizId' element={<AddQuestion questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
+          <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />

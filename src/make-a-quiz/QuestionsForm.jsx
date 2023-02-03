@@ -37,10 +37,20 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
   //   postQuestions(questionArray)
   // }
 
-  function getParams() {
+  function getParams(e) {
+    e.preventDefault()
     setIncorrectAnswers(incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
     console.log(incorrectAnswers)
     addQuestion(quizId, question, correctAnswer, incorrectAnswers)
+  }
+
+  function resetForm() {
+    setQuestion('')
+    setCorrectAnswer('')
+    setIncorrectAnswers([])
+    setIncorrectAns1('')
+    setIncorrectAns2('')
+    setIncorrectAns3('')
   }
 
 
@@ -55,7 +65,7 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
     }
     console.log(newQuestion)
     // Post new question to API
-    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+    await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -63,11 +73,13 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
       },
       body: JSON.stringify(newQuestion)
     })
-    
-    const data = await createdQuestion.json()
-    const updatedQuestions = questions.push(data)
-    setQuestions(updatedQuestions)
-    nav('/')
+    // console.log(createdQuestion)
+    // const data = await createdQuestion.json()
+    // const updatedQuestions = questions.push(data)
+    // setQuestions(updatedQuestions)
+    // console.log(updatedQuestions)
+    resetForm()
+    alert('Question added successfully!')
   }
 
   // const postQuestions = async () => {
