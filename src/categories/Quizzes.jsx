@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react'
 import RandomQuiz from './RandomQuiz'
-import ShowQuiz from '../take-a-quiz/ShowQuiz'
+import ShowQuiz from './ShowQuiz'
 import ReturnToTop from '../UI/ReturnToTop'
 
 const Quizzes = ({ quizzes }) => {
 
   return (
     <>
-      <h1>All Quizzes</h1>
+      <h2>All Quizzes</h2>
       {quizzes.length === 0 ? 'Loading...' : quizzes.map((quiz, index) => (
         <div key={index}>
-          <ShowQuiz quiz={quiz}/>
+          <ShowQuiz quiz={quiz} />
         </div>
       ))}
       <RandomQuiz quizzes={quizzes} />
-      <ReturnToTop />
+      <div>
+        <ReturnToTop />
+      </div>
     </>
   )
 }

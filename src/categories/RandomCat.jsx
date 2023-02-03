@@ -22,7 +22,8 @@ const RandomCat = ({ categories }) => {
           </Link>
         </button>
       </>
-      ) : '' }
+      ) : '' 
+    }
     </>
   )
 }

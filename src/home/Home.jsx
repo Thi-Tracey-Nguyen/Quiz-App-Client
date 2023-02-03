@@ -1,5 +1,5 @@
 import React from 'react'
-import ShowQuiz from '../take-a-quiz/ShowQuiz'
+import ShowQuiz from '../categories/ShowQuiz'
 
 const Home = ({ quizzes }) => {
   const slicedQuizzes = quizzes.slice(0, 3)

@@ -4,7 +4,7 @@ import { ExternalLink } from 'react-external-link'
 
 const Footer = () => {
   return (
-    <div className='fixed-bottom'>
+    <div>
 			<div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
 					<p>
 						&copy;
