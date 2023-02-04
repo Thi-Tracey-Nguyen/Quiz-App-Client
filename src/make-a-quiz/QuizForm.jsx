@@ -10,7 +10,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
 
   const nav = useNavigate()
 
-  // Function to submit the new quiz to the API
+  // Function to check if category entered and if so call addQuiz function
   async function submitQuiz(e) {
     e.preventDefault()
     if (!category) {
@@ -64,65 +64,56 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   }
 
   return (
-    <form onSubmit={submitQuiz} className='container'>
-      <div className='quiz-name-form'>
-        <label>Quiz title:
-          <input 
-            type='text' 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
-          />
-        </label>
-      </div>
-      <div className='author-form'>
-        <label>Author:
-          <input  
-            type='text'
-            value={author} 
-            onChange={(e) => setAuthor(e.target.value)}
-          /> 
-        </label>
-      </div>
-      <div className='category-dropdown-form'>
-        <label>Category:
-          <select 
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option>Select...</option>
-            {categories.map((cat, index) => 
-              <option key={index}>{cat.name}</option>
-            )}
-          </select>
-        </label>
-      </div>
-      {/* <div className='category-name-form'>
-        <label>Category name:
-          <input 
-            type='text' 
-            value={category} 
-            onChange={(e) => setCategory(e.target.value)} 
-          />
-        </label>
-      </div> */}
-      {/* <div className='category-img-form'>
-        <label>Category image:
-          <input 
-            type='text' 
-            value={image} 
-            onChange={(e) => setImage(e.target.value)} 
-          />
-        </label>
-      </div> */}
-      <br/>
-      <button>
-        <Link to={'/'}>
-          Quit
-        </Link>
-      </button> 
-      <button>
-          Next
-      </button>
-    </form>
+    <>
+      <h2>Make a new Quiz</h2>
+      
+        <form onSubmit={submitQuiz} className='container'>
+          <div className='category-dropdown-form'>
+            <label>Category:
+              <select 
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option>Select...</option>
+                {categories.map((cat, index) => 
+                  <option key={index}>{cat.name}</option>
+                )}
+              </select>
+            </label>
+          </div>
+          <div className='quiz-name-form'>
+            <label>Quiz name:
+              <input 
+                type='text' 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} 
+              />
+            </label>
+          </div>
+          <div className='author-form'>
+            <label>Created by:
+              <input  
+                type='text'
+                value={author} 
+                onChange={(e) => setAuthor(e.target.value)}
+              /> 
+            </label>
+          </div>
+          <br />
+          <p>
+            Don't see a Category that fits your Quiz idea?
+          </p>
+          <Link to={'/add-a-category'}>Add a new Category</Link>
+          <br/>
+          <button>
+            <Link to={'/'}>
+              Quit
+            </Link>
+          </button> 
+          <button>
+              Next
+          </button>
+        </form>
+    </>
   )
 }
 
