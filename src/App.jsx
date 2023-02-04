@@ -15,6 +15,7 @@ import Result from './result/Result'
 // import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
 import QuestionsForm from './make-a-quiz/QuestionsForm'
+import EditAQuiz from './edit-a-quiz/EditAQuiz'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
@@ -79,6 +80,16 @@ const App = () => {
     return quiz ? <TakeAQuiz quiz={quiz} onChange={getAnswers} /> : <h4>Loading... </h4>
   }
 
+  // HOC for EditAQuiz to access quizId in the URL
+  const EditAQuizWrapper = () => {
+    const { quizId } = useParams()
+    
+    // get quiz object from quizId
+    const quiz = quizzes.find(quiz => quiz._id === quizId)
+
+    return quiz ? <EditAQuiz quiz={quiz} /> : <h4>Loading... </h4>
+  }
+
   // HOC for Result to access quizId in the URL
   const ResultWrapper = () => {
     const { quizId } = useParams()
@@ -88,18 +99,6 @@ const App = () => {
 
     return quiz ? <Result quiz={quiz} answers={answers} /> : <h4>Loading... </h4>
   }
-
-  // take a quiz
-   
-  // const [ answers, setAnswers ] = useState([])
-  // // const [ points, setPoints ] = useState(0)
-
-  // callback function to get answer from ShowQuestion (passing props from child -> parent)
-  // function getData(data) {
-  //   setAnswers([...answers, data])
-  // }
-
-  
   
   // HOC for QuestionsForm to access quizTitle in the URL
   // const AddQuestionWrapper = () => {
@@ -118,11 +117,11 @@ const App = () => {
           <Route path='/quizzes' element={<Quizzes quizzes={quizzes}/>} />
           <Route path='/categories' element={<Categories categories={categories}/>} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
-          {/* <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} /> */}
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
+          <Route path='/edit-a-quiz/:quizId' element={<EditAQuizWrapper />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
           <Route path='/profile' element={<Profile />} />
