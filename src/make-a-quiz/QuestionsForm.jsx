@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReturnToTop from '../UI/ReturnToTop'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
+const QuestionsForm = ({ questions, quizzes }) => {
   const { quizId } = useParams()
   // const [quizId, setQuizId] = useState('')
   const [question, setQuestion] = useState('')
@@ -11,7 +11,7 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
   const [incorrectAns1, setIncorrectAns1] = useState('')
   const [incorrectAns2, setIncorrectAns2] = useState('')
   const [incorrectAns3, setIncorrectAns3] = useState('')
-  const [questionArray, setQuestionArray] = useState([])
+  const [lastQuestion, setLastQuestion] = useState(false)
 
   const nav = useNavigate()
   
@@ -37,13 +37,25 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
   //   postQuestions(questionArray)
   // }
 
+  // Function to put incorrect answers into array and set quizId from URL 
   function getParams(e) {
     e.preventDefault()
     setIncorrectAnswers(incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
-    console.log(incorrectAnswers)
     addQuestion(quizId, question, correctAnswer, incorrectAnswers)
+    if (lastQuestion) {
+      nav('/quizzes')
+    } else {
+      alert('Question added successfully!')
+    }
   }
 
+  // Function to submit final question and nav to quizzes page
+  // function submitForm() {
+  //   setLastQuestion(true)
+  //   getParams(quizId, question, correctAnswer, incorrectAnswers)
+  // }
+
+  // Function to reset the state of the form after submitting a question
   function resetForm() {
     setQuestion('')
     setCorrectAnswer('')
@@ -53,9 +65,8 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
     setIncorrectAns3('')
   }
 
-
+  // Function to post a new question to the DB
   const addQuestion = async (quizId, question, correctAnswer, incorrectAnswers) => {
-    // getQuizId()
     // Add a new question
     const newQuestion = {
       quizId: quizId,
@@ -63,7 +74,6 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers
     }
-    console.log(newQuestion)
     // Post new question to API
     await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
@@ -79,7 +89,6 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
     // setQuestions(updatedQuestions)
     // console.log(updatedQuestions)
     resetForm()
-    alert('Question added successfully!')
   }
 
   // const postQuestions = async () => {
@@ -88,59 +97,67 @@ const QuestionsForm = ({ questions, quizzes, setQuestions }) => {
   
   return (
     <> 
-      <form onSubmit={getParams} className='container'>
-        <div className='question-form'>
-          <label>Question:
+      <h2>Add questions to your new Quiz</h2>
+      <p>You can always quit and do this later from the Edit a Quiz page, your quiz has been saved.</p>
+
+        <form onSubmit={getParams} className='container'>
+          <div className='question-form'>
+            <label>Question:
+              <input 
+                type='text'
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className='correct-answer-form'>
+            <label>Correct answer:
+              <input 
+                type='text'
+                value={correctAnswer}
+                onChange={(e) => setCorrectAnswer(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className='incorrect-answers-form'>
+            <label>Incorrect answers:
+              <input 
+                type='text'
+                value={incorrectAns1}
+                onChange={(e) => setIncorrectAns1(e.target.value)}
+              />
+            </label>
+          </div>
             <input 
-              type='text'
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
+              type='text' 
+              value={incorrectAns2}
+              onChange={(e) => setIncorrectAns2(e.target.value)}
             />
-          </label>
-        </div>
-        <div className='correct-answer-form'>
-          <label>Correct answer:
             <input 
-              type='text'
-              value={correctAnswer}
-              onChange={(e) => setCorrectAnswer(e.target.value)}
+              type='text' 
+              value={incorrectAns3}
+              onChange={(e) => setIncorrectAns3(e.target.value)}
             />
-          </label>
-        </div>
-        <div className='incorrect-answers-form'>
-          <label>Incorrect answers:
-            <input 
-              type='text'
-              value={incorrectAns1}
-              onChange={(e) => setIncorrectAns1(e.target.value)}
-            />
-          </label>
-        </div>
-          <input 
-            type='text' 
-            value={incorrectAns2}
-            onChange={(e) => setIncorrectAns2(e.target.value)}
-          />
-          <input 
-            type='text' 
-            value={incorrectAns3}
-            onChange={(e) => setIncorrectAns3(e.target.value)}
-          />
-        <button>
-          Add new question
-        </button> 
-      </form>
-        {/* <button onClick={submitAllQuestions}>
-          <Link to={'/quizzes'}>
-            Save and publish
-          </Link>
-        </button> */}
-        <br/>
-        <button>
-          <Link to={'/'}>
-            Quit
-          </Link>
-        </button>
+          <button 
+            onClick={() => (setLastQuestion(lastQuestion))}
+            type='submit'
+            name='add-question'
+          >
+            Add new question
+          </button> 
+          <button 
+            onClick={() => (setLastQuestion(true))}
+            type='submit'
+            name='submit-form'
+          >
+              Save and publish
+          </button>
+        </form>
+          <button>
+            <Link to={'/'}>
+              Quit
+            </Link>
+          </button>
     </> 
   )
 }
