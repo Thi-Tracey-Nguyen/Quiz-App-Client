@@ -8,7 +8,7 @@ const EditQuizzes = ({ quizzes }) => {
   const [selectedQuiz, setSelectedQuiz] = useState(null)
   // const [showConfirm, setShowConfirm] = useState(false)
   const [selectedQuizEdit, setSelectedQuizEdit] = useState(null)
-  const [showConfirmEdit, setShowConfirmEdit] = useState(false)
+  // const [showConfirmEdit, setShowConfirmEdit] = useState(false)
     
   const nav = useNavigate()
 
@@ -21,9 +21,8 @@ const EditQuizzes = ({ quizzes }) => {
     handleDeleteQuiz(selectedQuiz._id)
     alert('Quiz deleted successfully')
     setSelectedQuiz(null)        
-    // setShowConfirm(true) 
     refreshPage()
-    nav('/edit-a-quiz/')
+
   }
 
   const handleDeleteQuiz = async (id) => {
@@ -40,7 +39,7 @@ const EditQuizzes = ({ quizzes }) => {
       // if (data.headers.status === 204) {
       //   alert('Quiz deleted successfully')
       // }
-
+      getQuizzes()
     } catch (error) {
       console.error(error)
     }

@@ -41,6 +41,7 @@ const App = () => {
     getQuizzes()
   }, [])
 
+  
   useEffect(() => {
     async function getQuestions() {
       const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions')
@@ -120,7 +121,7 @@ const App = () => {
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
-          <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes}/>} />
+          <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes} />} />
           <Route path='/edit-a-quiz/:quizId' element={<EditAQuizWrapper />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
