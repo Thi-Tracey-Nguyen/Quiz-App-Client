@@ -44,6 +44,7 @@ const QuestionsForm = ({ questions, quizzes }) => {
     addQuestion(quizId, question, correctAnswer, incorrectAnswers)
     if (lastQuestion) {
       nav('/quizzes')
+      window.location.reload(false)
     } else {
       alert('Question added successfully!')
     }
