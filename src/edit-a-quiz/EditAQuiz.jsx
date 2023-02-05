@@ -46,6 +46,16 @@ const EditAQuiz = ({ quiz }) => {
     updateQuestion()
   }
 
+  // function render() {
+  //   return (
+  //     <>
+  //       <button> Add a question </button>
+  //       <button> Delete this question </button>
+  //       <button onClick={handleClickNext}> Next </button>
+  //     </>
+  //   )
+  // }
+
   return (
     <>
       <div>Edit {quiz.title}</div>
