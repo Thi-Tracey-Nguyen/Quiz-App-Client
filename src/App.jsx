@@ -21,7 +21,7 @@ import CategoryForm from './make-a-quiz/CategoryForm'
 const App = () => {
   const [ categories, setCategories ] = useState([])
   const [quizzes, setQuizzes] = useState([])
-  const [questions, setQuestions] = useState([])
+  const [questions, setQuestions] = useState('')
   const nav = useNavigate()
 
   useEffect(() => {
@@ -42,7 +42,6 @@ const App = () => {
     getQuizzes()
   }, [])
 
-  
   useEffect(() => {
     async function getQuestions() {
       const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions')
@@ -54,16 +53,6 @@ const App = () => {
 
   const [answers, setAnswers] = useState([])
 
-  //HOC for TakeAQuiz to access quizId in the URL
-  // const { quizId } = useParams()
-  // console.log(useParams())
-  
-  // // get quiz object from quizId
-  // const quiz = quizzes.find(quiz => quiz._id === quizId)
-  // console.log(quizId)
-
-  // const [index, setIndex] = useState(0)
-  // // const question = quiz.questions[index]
   
   //this function gets points sent from TakeAQuiz component (child to parent)
   function getAnswers(data) {
@@ -72,14 +61,21 @@ const App = () => {
     // nav(`/result/${quizId}`)
   }
   
-  // HOC for ShowQuestion to access quizId in the URL
+  // HOC for ShowQuestion to access quizId in the URL and to fetch a quiz
   const TakeAQuizWrapper = () => {
     const { quizId } = useParams()
+    const [quiz, setQuiz] = useState('')
     
-    // get quiz object from quizId
-    const quiz = quizzes.find(quiz => quiz._id === quizId)
+    useEffect(() => {
+      async function getQuiz() {
+        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const data = await res.json()
+        setQuiz(data)
+      }
+      getQuiz()
+    }, [quizId])
 
-    return quiz ? <TakeAQuiz quiz={quiz} onChange={getAnswers} /> : <h4>Loading... </h4>
+    return quiz ? <TakeAQuiz quiz={quiz} onChange={getAnswers} /> : 'Loading...'
   }
 
   // HOC for EditAQuiz to access quizId in the URL
@@ -95,9 +91,16 @@ const App = () => {
   // HOC for Result to access quizId in the URL
   const ResultWrapper = () => {
     const { quizId } = useParams()
+    const [quiz, setQuiz] = useState('')
     
-    // get quiz object from quizId
-    const quiz = quizzes.find(quiz => quiz._id === quizId)
+    useEffect(() => {
+      async function getQuiz() {
+        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const data = await res.json()
+        setQuiz(data)
+      }
+      getQuiz()
+    }, [quizId])
 
     return quiz ? <Result quiz={quiz} answers={answers} /> : <h4>Loading... </h4>
   }
