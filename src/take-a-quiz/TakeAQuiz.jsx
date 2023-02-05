@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const TakeAQuiz= ({ quiz, onChange }) => {
 
@@ -9,6 +9,7 @@ const TakeAQuiz= ({ quiz, onChange }) => {
   const [ timeLeft, setTimeLeft ] = useState(8)
   const nav = useNavigate()
 
+  // console.log(quiz.questions)
   const question = quiz.questions[index]
 
   // countdown timer
