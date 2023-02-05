@@ -46,6 +46,13 @@ const EditAQuiz = ({ quiz }) => {
     updateQuestion()
   }
 
+  // updates index when user click next
+  function handleSubmit(event) {
+    event.preventDefault()
+    updateQuestion()
+    nav('/quizzes')
+  }
+
   // function render() {
   //   return (
   //     <>
@@ -100,7 +107,7 @@ const EditAQuiz = ({ quiz }) => {
 
             { index < quiz.questions.length-1 ? 
               <button onClick={ handleClickNext }> Next Question </button> :
-              <button onClick={() => nav('/quizzes')}> Submit </button> 
+              <button onClick={ handleSubmit }> Submit </button> 
             }     
         </form>
     </>
