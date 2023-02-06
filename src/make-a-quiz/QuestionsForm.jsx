@@ -172,7 +172,7 @@ const QuestionsForm = ({ questions, quizzes }) => {
         </button>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default QuestionsForm;
+export default QuestionsForm
