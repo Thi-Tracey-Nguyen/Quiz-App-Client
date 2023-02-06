@@ -10,10 +10,10 @@ const EditAQuiz = ({ categories }) => {
   const [author, setAuthor] = useState('')
   const [image, setImage] = useState('')
   const imgArray = [
-    'public/brain.png', 'public/fashion.png', 'public/geography.png',
-    'public/maths.png', 'public/movies.png', 'public/music.png',
-    'public/nature.png', 'public/pets.png', 'public/pizza.png',
-    'public/question-mark.png', 'public/test.png', 'public/tv.png'
+    '/brain.png', '/fashion.png', '/geography.png',
+    '/maths.png', '/movies.png', '/music.png',
+    '/nature.png', '/pets.png', '/pizza.png',
+    '/question-mark.png', '/test.png', '/tv.png'
   ]
 
   const nav = useNavigate()
