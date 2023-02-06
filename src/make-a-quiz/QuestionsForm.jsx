@@ -44,17 +44,10 @@ const QuestionsForm = ({ questions, quizzes }) => {
     addQuestion(quizId, question, correctAnswer, incorrectAnswers)
     if (lastQuestion) {
       nav('/quizzes')
-      window.location.reload(false)
     } else {
       alert('Question added successfully!')
     }
   }
-
-  // Function to submit final question and nav to quizzes page
-  // function submitForm() {
-  //   setLastQuestion(true)
-  //   getParams(quizId, question, correctAnswer, incorrectAnswers)
-  // }
 
   // Function to reset the state of the form after submitting a question
   function resetForm() {
@@ -76,7 +69,7 @@ const QuestionsForm = ({ questions, quizzes }) => {
       incorrectAnswers: incorrectAnswers
     }
     // Post new question to API
-    await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -85,16 +78,12 @@ const QuestionsForm = ({ questions, quizzes }) => {
       body: JSON.stringify(newQuestion)
     })
     // console.log(createdQuestion)
-    // const data = await createdQuestion.json()
+    const data = await createdQuestion.json()
     // const updatedQuestions = questions.push(data)
     // setQuestions(updatedQuestions)
     // console.log(updatedQuestions)
     resetForm()
   }
-
-  // const postQuestions = async () => {
-    
-  // }
   
   return (
     <> 
@@ -151,7 +140,7 @@ const QuestionsForm = ({ questions, quizzes }) => {
             type='submit'
             name='submit-form'
           >
-              Save and publish
+            Save and publish
           </button>
         </form>
           <button>
