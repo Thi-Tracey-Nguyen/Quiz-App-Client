@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const EditAQuiz = ({ quiz }) => {
+const EditQuestions = ({ quiz }) => {
   const [index, setIndex] = useState(0)
   const nav = useNavigate()
 
@@ -244,4 +244,4 @@ const EditAQuiz = ({ quiz }) => {
   )
 }
 
-export default EditAQuiz
+export default EditQuestions

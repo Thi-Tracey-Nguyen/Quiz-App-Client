@@ -15,7 +15,7 @@ import Result from './result/Result'
 // import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
 import QuestionsForm from './make-a-quiz/QuestionsForm'
-import EditAQuiz from './edit-a-quiz/EditAQuiz'
+import EditQuestions from './edit-a-quiz/EditQuestions'
 import CategoryForm from './make-a-quiz/CategoryForm'
 
 const App = () => {
