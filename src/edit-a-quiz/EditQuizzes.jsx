@@ -20,7 +20,6 @@ const EditQuizzes = ({ quizzes }) => {
     alert('Quiz deleted successfully')
     setSelectedQuiz(null)        
     refreshPage()
-
   }
 
   const handleDeleteQuiz = async (id) => {

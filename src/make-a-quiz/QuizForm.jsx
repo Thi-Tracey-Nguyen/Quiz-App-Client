@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import React, { useState, Image } from 'react'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import "../styles/CommonStyles.css";
 
 const QuizForm = ({ quizzes, categories, setQuizzes }) => {
-  const [category, setCategory] = useState("");
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [questions, setQuestions] = useState([]);
-  const [image, setImage] = useState("");
+  const [category, setCategory] = useState('')
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [questions, setQuestions] = useState([])
+  const [image, setImage] = useState('')
+  const imgArray = [
+    'src/assets/brain.png', 'src/assets/fashion.png', 'src/assets/geography.png',
+    'src/assets/maths.png', 'src/assets/movies.png', 'src/assets/music.png',
+    'src/assets/nature.png', 'src/assets/pets.png', 'src/assets/pizza.png',
+    'src/assets/question-mark.png', 'src/assets/test.png', 'src/assets/tv.png'
+  ]
 
   const nav = useNavigate();
 
@@ -32,18 +38,16 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       image: image,
     };
     // Post new quiz to the API
-    const createdQuiz = await fetch(
-      "https://quiz-app-server-production-09e8.up.railway.app/quizzes",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newQuiz),
-      }
-    );
-    const data = await createdQuiz.json();
+    const createdQuiz = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newQuiz)
+    })
+    console.log(newQuiz)
+    const data = await createdQuiz.json()
     // Update quizzes state with the new quiz
     const updatedQuizzes = quizzes.push(data);
     setQuizzes(updatedQuizzes);
@@ -96,6 +100,22 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
             />
+          </div>
+          <div className='image-form'>
+            Choose an image: <br/>
+            {imgArray.map((img, index) => (
+              <label htmlFor='image-form'>
+                  <input 
+                    type='radio'
+                    name={image}
+                    value={img}
+                    onChange={(e) => setImage(e.target.value)}
+                    key={index}
+                    checked={image === img}
+                  />
+                <img src={img} width={100} height={100}/>
+              </label>
+            ))}
           </div>
           <br />
           <p>Don't see a Category that fits your Quiz idea?
