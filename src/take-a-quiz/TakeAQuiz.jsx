@@ -102,11 +102,11 @@ const TakeAQuiz= ({ quiz, onChange }) => {
 
   return (
     <> 
-    <div class="main-body flex-wrap" style={{ height: "100vh" }}>
-     <h1 class="justify-content-center text-dark fw-bold"
+    <div className="main-body flex-wrap" style={{ height: "100vh" }}>
+     <h1 className="justify-content-center text-dark fw-bold"
           style={{ width: "15rem", height: "5rem" }}>Timer: {timeLeft}</h1>
-      <h1 class="justify-content-center text-dark fw-bold">{quiz.title}</h1>
-      <h4 class="d-flex justify-content-center">{question.question}</h4>
+      <h1 className="justify-content-center text-dark fw-bold">{quiz.title}</h1>
+      <h4 className="d-flex justify-content-center">{question.question}</h4>
 
       <div>
         {seededAnswers.map((seededAnswer, index) => (

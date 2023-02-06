@@ -30,7 +30,6 @@ const EditQuizzes = ({ quizzes }) => {
           method: "DELETE",
         }
       )
-
       getQuizzes()
     } catch (error) {
       console.error(error)

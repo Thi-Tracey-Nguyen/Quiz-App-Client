@@ -16,13 +16,16 @@ const Result = ({ answers, quiz }) => {
 
   return (
     <>
-    <div class='main-body flex-wrap' style = {{height: '100vh'}}></div>
+    <div className='main-body flex-wrap' style = {{height: '100vh'}}>
       <h1>Result Page</h1>
       <h2>Your points: {points}</h2>
-      <p>Your answers are:</p>
+      <br/>
+      <p className='fw-bold'>Your answers are:</p>
       {answers.map((answer, index) => <p key={index}>{answer}</p>)}
-      <p>Correct answers are:</p>
+      <br/>           
+      <p className='fw-bold'>Correct answers are:</p>
       {quiz.questions.map((question, index) => <p key={index}>{question.correctAnswer}</p>)}
+    </div>
     </>
     
   )
