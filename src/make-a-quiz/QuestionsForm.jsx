@@ -95,13 +95,13 @@ const QuestionsForm = ({ questions, quizzes }) => {
 
   return (
     <>
-      <div class="main-body flex-wrap" style={{ height: "100vh" }}>
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
         <h2>Add questions to your new Quiz</h2>
         <p>
           You can always quit and do this later from the Edit a Quiz page, your
           quiz has been saved.
         </p>
-        <form onSubmit={getParams} class='d-flex flex-column flex-wrap' style={{width:'400px'}}>
+        <form onSubmit={getParams} className='d-flex flex-column flex-wrap' style={{width:'400px'}}>
           <div className="question-form d-flex flex-column">
             <label>Question:</label>
             <input
@@ -148,12 +148,12 @@ const QuestionsForm = ({ questions, quizzes }) => {
             />
           </div>
           <br/>
-          <div class="d-flex justify-content-between">
+          <div className="d-flex justify-content-between">
             <button
               onClick={() => setLastQuestion(lastQuestion)}
               type="submit"
               name="add-question"
-              class="text-dark fw-bold"
+              className="text-dark fw-bold"
             >
               Add new question
             </button>
@@ -161,14 +161,14 @@ const QuestionsForm = ({ questions, quizzes }) => {
               onClick={() => setLastQuestion(true)}
               type="submit"
               name="submit-form"
-              class="text-dark fw-bold"
+              className="text-dark fw-bold"
             >
               Save and publish
             </button>
           </div>
         </form>
-        <button  class="text-dark fw-bold">
-          <Link to={"/"} class = 'd-flex justify-content-center text-dark fw-bold'>Quit</Link>
+        <button  className="text-dark fw-bold">
+          <Link to={"/"} className = 'd-flex justify-content-center text-dark fw-bold'>Quit</Link>
         </button>
       </div>
     </>

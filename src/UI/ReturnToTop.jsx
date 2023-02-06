@@ -22,9 +22,11 @@ const ReturnToTop = () => {
   }
 	
 	return (
+    <div className='d-flex flex wrap position-absolute bottom-0 start-0'>
     <button onClick={goToTop} className='return-to-top'>
       &#8593;
     </button>
+    </div>
   )
 }
 
