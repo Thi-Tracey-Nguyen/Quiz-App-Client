@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import "../styles/CommonStyles.css";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const TakeAQuiz= ({ quiz, onChange }) => {
@@ -101,9 +102,11 @@ const TakeAQuiz= ({ quiz, onChange }) => {
 
   return (
     <> 
-      <h1>Timer: {timeLeft}</h1>
-      <h1>{quiz.title}</h1>
-      <h4>{question.question}</h4>
+    <div class="main-body flex-wrap" style={{ height: "100vh" }}>
+     <h1 class="justify-content-center text-dark fw-bold"
+          style={{ width: "15rem", height: "5rem" }}>Timer: {timeLeft}</h1>
+      <h1 class="justify-content-center text-dark fw-bold">{quiz.title}</h1>
+      <h4 class="d-flex justify-content-center">{question.question}</h4>
 
       <div>
         {seededAnswers.map((seededAnswer, index) => (
@@ -128,6 +131,7 @@ const TakeAQuiz= ({ quiz, onChange }) => {
         <button>
           <Link to='/quizzes'> Quit </Link>
         </button>
+        </div>
     </>
   )
 }
