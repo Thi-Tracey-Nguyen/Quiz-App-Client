@@ -14,32 +14,32 @@ const EditAQuiz = ({ quiz }) => {
   const [incorrectAnswer2, setIncorrectAnswer2] = useState(questionObject.incorrectAnswers[1])
   const [incorrectAnswer3, setIncorrectAnswer3] = useState(questionObject.incorrectAnswers[2])
 
-  // // this function creates a new question object and put it to the server API
-  // async function updateQuestion() {
+  // this function creates a new question object and put it to the server API
+  async function updateQuestion() {
 
-  //   // creates a new question object to send back to server  
-  //   const updatedQuestion = {
-  //     question, 
-  //     correctAnswer,
-  //     incorrectAnswers: [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3]
-  //   }
+    // creates a new question object to send back to server  
+    const updatedQuestion = {
+      question, 
+      correctAnswer,
+      incorrectAnswers: [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3]
+    }
     
-  //   // fetch to API
-  //   const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(updatedQuestion)
-  //   })
+    // fetch to API
+    const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedQuestion)
+    })
 
-  //   const data = await res.json()
-  //   console.log(data)
+    const data = await res.json()
+    console.log(data)
 
-  //   // need to add logic to handle errors
-  //   alert('Question updated successfully')
-  // }
+    // need to add logic to handle errors
+    alert('Question updated successfully')
+  }
 
 
   // updates index when user click next
@@ -52,54 +52,59 @@ const EditAQuiz = ({ quiz }) => {
     // setIncorrectAnswer1(questionObject.incorrectAnswers[0])
     // setIncorrectAnswer2(questionObject.incorrectAnswers[1])
     // setIncorrectAnswer3(questionObject.incorrectAnswers[2])
-    // updateQuestion()
+    updateQuestion()
   }
 
-  // // updates index when user click next
-  // function handleSubmit(event) {
-  //   event.preventDefault()
-  //   updateQuestion()
-  //   nav('/quizzes')
-  // }
+  // updates index when user click next
+  function handleSubmit(event) {
+    event.preventDefault()
+    updateQuestion()
+    nav('/quizzes')
+  }
 
-  // // handle click delete
-  // function handleClickDelete(event) {
-  //   event.preventDefault()
-  //   setConfirm(true)
-  // }
+  // handle click delete
+  function handleClickDelete(event) {
+    event.preventDefault()
+    setConfirm(true)
+  }
 
-  // // handles click on delete a question
-  // const confirmForm = () => {
-  //   return (
-  //     <>
-  //       <p> Do you want to delete this question? </p>
-  //       <button onClick={handleConfirmDelete}> Confirm </button>
-  //       <button> Cancel </button>
-  //       <br />
-  //     </>
-  //   )
-  // }
-
-  // // handles confirming deletion of a question
-  // const handleConfirmDelete = async (event) => {
-  //   const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
-  //       method: "DELETE",
-  //   })
-  //   setIndex(index+1)
-  // }
-  // console.log(questionObject)
-
-  // // group buttons in a function for conditional rendering
-  // const render = () => {
-  //   return (
-  //     <>
-  //       <button> Add a question </button>
-  //       <button onClick={ handleClickDelete }> Delete this question </button>
-  //       <button onClick={ handleClickNext }> Next </button>
-  //     </>
-  //   )
-  // }
+  // handles confirming deletion of a question
+  const handleConfirmDelete = async (event) => {
+    try {
+      await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
+          method: "DELETE"
+      })
+      setIndex(index+1)
+      console.log(questionObject._id)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   console.log(questionObject)
+
+  // group buttons in a function for conditional rendering
+  const render = () => {
+    return (
+      <>
+        <button> Add a question </button>
+        <button onClick={ handleClickDelete }> Delete this question </button>
+        <button onClick={ handleClickNext }> Next </button>
+      </>
+    )
+  }
+
+  // handles click on delete a question
+  const confirmForm = () => {
+    return (
+      <>
+        <p> Do you want to delete this question? </p>
+        <button onClick={handleConfirmDelete}> Confirm </button>
+        <button> Cancel </button>
+        <br />
+      </>
+    )
+  }
+  console.log(questionObject._id)
 
   return (
     <>
@@ -150,10 +155,9 @@ const EditAQuiz = ({ quiz }) => {
 
             { confirm && confirmForm() }
             { index < quiz.questions.length-1 ? 
-              // render() :
-              <button onClick={ handleClickNext }> Next </button> : 
-              <button> Submit </button> 
-              // <button onClick={ handleSubmit }> Submit </button> 
+              render() :
+              // <button onClick={ handleClickNext }> Next </button> : 
+              <button onClick={ handleSubmit }> Submit </button> 
             }     
         </form>
     </>
