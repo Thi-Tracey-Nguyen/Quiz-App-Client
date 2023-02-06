@@ -15,15 +15,15 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
     'src/assets/question-mark.png', 'src/assets/test.png', 'src/assets/tv.png'
   ]
 
-  const nav = useNavigate();
+  const nav = useNavigate()
 
   // Function to check if category entered and if so call addQuiz function
   async function submitQuiz(e) {
-    e.preventDefault();
+    e.preventDefault()
     if (!category) {
       alert("You need to select a category");
     } else {
-      addQuiz(category, title, author, questions, image);
+      addQuiz(category, title, author, questions, image)
     }
   }
 
@@ -137,4 +137,4 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   );
 };
 
-export default QuizForm;
+export default QuizForm

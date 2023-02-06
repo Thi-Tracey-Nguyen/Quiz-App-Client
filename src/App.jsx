@@ -15,6 +15,7 @@ import Result from './result/Result'
 // import ShowQuestion from './take-a-quiz/ShowQuestion'
 import TakeAQuiz from './take-a-quiz/TakeAQuiz'
 import QuestionsForm from './make-a-quiz/QuestionsForm'
+import EditQuestions from './edit-a-quiz/EditQuestions'
 import EditAQuiz from './edit-a-quiz/EditAQuiz'
 import CategoryForm from './make-a-quiz/CategoryForm'
 
@@ -132,7 +133,8 @@ const App = () => {
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes} />} />
-          <Route path='/edit-a-quiz/:quizId' element={<EditAQuizWrapper />} />
+          <Route path='/edit-a-quiz/:quizId' element={<EditAQuiz categories={categories} />} />
+          {/* <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestions />} /> */}
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
