@@ -9,6 +9,7 @@ const EditAQuiz = ({ categories }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [image, setImage] = useState('')
+  const [editMode, setEditMode] = useState(true)
   const imgArray = [
     '/brain.png', '/fashion.png', '/geography.png',
     '/maths.png', '/movies.png', '/music.png',
@@ -30,12 +31,8 @@ const EditAQuiz = ({ categories }) => {
   // Function to check if category entered and if so call addQuiz function
   async function submitQuiz(e) {
     e.preventDefault()
-    if (!category) {
-      alert("You need to select a category");
-    } else {
-      editQuiz(category, title, author, image)
-      nav('/quizzes')
-    }
+    editQuiz(category, title, author, image)
+    setEditMode(false)
   }
 
   // Add a new quiz to the API
@@ -60,21 +57,9 @@ const EditAQuiz = ({ categories }) => {
     })
     
     const data = await newQuiz.json()
-    // Update quizzes state with the new quiz
-    // const updatedQuizzes = quizzes.push(data)
-    // setQuizzes(updatedQuizzes)
-    // Navigate to add questions to the new quiz
-    // const findTitle = data.title
-    // const quiz = quizzes.find(quiz => quiz.title === findTitle)
-    // console.log(quizzes)
-    // nav(`/add-questions/${quiz._id}`)
-    // const convertedTitle = await data.title.replaceAll(' ', '%20')
-    // console.log(convertedTitle)
-    // nav(`/add-questions/${convertedTitle}`)
-    // console.log(convertedTitle)
-  };
+  }
 
-  // // Uses the new quiz data to get the ID of the new quiz from the DB
+  // Uses the new quiz data to get the ID of the new quiz from the DB
   function navToNewQuiz(data) {
     // Find the quiz in the DB where the title matches the quiz just created
     const quiz = quizzes.find((quiz) => quiz.title === data.title);
@@ -137,12 +122,13 @@ const EditAQuiz = ({ categories }) => {
             <br />
             <div class="d-flex justify-content-between">
               <button>
-                <Link to={"/"} class="text-dark fw-bold">
-                  Quit
+                <Link to="/quizzes" class="text-dark fw-bold">
+                  Back to All Quizzes
                 </Link>
               </button>
-              <button  class="text-dark fw-bold" type='submit'>Save changes</button>
-              {/* <button  class="text-dark fw-bold">Next</button> */}
+              {editMode? <button  class="text-dark fw-bold" type='submit'>Save changes</button> :
+                ''}
+              <button  class="text-dark fw-bold">Edit questions</button>
             </div>
           </form>
         </div>
