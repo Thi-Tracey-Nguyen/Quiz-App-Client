@@ -38,7 +38,7 @@ const EditQuizzes = ({ quizzes }) => {
       // if (data.headers.status === 204) {
       //   alert('Quiz deleted successfully')
       // }
-      getQuizzes()
+      // getQuizzes()
     } catch (error) {
       console.error(error)
     }
