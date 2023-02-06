@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ShowQuiz from './ShowQuiz'
+import '../styles/CommonStyles.css'
 
 const CategoryQuizzes = ({ quizzes, categories }) => {
 
@@ -17,14 +18,16 @@ const CategoryQuizzes = ({ quizzes, categories }) => {
 
 	return (
 		<>
-			<h4>Quizzes of {categoryNameConverted} category</h4>
-				<ul>
+		<div class='main-body flex-wrap' style ={{height: '100vh'}}>
+		<h1>Quizzes of {categoryNameConverted} category</h1>
+				<ul class='d-flex justify-content-center flex-wrap '>
 						{quizzesByCat.map((quizByCat, index) => (
-						<div key={index}>
+						<div key={index} class="card m-3" style={{width: "15rem"}}>
 								<ShowQuiz quiz={quizByCat}/>
 						</div>
 						))}
 				</ul>
+		</div>
 		</>
   )
 }
