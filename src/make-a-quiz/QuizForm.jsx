@@ -73,7 +73,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
 
   return (
     <>
-      <div class="main-body flex-wrap" style={{ height: "100vh" }}>
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
         <h1>Make a new Quiz</h1>
         <form onSubmit={submitQuiz}>
           <div className="category-dropdown-form d-flex flex-column">       
@@ -101,7 +101,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
               onChange={(e) => setAuthor(e.target.value)}
             />
           </div>
-          <div className='image-form'>
+          <div className='image-form '>
             Choose an image: <br/>
             {imgArray.map((img, index) => (
               <label htmlFor='image-form' key={index}>
@@ -123,13 +123,13 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
           <Link to={"/add-a-category"}>Add a new Category</Link>
           </p>
           <br />
-          <div class="d-flex justify-content-between">
+          <div className="d-flex justify-content-between">
             <button>
-              <Link to={"/"} class="text-dark fw-bold">
+              <Link to={"/"} className="text-dark fw-bold">
                 Quit
               </Link>
             </button>
-            <button  class="text-dark fw-bold">Next</button>
+            <button  className="text-dark fw-bold">Next</button>
           </div>
         </form>
       </div>

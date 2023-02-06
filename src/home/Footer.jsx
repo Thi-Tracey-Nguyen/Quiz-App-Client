@@ -16,7 +16,7 @@ const Footer = () => {
 					</p>
 			
 			<p style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-					<ExternalLink href='mailto:thequizapp@mail.com' style={{color:'#FFFFFF'}}>Have suggestions? Get in touch</ExternalLink>
+					<ExternalLink href='mailto:thequizapp@mail.com' style={{color:' #D86D18'}}>Have suggestions? Get in touch</ExternalLink>
 			</p>
 			</div>
     </div>
