@@ -12,7 +12,6 @@ const ShowQuiz = ({ quiz }) => {
 			<div class='d-flex justify-content-center'>{quiz.questions.length} questions</div>
 		</div>
     </>
-    
   )
 }
 export default ShowQuiz

@@ -46,17 +46,11 @@ const QuestionsForm = ({ questions, quizzes }) => {
     );
     addQuestion(quizId, question, correctAnswer, incorrectAnswers);
     if (lastQuestion) {
-      nav("/quizzes");
+      nav('/quizzes')
     } else {
       alert("Question added successfully!");
     }
   }
-
-  // Function to submit final question and nav to quizzes page
-  // function submitForm() {
-  //   setLastQuestion(true)
-  //   getParams(quizId, question, correctAnswer, incorrectAnswers)
-  // }
 
   // Function to reset the state of the form after submitting a question
   function resetForm() {
@@ -83,28 +77,21 @@ const QuestionsForm = ({ questions, quizzes }) => {
       incorrectAnswers: incorrectAnswers,
     };
     // Post new question to API
-    await fetch(
-      "https://quiz-app-server-production-09e8.up.railway.app/questions",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newQuestion),
-      }
-    );
+    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newQuestion)
+    })
     // console.log(createdQuestion)
-    // const data = await createdQuestion.json()
+    const data = await createdQuestion.json()
     // const updatedQuestions = questions.push(data)
     // setQuestions(updatedQuestions)
     // console.log(updatedQuestions)
-    resetForm();
-  };
-
-  // const postQuestions = async () => {
-
-  // }
+    resetForm()
+  }
 
   return (
     <>

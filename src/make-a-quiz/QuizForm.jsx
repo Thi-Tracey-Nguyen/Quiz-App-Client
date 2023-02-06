@@ -104,7 +104,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
           <div className='image-form'>
             Choose an image: <br/>
             {imgArray.map((img, index) => (
-              <label htmlFor='image-form'>
+              <label htmlFor='image-form' key={index}>
                   <input 
                     type='radio'
                     name={image}
