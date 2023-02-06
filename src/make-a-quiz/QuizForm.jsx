@@ -46,7 +46,6 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       },
       body: JSON.stringify(newQuiz)
     })
-    console.log(newQuiz)
     const data = await createdQuiz.json()
     // Update quizzes state with the new quiz
     const updatedQuizzes = quizzes.push(data);

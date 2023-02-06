@@ -127,7 +127,7 @@ const App = () => {
       <NavBar />
         <Routes>
           <Route path='/' element={<Home quizzes={quizzes}/>} />
-          <Route path='/quizzes' element={<Quizzes quizzes={quizzes} setQuizzes={setQuizzes} setQuestions={setQuestions} />} />
+          <Route path='/quizzes' element={<Quizzes quizzes={quizzes} questions={questions} setQuizzes={setQuizzes} setQuestions={setQuestions} />} />
           <Route path='/categories' element={<Categories categories={categories}/>} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
@@ -136,7 +136,7 @@ const App = () => {
           <Route path='/edit-a-quiz/:quizId' element={<EditAQuiz categories={categories} />} />
           {/* <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestions />} /> */}
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
-          <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} />} />
+          <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/log-in' element={<LogIn />} />
           <Route path='/profile' element={<Profile />} />
