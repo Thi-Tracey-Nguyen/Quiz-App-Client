@@ -5,10 +5,8 @@ import QuestionsForm from "../make-a-quiz/QuestionsForm"
 
 
 const EditQuizzes = ({ quizzes }) => {
-  const [selectedQuiz, setSelectedQuiz] = useState(null)
-  // const [showConfirm, setShowConfirm] = useState(false)
-  const [selectedQuizEdit, setSelectedQuizEdit] = useState(null)
-  // const [showConfirmEdit, setShowConfirmEdit] = useState(false)
+  const [selectedQuiz, setSelectedQuiz] = useState(null)  
+  const [selectedQuizEdit, setSelectedQuizEdit] = useState(null)  
     
   const nav = useNavigate()
 
@@ -33,27 +31,15 @@ const EditQuizzes = ({ quizzes }) => {
           method: "DELETE",
         }
       )
-      // logic to check if deletion is successful before alerting but currently not working
-      // const data = await res.json()
-      // console.log(data.headers.status)
-      // if (data.headers.status === 204) {
-      //   alert('Quiz deleted successfully')
-      // }
+
       getQuizzes()
     } catch (error) {
       console.error(error)
     }
   }
-  // const handleCloseConfirm = () => {
-  //   setShowConfirm(false)
-  //   nav('/edit-a-quiz/')
-  // }
 
   const handleConfirmEdit = () => {
-    console.log('calling handleEditQuiz :', selectedQuizEdit._id)    
-    //return <QuestionsForm quizId={selectedQuizEdit._id} />
-    //setSelectedQuizEdit(null)    
-    //setShowConfirmEdit(true) 
+    console.log('calling handleEditQuiz :', selectedQuizEdit._id)
     nav(`/edit-a-quiz/${selectedQuizEdit._id}`)
   }
 
@@ -67,18 +53,14 @@ const EditQuizzes = ({ quizzes }) => {
   }
 
 
-  // const handleCloseConfirmEdit = () => {
-  //   setShowConfirmEdit(false)
-  //   navigateTo('/edit-a-quiz/')
-  // }
-  
 
   return (
     <>
+    <div class='main-body flex-wrap'>
       <h1>Choose a Quiz to edit or delete</h1>
-      <ul>
+      <ul class='d-flex justify-content-center flex-wrap '>
         {quizzes.length === 0 ? "Loading..." : quizzes.map((quiz, index) => (
-          <div key={index}>
+          <div key={index} class="card m-3" style={{width: "15rem"}}>
             <ShowQuiz quiz={quiz} />
             <ul>                  
               <button onClick={() => setSelectedQuizEdit(quiz)}>Edit</button>
@@ -117,7 +99,7 @@ const EditQuizzes = ({ quizzes }) => {
           <button onClick={handleCloseConfirm}>Close</button>
         </div>
       )} */}
-      
+    </div>
     </>
   )
 }

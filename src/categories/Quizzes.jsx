@@ -1,24 +1,30 @@
-import React, {useEffect, useState} from 'react'
-import RandomQuiz from './RandomQuiz'
-import ShowQuiz from './ShowQuiz'
-import ReturnToTop from '../UI/ReturnToTop'
+import React, { useEffect, useState } from "react";
+import RandomQuiz from "./RandomQuiz";
+import ShowQuiz from "./ShowQuiz";
+import ReturnToTop from "../UI/ReturnToTop";
+import "../styles/CommonStyles.css";
 
 const Quizzes = ({ quizzes }) => {
-
   return (
     <>
-      <h2>All Quizzes</h2>
-      {quizzes.length === 0 ? 'Loading...' : quizzes.map((quiz, index) => (
-        <div key={index}>
-          <ShowQuiz quiz={quiz} />
+      <div class="main-body flex-wrap">
+      <h1>All Quizzes</h1>
+        <ul class="d-flex justify-content-center flex-wrap ">
+          {quizzes.length === 0
+            ? "Loading..."
+            : quizzes.map((quiz, index) => (
+                <div key={index} class="card m-3" style={{ width: "15rem" }}>
+                  <ShowQuiz quiz={quiz} />
+                </div>
+              ))}
+        </ul>
+        <RandomQuiz quizzes={quizzes} />
+        <div>
+          <ReturnToTop />
         </div>
-      ))}
-      <RandomQuiz quizzes={quizzes} />
-      <div>
-        <ReturnToTop />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Quizzes
+export default Quizzes;

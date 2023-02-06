@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
-import ReturnToTop from '../UI/ReturnToTop'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import ReturnToTop from "../UI/ReturnToTop";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import "../styles/CommonStyles.css";
 
 const QuestionsForm = ({ questions, quizzes }) => {
-  const { quizId } = useParams()
+  const { quizId } = useParams();
   // const [quizId, setQuizId] = useState('')
-  const [question, setQuestion] = useState('')
-  const [correctAnswer, setCorrectAnswer] = useState('')
-  const [incorrectAnswers, setIncorrectAnswers] = useState([])
-  const [incorrectAns1, setIncorrectAns1] = useState('')
-  const [incorrectAns2, setIncorrectAns2] = useState('')
-  const [incorrectAns3, setIncorrectAns3] = useState('')
-  const [lastQuestion, setLastQuestion] = useState(false)
+  const [question, setQuestion] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [incorrectAns1, setIncorrectAns1] = useState("");
+  const [incorrectAns2, setIncorrectAns2] = useState("");
+  const [incorrectAns3, setIncorrectAns3] = useState("");
+  const [lastQuestion, setLastQuestion] = useState(false);
 
-  const nav = useNavigate()
-  
+  const nav = useNavigate();
+
   // Function to use quiz title to get ID
   // function getQuizId() {
   //   const convertedTitle = title.replaceAll('%20', ' ')
@@ -37,15 +38,17 @@ const QuestionsForm = ({ questions, quizzes }) => {
   //   postQuestions(questionArray)
   // }
 
-  // Function to put incorrect answers into array and set quizId from URL 
+  // Function to put incorrect answers into array and set quizId from URL
   function getParams(e) {
-    e.preventDefault()
-    setIncorrectAnswers(incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
-    addQuestion(quizId, question, correctAnswer, incorrectAnswers)
+    e.preventDefault();
+    setIncorrectAnswers(
+      incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3)
+    );
+    addQuestion(quizId, question, correctAnswer, incorrectAnswers);
     if (lastQuestion) {
-      nav('/quizzes')
+      nav("/quizzes");
     } else {
-      alert('Question added successfully!')
+      alert("Question added successfully!");
     }
   }
 
@@ -57,109 +60,132 @@ const QuestionsForm = ({ questions, quizzes }) => {
 
   // Function to reset the state of the form after submitting a question
   function resetForm() {
-    setQuestion('')
-    setCorrectAnswer('')
-    setIncorrectAnswers([])
-    setIncorrectAns1('')
-    setIncorrectAns2('')
-    setIncorrectAns3('')
+    setQuestion("");
+    setCorrectAnswer("");
+    setIncorrectAnswers([]);
+    setIncorrectAns1("");
+    setIncorrectAns2("");
+    setIncorrectAns3("");
   }
 
   // Function to post a new question to the DB
-  const addQuestion = async (quizId, question, correctAnswer, incorrectAnswers) => {
+  const addQuestion = async (
+    quizId,
+    question,
+    correctAnswer,
+    incorrectAnswers
+  ) => {
     // Add a new question
     const newQuestion = {
       quizId: quizId,
       question: question,
       correctAnswer: correctAnswer,
-      incorrectAnswers: incorrectAnswers
-    }
+      incorrectAnswers: incorrectAnswers,
+    };
     // Post new question to API
-    await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newQuestion)
-    })
+    await fetch(
+      "https://quiz-app-server-production-09e8.up.railway.app/questions",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newQuestion),
+      }
+    );
     // console.log(createdQuestion)
     // const data = await createdQuestion.json()
     // const updatedQuestions = questions.push(data)
     // setQuestions(updatedQuestions)
     // console.log(updatedQuestions)
-    resetForm()
-  }
+    resetForm();
+  };
 
   // const postQuestions = async () => {
-    
-  // }
-  
-  return (
-    <> 
-      <h2>Add questions to your new Quiz</h2>
-      <p>You can always quit and do this later from the Edit a Quiz page, your quiz has been saved.</p>
 
-        <form onSubmit={getParams} className='container'>
-          <div className='question-form'>
-            <label>Question:
-              <input 
-                type='text'
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-              />
-            </label>
+  // }
+
+  return (
+    <>
+      <div class="main-body flex-wrap" style={{ height: "100vh" }}>
+        <h2>Add questions to your new Quiz</h2>
+        <p>
+          You can always quit and do this later from the Edit a Quiz page, your
+          quiz has been saved.
+        </p>
+        <form onSubmit={getParams} class='d-flex flex-column flex-wrap' style={{width:'400px'}}>
+          <div className="question-form d-flex flex-column">
+            <label>Question:</label>
+            <input
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Type question here.."
+              aria-label="Type Question Here"
+            />
           </div>
-          <div className='correct-answer-form'>
-            <label>Correct answer:
-              <input 
-                type='text'
-                value={correctAnswer}
-                onChange={(e) => setCorrectAnswer(e.target.value)}
-              />
-            </label>
+          <div className="correct-answer-form  d-flex flex-column">
+            <label>Correct answer:</label>
+            <input
+              type="text"
+              value={correctAnswer}
+              onChange={(e) => setCorrectAnswer(e.target.value)}
+              placeholder="Correct answer is.."
+              aria-label="Type Question Here"
+            />
           </div>
-          <div className='incorrect-answers-form'>
-            <label>Incorrect answers:
-              <input 
-                type='text'
-                value={incorrectAns1}
-                onChange={(e) => setIncorrectAns1(e.target.value)}
-              />
-            </label>
-          </div>
-            <input 
-              type='text' 
+          <div className="incorrect-answers-form d-flex flex-column">
+            <label>Incorrect answers:</label>
+            <input
+              type="text"
+              value={incorrectAns1}
+              onChange={(e) => setIncorrectAns1(e.target.value)}
+              placeholder="Incorrect answer 1"
+              aria-label="Incorrect Answer 1"
+            />
+
+            <input
+              type="text"
               value={incorrectAns2}
               onChange={(e) => setIncorrectAns2(e.target.value)}
+              placeholder="Incorrect answer 2"
+              aria-label="Incorrect Answer 2"
             />
-            <input 
-              type='text' 
+            <input
+              type="text"
               value={incorrectAns3}
               onChange={(e) => setIncorrectAns3(e.target.value)}
+              placeholder="Incorrect answer 3"
+              aria-label="Incorrect Answer 3"
             />
-          <button 
-            onClick={() => (setLastQuestion(lastQuestion))}
-            type='submit'
-            name='add-question'
-          >
-            Add new question
-          </button> 
-          <button 
-            onClick={() => (setLastQuestion(true))}
-            type='submit'
-            name='submit-form'
-          >
+          </div>
+          <br/>
+          <div class="d-flex justify-content-between">
+            <button
+              onClick={() => setLastQuestion(lastQuestion)}
+              type="submit"
+              name="add-question"
+              class="text-dark fw-bold"
+            >
+              Add new question
+            </button>
+            <button
+              onClick={() => setLastQuestion(true)}
+              type="submit"
+              name="submit-form"
+              class="text-dark fw-bold"
+            >
               Save and publish
-          </button>
+            </button>
+          </div>
         </form>
-          <button>
-            <Link to={'/'}>
-              Quit
-            </Link>
-          </button>
-    </> 
-  )
-}
+        <button  class="text-dark fw-bold">
+          <Link to={"/"} class = 'd-flex justify-content-center text-dark fw-bold'>Quit</Link>
+        </button>
+      </div>
+    </>
+  );
+};
 
-export default QuestionsForm
+export default QuestionsForm;
