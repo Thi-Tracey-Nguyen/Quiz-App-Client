@@ -10,7 +10,6 @@ const ShowQuiz = ({ quiz }) => {
     	<p>Author: {quiz.author} <br />
     	{quiz.questions.length} questions</p>
     </>
-    
   )
 }
 

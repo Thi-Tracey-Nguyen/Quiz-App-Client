@@ -65,7 +65,7 @@ const App = () => {
   const TakeAQuizWrapper = () => {
     const { quizId } = useParams()
     const [quiz, setQuiz] = useState('')
-    
+
     useEffect(() => {
       async function getQuiz() {
         const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
