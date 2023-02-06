@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Image } from 'react'
 import { Link, redirect, useNavigate } from 'react-router-dom'
 
 const QuizForm = ({ quizzes, categories, setQuizzes }) => {
@@ -7,6 +7,12 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   const [author, setAuthor] = useState('')
   const [questions, setQuestions] = useState([])
   const [image, setImage] = useState('')
+  const imgArray = [
+    'src/assets/brain.png', 'src/assets/fashion.png', 'src/assets/geography.png',
+    'src/assets/maths.png', 'src/assets/movies.png', 'src/assets/music.png',
+    'src/assets/nature.png', 'src/assets/pets.png', 'src/assets/pizza.png',
+    'src/assets/question-mark.png', 'src/assets/test.png', 'src/assets/tv.png'
+  ]
 
   const nav = useNavigate()
 
@@ -39,6 +45,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       },
       body: JSON.stringify(newQuiz)
     })
+    console.log(newQuiz)
     const data = await createdQuiz.json()
     // Update quizzes state with the new quiz
     const updatedQuizzes = quizzes.push(data)
@@ -66,7 +73,6 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   return (
     <>
       <h2>Make a new Quiz</h2>
-      
         <form onSubmit={submitQuiz} className='container'>
           <div className='category-dropdown-form'>
             <label>Category:
@@ -98,7 +104,24 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
               /> 
             </label>
           </div>
+          <div className='image-form'>
+            Choose an image: <br/>
+            {imgArray.map((img, index) => (
+              <label htmlFor='image-form'>
+                  <input 
+                    type='radio'
+                    name={image}
+                    value={img}
+                    onChange={(e) => setImage(e.target.value)}
+                    key={index}
+                    checked={image === img}
+                  />
+                <img src={img} width={100} height={100}/>
+              </label>
+            ))}
+          </div>
           <br />
+          
           <p>
             Don't see a Category that fits your Quiz idea?
           </p>
