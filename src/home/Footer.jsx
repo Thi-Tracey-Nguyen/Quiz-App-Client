@@ -4,19 +4,21 @@ import { ExternalLink } from 'react-external-link'
 
 const Footer = () => {
   return (
-    <div>
-			<div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+    <div >
+			<div style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'#FFFFFF', background: 'linear-gradient(to top, #000000,#3e4545)', flexDirection:'column'}}>
 					<p>
+						<br />
 						&copy;
-						<ExternalLink href='https://www.linkedin.com/in/thi-nguyen-4b2384169/'> Thi Nguyen, </ExternalLink>
-						<ExternalLink href='https://github.com/Steff4evr'>Steffy Johnson, </ExternalLink>
-						<ExternalLink href='https://www.linkedin.com/in/sian-steel'>Sian Steel </ExternalLink>
+						<ExternalLink href='https://www.linkedin.com/in/thi-nguyen-4b2384169/' style={{color:'#FFFFFF'}}> Thi Nguyen, </ExternalLink>
+						<ExternalLink href='https://github.com/Steff4evr' style={{color:'#FFFFFF'}}>Steffy Johnson, </ExternalLink>
+						<ExternalLink href='https://www.linkedin.com/in/sian-steel' style={{color:'#FFFFFF'}}>Sian Steel </ExternalLink>
 						2023
 					</p>
-			</div>
+			
 			<p style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-					<ExternalLink href='mailto:thequizapp@mail.com'>Have suggestions? Get in touch</ExternalLink>
+					<ExternalLink href='mailto:thequizapp@mail.com' style={{color:'#FFFFFF'}}>Have suggestions? Get in touch</ExternalLink>
 			</p>
+			</div>
     </div>
   )
 }

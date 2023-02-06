@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react'
-import RandomQuiz from './RandomQuiz'
-import ShowQuiz from './ShowQuiz'
-import ReturnToTop from '../UI/ReturnToTop'
+import React, { useEffect, useState } from "react";
+import RandomQuiz from "./RandomQuiz";
+import ShowQuiz from "./ShowQuiz";
+import ReturnToTop from "../UI/ReturnToTop";
+import "../styles/CommonStyles.css";
 
 const Quizzes = ({ quizzes, setQuizzes, setQuestions }) => {
   useEffect(() => {
@@ -24,16 +25,20 @@ const Quizzes = ({ quizzes, setQuizzes, setQuestions }) => {
 
   return (
     <>
-      <h2>All Quizzes</h2>
-      {isNaN(quizzes) ? quizzes.map((quiz, index) => (
-          <div key={index}>
-            <ShowQuiz quiz={quiz} />
-          </div>
-        )) : 'Loading...' 
-      }
-      <RandomQuiz quizzes={quizzes} />
-      <div>
-        <ReturnToTop />
+      <div class="main-body flex-wrap">
+        <h1>All Quizzes</h1>
+          <ul class="d-flex justify-content-center flex-wrap ">
+            {isNaN(quizzes) ? quizzes.map((quiz, index) => (
+                <div key={index} class="card m-3" style={{ width: "15rem" }}>
+                  <ShowQuiz quiz={quiz} />
+                </div>
+              )) : 'Loading...' 
+            }
+          </ul>
+        <RandomQuiz quizzes={quizzes} />
+        <div>
+          <ReturnToTop />
+        </div>
       </div>
     </>
   )

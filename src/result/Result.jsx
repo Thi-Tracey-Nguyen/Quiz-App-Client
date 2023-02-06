@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/CommonStyles.css'
 
 const Result = ({ answers, quiz }) => {
 
@@ -15,6 +16,7 @@ const Result = ({ answers, quiz }) => {
 
   return (
     <>
+    <div class='main-body flex-wrap' style = {{height: '100vh'}}></div>
       <h1>Result Page</h1>
       <h2>Your points: {points}</h2>
       <p>Your answers are:</p>
