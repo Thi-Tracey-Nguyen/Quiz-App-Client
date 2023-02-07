@@ -20,7 +20,7 @@ import EditAQuiz from './edit-a-quiz/EditAQuiz'
 import CategoryForm from './make-a-quiz/CategoryForm'
 
 const App = () => {
-  const [ categories, setCategories ] = useState([])
+  const [categories, setCategories] = useState([])
   const [quizzes, setQuizzes] = useState([])
   const [questions, setQuestions] = useState('')
   const nav = useNavigate()
