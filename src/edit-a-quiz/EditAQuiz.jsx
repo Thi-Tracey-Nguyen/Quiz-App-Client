@@ -3,6 +3,7 @@ import { Link, redirect, useNavigate, useParams } from 'react-router-dom'
 import "../styles/CommonStyles.css";
 
 const EditAQuiz = ({ categories }) => {
+  const { quizId } = useParams()
   const [quiz, setQuiz] = useState('')
   const [category, setCategory] = useState('')
   const [title, setTitle] = useState('')
@@ -15,7 +16,7 @@ const EditAQuiz = ({ categories }) => {
     '/nature.png', '/pets.png', '/pizza.png',
     '/question-mark.png', '/test.png', '/tv.png'
   ]
-  const { quizId } = useParams()
+
   const nav = useNavigate()
 
   useEffect(() => {
@@ -64,12 +65,6 @@ const EditAQuiz = ({ categories }) => {
     const quiz = quizzes.find((quiz) => quiz.title === data.title);
     // Use the ID of that quiz to navigate to the correct Add Questions page
     nav(`/add-questions/${quiz._id}`);
-  }
-
-  function handleClickQuestions(event) {
-    event.preventDefault()
-    // nav(`{edit-a-quiz/${quiz.id}/questions}`)
-    nav('./questions')
   }
 
   return (
@@ -133,7 +128,7 @@ const EditAQuiz = ({ categories }) => {
               </button>
               {editMode? <button  class="text-dark fw-bold" type='submit'>Save changes</button> :
                 ''}
-              <button onClick={handleClickQuestions}class="text-dark fw-bold" >Edit questions</button>
+              <button  class="text-dark fw-bold">Edit questions</button>
             </div>
           </form>
         </div>
