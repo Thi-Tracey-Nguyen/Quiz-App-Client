@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom"
 import "../styles/CommonStyles.css"
 
 const EditQuestions = ({ quiz }) => {
-  const [index, setIndex] = useState(0)
-  const nav = useNavigate()
+  const [index, setIndex] = useState(0);
+  const nav = useNavigate();
 
   // const questionObject = quiz.questions[index]
   
