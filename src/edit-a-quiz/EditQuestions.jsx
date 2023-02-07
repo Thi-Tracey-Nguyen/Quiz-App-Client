@@ -242,6 +242,7 @@ const EditQuestions = ({ quiz }) => {
         </form>
     </>
   )
+
 }
 
 export default EditQuestions
