@@ -27,7 +27,6 @@ const EditQuestions = ({ quiz }) => {
       correctAnswer: correctAnswer,
       incorrectAnswers: [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3]
     }
-    console.log(updatedQuestion, 'updated')
     // fetch to API
     const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
       method: 'PUT',
@@ -79,15 +78,15 @@ const EditQuestions = ({ quiz }) => {
     setIndex(index+1)
   }
 
-  // Function to reset the state of the form after submitting a question
-  function resetForm() {
-    const newQuestion = {
-      quizId: quiz._id,
-      question: "",
-      correctAnswer: "",
-      incorrectAnswers: ["", "", ""],
-    };
-    setQuestionObject(newQuestion);
+   // Function to reset the state of the form after deleting the last question
+   function resetForm() {
+    // need to set up this way, not hard setQuestion, etc because they won't be populated in the form
+    const blankQuestion = {
+      question: '',
+      correctAnswer: '',
+      incorrectAnswers: ['', '', '']
+    }
+    setQuestionObject(blankQuestion)
   }
 
   // Function to post a new question to the DB
@@ -125,9 +124,9 @@ const EditQuestions = ({ quiz }) => {
 
   // handle add a new question
   function handleAddQuestion(event) {
-    event.preventDefault();
-    resetForm();
-    setIndex(index + 1)
+    event.preventDefault()
+    resetForm()
+    setIndex(index + 1) //need this to update the form 
     setNewQuestion(true)
   }
 
@@ -147,9 +146,14 @@ const EditQuestions = ({ quiz }) => {
         console.log(error)
       }
       // index === quiz.questions.length-1 ? resetForm() : setIndex(index+1) 
-      setIndex(index+1)
-      setQuestionObject(quiz.questions[index+1])
-      setConfirm(false)``
+      // checks if the question is the last before moving to next question. 
+      if (index !== quiz.questions.length-1) {
+        setIndex(index+1)
+        setQuestionObject(quiz.questions[index+1])
+      } else {
+        resetForm() //if last question, only reset form
+      }
+      setConfirm(false)
     }
   }
 
@@ -187,6 +191,7 @@ const EditQuestions = ({ quiz }) => {
     })
     const data = await res.json()
     setNewQuestion(false)
+    setQuestionObject(newQuestion)
     quiz.questions.push(data)
     alert('Question added successfully')
   } 
@@ -224,13 +229,13 @@ const EditQuestions = ({ quiz }) => {
               type='text'
               defaultValue={questionObject.incorrectAnswers[0]}
               // value={questionObject.incorrectAnswers[2]}
-              onChange={(e) => setIncorrectAnswer3(e.target.value)} 
+              onChange={(e) => setIncorrectAnswer1(e.target.value)} 
               />
             <input
               type='text'
               defaultValue={questionObject.incorrectAnswers[1]}
               // value={questionObject.incorrectAnswers[2]}
-              onChange={(e) => setIncorrectAnswer3(e.target.value)} 
+              onChange={(e) => setIncorrectAnswer2(e.target.value)} 
               />
             <input
               type='text'
