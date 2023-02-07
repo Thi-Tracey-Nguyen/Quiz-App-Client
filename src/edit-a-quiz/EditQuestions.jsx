@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/CommonStyles.css";
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import "../styles/CommonStyles.css"
 
 const EditQuestions = ({ quiz }) => {
-  const [index, setIndex] = useState(0);
-  const nav = useNavigate();
+  const [index, setIndex] = useState(0)
+  const nav = useNavigate()
 
   // const questionObject = quiz.questions[index]
   
@@ -121,8 +121,8 @@ const EditQuestions = ({ quiz }) => {
   function handleAddQuestion(event) {
     event.preventDefault();
     resetForm();
-    setIndex(index + 1);
-    setNewQuestion(true);
+    setIndex(index + 1)
+    setNewQuestion(true)
   }
 
   // handles confirming deletion of a question
@@ -185,7 +185,6 @@ const EditQuestions = ({ quiz }) => {
     alert('Question added successfully')
   } 
 
-
   return (
     <>
       <div className="main-body flex-wrap" style={{ height: "100vh" }}>
@@ -221,7 +220,7 @@ const EditQuestions = ({ quiz }) => {
               // value={questionObject.incorrectAnswers[2]}
               onChange={(e) => setIncorrectAnswer3(e.target.value)} 
               />
-            
+          </div> 
         </form>
         { confirm && confirmForm() }
         <button onClick={() => nav('/edit-a-quiz')}>Quit</button> 
@@ -230,7 +229,7 @@ const EditQuestions = ({ quiz }) => {
         { (!confirm && !newQuestion) && <button onClick={ handleClickDelete }> Delete this question </button> }  
         { (index === quiz.questions.length-1 && !confirm) &&  <button onClick={ handleAddQuestion }> Add a new question </button>}
         { index === quiz.questions.length-1 && <button onClick={handleSubmit}> Submit </button> }
-
+      </div>
     </>
   )
 }
