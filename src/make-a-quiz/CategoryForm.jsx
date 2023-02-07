@@ -53,7 +53,7 @@ const AddCategory = ({ categories, setCategories }) => {
           <div className='d-flex justify-content-between'>
             <button>Submit</button>
             <button>
-              <Link to='/make-a-quiz'>Quit</Link>
+              <Link to='/make-a-quiz' className='fw-normal'>Quit</Link>
             </button>
           </div>
         </form>

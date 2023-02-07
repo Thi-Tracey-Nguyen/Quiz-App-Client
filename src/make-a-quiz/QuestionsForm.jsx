@@ -128,7 +128,7 @@ const QuestionsForm = ({ questions, setQuestions }) => {
               onClick={() => setLastQuestion(lastQuestion)}
               type='submit'
               name='add-question'
-              className='text-dark fw-bold'
+              className='fw-normal'
             >
               Add new question
             </button>
@@ -136,14 +136,14 @@ const QuestionsForm = ({ questions, setQuestions }) => {
               onClick={() => setLastQuestion(true)}
               type='submit'
               name='submit-form'
-              className='text-dark fw-bold'
+              className='fw-normal'
             >
               Save and publish
             </button>
           </div>
         </form>
         <button  className='text-dark fw-bold'>
-          <Link to={'/'} className='d-flex justify-content-center text-dark fw-bold'>Quit</Link>
+          <Link to={'/'} className='d-flex justify-content-center fw-normal'>Quit</Link>
         </button>
       </div>
     </>

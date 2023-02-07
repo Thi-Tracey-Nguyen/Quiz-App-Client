@@ -13,12 +13,12 @@ const RandomCat = ({ categories }) => {
 
   return (
     <>
-    <div class='flex-wrap'>
+    <div className='flex-wrap'>
       { category ? (
       <>
-        <p class = 'd-flex justify-content-center text-dark fw-bold'>Can't choose?</p>
+        <p className = 'd-flex justify-content-center text-dark fw-bold'>Can't choose?</p>
         <button>
-          <Link to={`/categories/${category.name}` } class = 'd-flex justify-content-center text-dark fw-bold' >
+          <Link to={`/categories/${category.name}` } className = 'd-flex justify-content-center fw-normal' >
             Random Category
           </Link>
         </button>

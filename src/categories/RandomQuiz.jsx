@@ -12,16 +12,16 @@ const RandomQuiz = ({ quizzes }) => {
 
   return (
     <>
-      <div class=" flex-wrap">
+      <div className=" flex-wrap">
         {quiz ? (
           <>
-            <p class="d-flex justify-content-center text-dark fw-bold">
+            <p className="d-flex justify-content-center text-dark fw-bold">
               Can't choose?
             </p>
             <button>
               <Link
                 to={`/quizzes/${quiz._id}`}
-                class="d-flex justify-content-center text-dark fw-bold"
+                className="d-flex justify-content-center fw-normal"
               >
                 Random Quiz
               </Link>
