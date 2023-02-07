@@ -52,6 +52,12 @@ const EditQuestions = ({ quiz }) => {
     updateQuestion()
   }
 
+  // updates index when user click next
+  function handleClickSave(event) {
+    event.preventDefault()
+    updateQuestion()
+  }
+
   // handle update question
   function handleSubmit(event) {
     event.preventDefault()
@@ -216,6 +222,18 @@ const EditQuestions = ({ quiz }) => {
             <label>Incorrect answers:</label>
             <input
               type='text'
+              defaultValue={questionObject.incorrectAnswers[0]}
+              // value={questionObject.incorrectAnswers[2]}
+              onChange={(e) => setIncorrectAnswer3(e.target.value)} 
+              />
+            <input
+              type='text'
+              defaultValue={questionObject.incorrectAnswers[1]}
+              // value={questionObject.incorrectAnswers[2]}
+              onChange={(e) => setIncorrectAnswer3(e.target.value)} 
+              />
+            <input
+              type='text'
               defaultValue={questionObject.incorrectAnswers[2]}
               // value={questionObject.incorrectAnswers[2]}
               onChange={(e) => setIncorrectAnswer3(e.target.value)} 
@@ -225,6 +243,7 @@ const EditQuestions = ({ quiz }) => {
         { confirm && confirmForm() }
         <button onClick={() => nav('/edit-a-quiz')}>Quit</button> 
         { (index < quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSaveNext }> Save & Next </button> }
+        { (index === quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSave }> Save </button> }
         { newQuestion && <button onClick={ handleConfirmAdd }> Save Question </button> } 
         { (!confirm && !newQuestion) && <button onClick={ handleClickDelete }> Delete this question </button> }  
         { (index === quiz.questions.length-1 && !confirm) &&  <button onClick={ handleAddQuestion }> Add a new question </button>}
