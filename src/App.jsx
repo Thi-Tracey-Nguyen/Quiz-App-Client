@@ -18,6 +18,7 @@ import QuestionsForm from './make-a-quiz/QuestionsForm'
 import EditQuestions from './edit-a-quiz/EditQuestions'
 import EditAQuiz from './edit-a-quiz/EditAQuiz'
 import CategoryForm from './make-a-quiz/CategoryForm'
+import QuizWrapper from './edit-a-quiz/QuizWrapper'
 
 const App = () => {
   const [ categories, setCategories ] = useState([])
@@ -79,23 +80,6 @@ const App = () => {
     return quiz ? <TakeAQuiz quiz={quiz} onChange={getAnswers} /> : 'Loading...'
   }
 
-  // HOC for EditAQuiz to access quizId in the URL
-  const EditAQuizWrapper = () => {
-    const { quizId } = useParams()
-    const [quiz, setQuiz] = useState('')
-    
-    useEffect(() => {
-      async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
-        const data = await res.json()
-        setQuiz(data)
-      }
-      getQuiz()
-    }, [quizId])
-
-    return quiz ? <EditAQuiz quiz={quiz} /> : <h4>Loading... </h4>
-  }
-
   // HOC for Result to access quizId in the URL
   const ResultWrapper = () => {
     const { quizId } = useParams()
@@ -111,6 +95,22 @@ const App = () => {
     }, [quizId])
 
     return quiz ? <Result quiz={quiz} answers={answers} /> : <h4>Loading... </h4>
+  }
+
+  const EditQuestionWrapper = () => {
+    const { quizId } = useParams()
+    const [quiz, setQuiz] = useState('')
+    
+    useEffect(() => {
+      async function getQuiz() {
+        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const data = await res.json()
+        setQuiz(data)
+      }
+      getQuiz()
+    }, [quizId])
+
+    return quiz ? <EditQuestions quiz={quiz} /> : <h4>Loading... </h4>
   }
   
   // HOC for QuestionsForm to access quizTitle in the URL
@@ -133,8 +133,10 @@ const App = () => {
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes} />} />
+          {/* <Route path='/edit-a-quiz/:quizId' element={<QuizWrapper categories={categories} />}> */}
           <Route path='/edit-a-quiz/:quizId' element={<EditAQuiz categories={categories} />} />
-          {/* <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestions />} /> */}
+            {/* <Route path='/edit-a-quiz/:quizId/general' element={<EditAQuiz categories={categories} />} /> */}
+          <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestionWrapper />} />
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
