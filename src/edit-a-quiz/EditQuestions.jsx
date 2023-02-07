@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/CommonStyles.css";
 
 const EditQuestions = ({ quiz }) => {
-  const [index, setIndex] = useState(0)
-  const nav = useNavigate()
+  const [index, setIndex] = useState(0);
+  const nav = useNavigate();
 
   // const questionObject = quiz.questions[index]
+  
   const [questionObject, setQuestionObject] = useState(quiz.questions[index])
   const [question, setQuestion] = useState(questionObject.question)
   const [confirm, setConfirm] = useState(false)
@@ -16,10 +18,10 @@ const EditQuestions = ({ quiz }) => {
   const [incorrectAnswer3, setIncorrectAnswer3] = useState(questionObject.incorrectAnswers[2])
   const [newQuestion, setNewQuestion] = useState(false)
 
+
   // this function creates a new question object and put it to the server API
   async function updateQuestion() {
-
-    // creates a new question object to send back to server  
+    // creates a new question object to send back to server
     const updatedQuestion = {
       question: question, 
       correctAnswer: correctAnswer,
@@ -36,7 +38,6 @@ const EditQuestions = ({ quiz }) => {
       body: JSON.stringify(updatedQuestion)
     })
   }
-
 
   // updates index when user click next
   function handleClickSaveNext(event) {
@@ -72,50 +73,56 @@ const EditQuestions = ({ quiz }) => {
     setIndex(index+1)
   }
 
-
   // Function to reset the state of the form after submitting a question
   function resetForm() {
     const newQuestion = {
       quizId: quiz._id,
-      question: '',
-      correctAnswer: '',
-      incorrectAnswers: ['', '', '']
-    }
-    setQuestionObject(newQuestion)
+      question: "",
+      correctAnswer: "",
+      incorrectAnswers: ["", "", ""],
+    };
+    setQuestionObject(newQuestion);
   }
 
   // Function to post a new question to the DB
-  const addQuestion = async (quizId, question, correctAnswer, incorrectAnswers) => {
+  const addQuestion = async (
+    quizId,
+    question,
+    correctAnswer,
+    incorrectAnswers
+  ) => {
     // Add a new question
     const newQuestion = {
       quizId: quizId,
       question: question,
       correctAnswer: correctAnswer,
-      incorrectAnswers: incorrectAnswers
-    }
+      incorrectAnswers: incorrectAnswers,
+    };
     // Post new question to API
-    await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newQuestion)
-    })
+    await fetch(
+      "https://quiz-app-server-production-09e8.up.railway.app/questions",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newQuestion),
+      }
+    );
     // console.log(createdQuestion)
     // const data = await createdQuestion.json()
     // const updatedQuestions = questions.push(data)
     // setQuestions(updatedQuestions)
     // console.log(updatedQuestions)
-    
-  }
+  };
 
   // handle add a new question
   function handleAddQuestion(event) {
-    event.preventDefault()
-    resetForm()
-    setIndex(index+1)
-    setNewQuestion(true)
+    event.preventDefault();
+    resetForm();
+    setIndex(index + 1);
+    setNewQuestion(true);
   }
 
   // handles confirming deletion of a question
@@ -140,7 +147,6 @@ const EditQuestions = ({ quiz }) => {
     }
   }
 
-
   // handles click on delete a question
   const confirmForm = () => {
     return (
@@ -150,20 +156,21 @@ const EditQuestions = ({ quiz }) => {
         <button onClick={ () => setConfirm(false) }> Cancel </button>
         <br />
       </>
-    )
-  }
+    );
+  };
 
   // add new question after typing all the info
   const handleConfirmAdd = async (event) => {
-    event.preventDefault()
-    
+    event.preventDefault();
+
     const newQuestion = {
       quizId: quiz._id,
       question: question,
       correctAnswer: correctAnswer,
-      incorrectAnswers: [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3]
-    }
+      incorrectAnswers: [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3],
+    };
     // Post new question to API
+
     const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
       headers: {
@@ -178,56 +185,42 @@ const EditQuestions = ({ quiz }) => {
     alert('Question added successfully')
   } 
 
-
-console.log(quiz)
-
   return (
     <>
-      <div>Edit {quiz.title}</div>
-        <form className='container' key={index}>
-          <div className='question-form'>
-            <label> Question
-              <input 
-                type='text'
-                defaultValue={questionObject.question}
-                // value={questionObject.question}
-                onChange={(e) => setQuestion(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className='correct-answer-form'>
-            <label>Correct answer:
-              <input 
-                type='text'
-                defaultValue={questionObject.correctAnswer}
-                // value={questionObject.correctAnswer}  
-                onChange={(e) => setCorrectAnswer(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className='incorrect-answers-form'>
-            <label>Incorrect answers:
-              <input 
-                type='text'
-                defaultValue={questionObject.incorrectAnswers[0]}
-                // value={questionObject.incorrectAnswers[0]}
-                onChange={(e) => setIncorrectAnswer1(e.target.value)}
-              />
-            </label>
-          </div>
-            <input 
-              type='text'
-              defaultValue={questionObject.incorrectAnswers[1]}
-              // value={questionObject.incorrectAnswers[1]}
-              onChange={(e) => setIncorrectAnswer2(e.target.value)}
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
+        <h2>Edit {quiz.title}</h2>
+        <form
+          className="container d-flex flex-column flex-wrap"
+          key={index}
+          style={{ width: "400px" }}
+        >
+          <div className="question-form d-flex flex-column">
+            <label> Question </label>
+            <input
+              type="text"
+              defaultValue={questionObject.question}
+              // value={questionObject.question}
+              onChange={(e) => setQuestion(e.target.value)}
             />
+          </div>
+          <div className="correct-answer-form d-flex flex-column">
+            <label>Correct answer:</label>
+            <input
+              type="text"
+              defaultValue={questionObject.correctAnswer}
+              // value={questionObject.correctAnswer}
+              onChange={(e) => setCorrectAnswer(e.target.value)}
+            />
+          </div>
+          <div className="incorrect-answers-form d-flex flex-column">
+            <label>Incorrect answers:</label>
             <input
               type='text'
               defaultValue={questionObject.incorrectAnswers[2]}
               // value={questionObject.incorrectAnswers[2]}
               onChange={(e) => setIncorrectAnswer3(e.target.value)} 
               />
-            
+          </div> 
         </form>
         { confirm && confirmForm() }
         <button onClick={() => nav('/edit-a-quiz')}>Quit</button> 
@@ -236,7 +229,7 @@ console.log(quiz)
         { (!confirm && !newQuestion) && <button onClick={ handleClickDelete }> Delete this question </button> }  
         { (index === quiz.questions.length-1 && !confirm) &&  <button onClick={ handleAddQuestion }> Add a new question </button>}
         { index === quiz.questions.length-1 && <button onClick={handleSubmit}> Submit </button> }
-
+      </div>
     </>
   )
 }
