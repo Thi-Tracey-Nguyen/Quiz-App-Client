@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/CommonStyles.css";
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import "../styles/CommonStyles.css"
 
 const EditQuestions = ({ quiz }) => {
   const [index, setIndex] = useState(0);
@@ -121,8 +121,8 @@ const EditQuestions = ({ quiz }) => {
   function handleAddQuestion(event) {
     event.preventDefault();
     resetForm();
-    setIndex(index + 1);
-    setNewQuestion(true);
+    setIndex(index + 1)
+    setNewQuestion(true)
   }
 
   // handles confirming deletion of a question
