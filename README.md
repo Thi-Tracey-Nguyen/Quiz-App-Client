@@ -192,6 +192,8 @@ Decisions and notes from the meetings were recorded within Trello and Google Doc
 
 Tasks were delegated according to preference, skill set and capacity, taking into account individuals current home and health situation. We also ensured that everyone had the opportunity to work on both the front and back end to get experience with both. This also allowed us to further establish where our strengths and preferences lay. Sian is interested in design and user experience, and therefore suited to the creation of components and managing control flow within the front end. Thi is an all-rounder, able to pivot quickly to solve problems and create features within both the front and back end. Steffy has a passion for styling, using CSS and Bootstrap to make the application look just like the wireframes.
 
+The Trello board can be viewed [here](https://trello.com/b/8A98I9sW/mern-quiz-app).
+
 <details>
 
 <summary><strong>Trello screenshots</strong></summary>
