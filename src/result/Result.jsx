@@ -32,11 +32,12 @@ const Result = ({ answers, quiz }) => {
   let points = 0
 
   function calculatePoints(answers, quiz) {
-    for (let i = 0; i < answers.length; i++) {
+    for (let i = 0;i < answers.length;i++) {
       if (answers[i] === quiz.questions[i].correctAnswer) {
         points = points + 1
       }
-  }}
+    }
+  }
 
   calculatePoints(answers, quiz)
 
@@ -51,33 +52,39 @@ const Result = ({ answers, quiz }) => {
   return (
     <>
       <div>
-        <HighScorePopup 
+        <HighScorePopup
           show={showPopup}
           value={false}
           onHide={(e) => setShowPopup(e.target.value)}
         />
       </div>
-      <div className='main-body flex-wrap' style = {{height: '100vh'}}>
+      <div className='main-body flex-wrap' style={{ height: '100vh' }}>
+
         <h1>Result!</h1>
         <h2>{points} / {quiz.questions.length}</h2>
-        <br/>
-        <img src={quiz.image} height={200} width={200} style={{padding: 5}} />
+        <br />
+        <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
         <h4>Review Answers</h4>
-        <p className='fw-bold'>Your answers:</p>  
-        { 
-          answers.map((answer, index) =>
-            <p key={index}>Question {index+1}<br/>{answer}</p>
-          )
-        }
-        <br/>           
-        <p className='fw-bold'>Correct answers are:</p>
-        {
-          quiz.questions.map((question, index) => 
-          <p key={index}>Question {index+1}<br/>{question.correctAnswer}</p>)
-        }
+        <div className='d-flex'>
+          <div className='container'>
+            <p className='fw-bold'>Your answers:</p>
+            {
+              answers.map((answer, index) =>
+                <p key={index}>Question {index + 1}<br />{answer}</p>
+              )
+            }
+          </div>          
+          <div className='container'>
+            <p className='fw-bold'>Correct answers are:</p>
+            {
+              quiz.questions.map((question, index) =>
+                <p key={index}>Question {index + 1}<br />{question.correctAnswer}</p>)
+            }
+          </div>
+        </div>
       </div>
     </>
-    
+
   )
 }
 
