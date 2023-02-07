@@ -131,8 +131,9 @@ const EditAQuiz = ({ categories }) => {
                   Back to All Quizzes
                 </Link>
               </button>
-              {editMode? <button  class="text-dark fw-bold" type='submit'>Save changes</button> :
-                ''}
+              {/* {editMode? <button  class="text-dark fw-bold" type='submit'>Save changes</button> :
+                ''} */}
+              <button  class="text-dark fw-bold" type='submit'>Save changes</button>
               <button onClick={handleClickQuestions}class="text-dark fw-bold" >Edit questions</button>
             </div>
           </form>
