@@ -135,7 +135,7 @@ const EditAQuiz = ({ categories }) => {
           </form>
         </div>
       </>
-    : 'Loading...'
+    : <h4>Loading</h4>
   )
 }
 
