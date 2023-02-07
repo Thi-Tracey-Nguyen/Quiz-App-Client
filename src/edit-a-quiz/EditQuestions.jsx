@@ -124,7 +124,7 @@ const EditQuestions = ({ quiz }) => {
           method: "DELETE"
       })
       setIndex(index+1)
-      console.log(questionObject._id)
+      setConfirm(false)
     } catch (error) {
       console.log(error)
     }

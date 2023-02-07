@@ -112,6 +112,22 @@ const App = () => {
 
     return quiz ? <Result quiz={quiz} answers={answers} /> : <h4>Loading... </h4>
   }
+
+  const EditQuestionWrapper = () => {
+    const { quizId } = useParams()
+    const [quiz, setQuiz] = useState('')
+    
+    useEffect(() => {
+      async function getQuiz() {
+        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const data = await res.json()
+        setQuiz(data)
+      }
+      getQuiz()
+    }, [quizId])
+
+    return quiz ? <EditQuestions quiz={quiz} /> : <h4>Loading... </h4>
+  }
   
   // HOC for QuestionsForm to access quizTitle in the URL
   // const AddQuestionWrapper = () => {
@@ -134,6 +150,7 @@ const App = () => {
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes} />} />
           <Route path='/edit-a-quiz/:quizId' element={<EditAQuiz categories={categories} />} />
+          <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestionWrapper />} />
           {/* <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestions />} /> */}
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
