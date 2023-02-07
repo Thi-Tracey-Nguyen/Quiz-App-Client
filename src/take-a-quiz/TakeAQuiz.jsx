@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import "../styles/CommonStyles.css";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const TakeAQuiz= ({ quiz, onChange }) => {
+const TakeAQuiz = ({ quiz, onChange }) => {
 
-  const [ index, setIndex ] = useState(0)
-  const [ answer, setAnswer ] = useState('')
-  const [ answers, setAnswers ] = useState([])
-  const [ timeLeft, setTimeLeft ] = useState(8)
+  const [index, setIndex] = useState(0)
+  const [answer, setAnswer] = useState('')
+  const [answers, setAnswers] = useState([])
+  const [timeLeft, setTimeLeft] = useState(8)
   const nav = useNavigate()
 
   // console.log(quiz.questions)
@@ -17,9 +17,9 @@ const TakeAQuiz= ({ quiz, onChange }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       if (timeLeft > 0) {
-        setTimeLeft(timeLeft -1)
+         setTimeLeft(timeLeft -1)
       } else {
-        if (index < quiz.questions.length-1) {
+        if (index < quiz.questions.length - 1) {
           setAnswer('')
           setTimeLeft(8)
           handleClickNext()
@@ -41,17 +41,17 @@ const TakeAQuiz= ({ quiz, onChange }) => {
   const handleChange = (e) => {
     setAnswer(e.target.value)
   }
-  
+
   // when Next is clicked, move to the next question and add answer to answers array
   const handleClickNext = (e) => {
 
     restartTimer() //restart timer when user moves to next question
 
     //check if index is within range
-    if (index < quiz.questions.length-1) {
-      setIndex(index+1) // move to next question 
+    if (index < quiz.questions.length - 1) {
+      setIndex(index + 1) // move to next question 
       setAnswers([...answers, answer]) // add selected answer to answers array
-    } else if (index === quiz.questions.length-1) {
+    } else if (index === quiz.questions.length - 1) {
       setAnswers([...answers, answer]) // if question is the last question, only update setAnswers
     }
   }
@@ -69,7 +69,7 @@ const TakeAQuiz= ({ quiz, onChange }) => {
   //create an array of all the answers (correct and incorrect) to shuffle answers
   const answersArray = [question.correctAnswer]
   question.incorrectAnswers.forEach(incorrectAnswer => answersArray.push(incorrectAnswer))
-  
+
   // set seededAnswers as state
   const [seededAnswers, setSeededAnswers] = useState([answersArray])
 
@@ -78,20 +78,20 @@ const TakeAQuiz= ({ quiz, onChange }) => {
 
     //this function shuffles elements in an array
     function shuffle(array) {
-      let currentIndex = array.length,  randomIndex;
-    
+      let currentIndex = array.length, randomIndex;
+
       // While there remain elements to shuffle.
       while (currentIndex != 0) {
-    
+
         // Pick a remaining element.
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-    
+
         // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [
           array[randomIndex], array[currentIndex]];
       }
-    
+
       return array;
     }
 
@@ -101,38 +101,40 @@ const TakeAQuiz= ({ quiz, onChange }) => {
   }, [index]) // shuffle answers when index changes (for next question)
 
   return (
-    <> 
-    <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-     <h1 className="justify-content-center text-dark fw-bold"
+    <>
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
+        <h1 className="justify-content-center text-dark fw-bold"
           style={{ width: "15rem", height: "5rem" }}>Timer: {timeLeft}</h1>
-      <h1 className="justify-content-center text-dark fw-bold">{quiz.title}</h1>
-      <h4 className="d-flex justify-content-center">{question.question}</h4>
+        <h1 className="justify-content-center text-dark fw-bold">{quiz.title}</h1>
+        <h4 className="d-flex justify-content-center">{question.question}</h4>
 
-      <div>
-        {seededAnswers.map((seededAnswer, index) => (
-          <>
-            <input 
-              type='radio'
-              name={answer}
-              value={seededAnswer}
-              onChange={handleChange}
-              key={index}
-              checked={answer === seededAnswer}
-            /> {seededAnswer} <br />
-          </> 
-        ))}         
-      </div>
-
-        { index < quiz.questions.length-1 ? 
-          <button onClick={ handleClickNext }> Next </button> : 
-          <button onClick={ handleSubmit }> Submit </button>
+        <div>
+          {seededAnswers.map((seededAnswer, index) => (
+            <>
+              <input
+                type='radio'
+                name={answer}
+                value={seededAnswer}
+                onChange={handleChange}
+                key={index}
+                checked={answer === seededAnswer}
+              /> {seededAnswer} <br />
+            </>
+          ))}
+        </div>
+        <br/>
+        <div className="d-flex justify-content-between">
+        {index < quiz.questions.length - 1 ?
+          <button onClick={handleClickNext}> Next </button> :
+          <button onClick={handleSubmit}> Submit </button>
         }
 
         <button>
           <Link to='/quizzes'> Quit </Link>
         </button>
-        <p>{index+1}/{quiz.questions.length}</p>
         </div>
+        <p>{index + 1}/{quiz.questions.length}</p>        
+      </div>
     </>
   )
 }
