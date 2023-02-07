@@ -54,11 +54,11 @@ const EditQuizzes = ({ quizzes }) => {
 
   return (
     <>
-    <div class='main-body flex-wrap'>
+    <div className='main-body flex-wrap'>
       <h1>Choose a Quiz to edit or delete</h1>
-      <ul class='d-flex justify-content-center flex-wrap '>
+      <ul className='d-flex justify-content-center flex-wrap '>
         {quizzes.length === 0 ? "Loading..." : quizzes.map((quiz, index) => (
-          <div key={index} class="card m-3" style={{width: "15rem"}}>
+          <div key={index} className="card m-3" style={{width: "15rem"}}>
             <ShowQuiz quiz={quiz} />
             <ul>                  
               <button onClick={() => setSelectedQuizEdit(quiz)}>Edit</button>

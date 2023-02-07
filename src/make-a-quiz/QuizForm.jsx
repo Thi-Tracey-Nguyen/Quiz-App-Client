@@ -123,12 +123,12 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
           </p>
           <br />
           <div className="d-flex justify-content-between">
-            <button>
-              <Link to={"/"} className="text-dark fw-bold">
+            <button >
+              <Link to={"/"} className="fw-normal">
                 Quit
               </Link>
             </button>
-            <button  className="text-dark fw-bold">Next</button>
+            <button>Next</button>
           </div>
         </form>
       </div>
