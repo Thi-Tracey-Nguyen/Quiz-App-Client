@@ -8,7 +8,6 @@ const EditAQuiz = ({ categories }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [image, setImage] = useState('')
-  const [editMode, setEditMode] = useState(true)
   const imgArray = [
     '/brain.png', '/fashion.png', '/geography.png',
     '/maths.png', '/movies.png', '/music.png',
@@ -31,7 +30,7 @@ const EditAQuiz = ({ categories }) => {
   async function submitQuiz(e) {
     e.preventDefault()
     editQuiz(category, title, author, image)
-    setEditMode(false)
+    nav('/quizzes/')
   }
 
   // Add a new quiz to the API
@@ -54,8 +53,6 @@ const EditAQuiz = ({ categories }) => {
       },
       body: JSON.stringify(editedQuiz)
     })
-    
-    const data = await newQuiz.json()
   }
 
   // Uses the new quiz data to get the ID of the new quiz from the DB
@@ -69,6 +66,7 @@ const EditAQuiz = ({ categories }) => {
   function handleClickQuestions(event) {
     event.preventDefault()
     // nav(`{edit-a-quiz/${quiz.id}/questions}`)
+    editQuiz(category, title, author, image)
     nav('./questions')
   }
 
@@ -128,12 +126,10 @@ const EditAQuiz = ({ categories }) => {
             <div class="d-flex justify-content-between">
               <button>
                 <Link to="/quizzes" class="text-dark fw-bold">
-                  Back to All Quizzes
+                  Quit
                 </Link>
               </button>
-              {/* {editMode? <button  class="text-dark fw-bold" type='submit'>Save changes</button> :
-                ''} */}
-              <button  class="text-dark fw-bold" type='submit'>Save changes</button>
+              <button  class="text-dark fw-bold" type='submit'>Save changes & Exit</button>
               <button onClick={handleClickQuestions}class="text-dark fw-bold" >Edit questions</button>
             </div>
           </form>
