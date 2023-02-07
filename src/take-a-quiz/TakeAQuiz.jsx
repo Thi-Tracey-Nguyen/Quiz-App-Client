@@ -131,6 +131,7 @@ const TakeAQuiz= ({ quiz, onChange }) => {
         <button>
           <Link to='/quizzes'> Quit </Link>
         </button>
+        <p>{index+1}/{quiz.questions.length}</p>
         </div>
     </>
   )
