@@ -46,6 +46,8 @@ const Result = ({ answers, quiz }) => {
     }
   }, [])
 
+  console.log(quiz.questions)
+
   return (
     <>
       <div>
@@ -56,14 +58,23 @@ const Result = ({ answers, quiz }) => {
         />
       </div>
       <div className='main-body flex-wrap' style = {{height: '100vh'}}>
-        <h1>Result Page</h1>
-        <h2>Your points: {points}</h2>
+        <h1>Result!</h1>
+        <h2>{points} / {quiz.questions.length}</h2>
         <br/>
-        <p className='fw-bold'>Your answers are:</p>
-        {answers.map((answer, index) => <p key={index}>{answer}</p>)}
+        <img src={quiz.image} height={200} width={200} style={{padding: 5}} />
+        <h4>Review Answers</h4>
+        <p className='fw-bold'>Your answers:</p>  
+        { 
+          answers.map((answer, index) =>
+            <p key={index}>Question {index+1}<br/>{answer}</p>
+          )
+        }
         <br/>           
         <p className='fw-bold'>Correct answers are:</p>
-        {quiz.questions.map((question, index) => <p key={index}>{question.correctAnswer}</p>)}
+        {
+          quiz.questions.map((question, index) => 
+          <p key={index}>Question {index+1}<br/>{question.correctAnswer}</p>)
+        }
       </div>
     </>
     
