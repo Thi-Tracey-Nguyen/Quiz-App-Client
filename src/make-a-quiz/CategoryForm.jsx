@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import "../styles/CommonStyles.css"
 
 const AddCategory = ({ categories, setCategories }) => {
-  const [name, setName] = useState('')
-  const [image, setImage] = useState('')
-  
+  const [name, setName] = useState("")
+  const [image, setImage] = useState("")
+
   const nav = useNavigate()
 
   async function getParams(e) {
@@ -17,53 +18,56 @@ const AddCategory = ({ categories, setCategories }) => {
     // Add a new category
     const newCategory = {
       name: name,
-      image: image
+      image: image,
     }
     // Post new category to the API
-    const createdCategory = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newCategory)
-    })
+    const createdCategory = await fetch(
+      "https://quiz-app-server-production-09e8.up.railway.app/categories",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCategory),
+      }
+    );
     const data = await createdCategory.json()
     // Update categories state
     setCategories([...categories, data])
-    nav('/make-a-quiz')
+    nav("/make-a-quiz")
   }
 
   return (
     <>
-      <h2>Add a new Category</h2>
-
-        <form onSubmit={getParams} className='container'>
-          <div className='cat-name-form'>
-            <label>Category name:
-              <input 
-                type='text' 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-              />
-            </label>
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
+        <h2>Add a new Category</h2>
+        <form onSubmit={getParams} className="container">
+          <div className="cat-name-form  d-flex flex-column">
+            <label>Category name:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
-          <div className='cat-image-form'>
-            <label>Image:
-              <input  
-                type='text'
-                value={image} 
-                onChange={(e) => setImage(e.target.value)}
-              /> 
-            </label>
+          <div className="cat-image-form  d-flex flex-column">
+            <label>Image:</label>
+            <input
+              type="text"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
           </div>
-          <button>
-            Submit
-          </button>
+          <br />
+          <div className="d-flex justify-content-between">
+            <button>Submit</button>
+            <button>
+              <Link to="/make-a-quiz">Quit</Link>
+            </button>
+          </div>
         </form>
-      <button>
-        <Link to='/make-a-quiz'>Quit</Link>
-      </button>
+      </div>
     </>
   )
 }
