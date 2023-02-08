@@ -123,7 +123,7 @@ const EditAQuiz = ({ categories }) => {
             <Link to={"/add-a-category"}>Add a new Category</Link>
             </p>
             <br />
-            <div class="d-flex justify-content-between">
+            <div className="d-flex justify-content-between">
               <button>
                 <Link to="/quizzes" className="fw-normal">
                   Quit
