@@ -72,9 +72,9 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
 
   return (
     <>
-      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-        <h1>Make a new Quiz</h1>
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>        
         <form onSubmit={submitQuiz}>
+        <h1 className="d-flex justify-content-center">Make a new Quiz</h1>
           <div className="category-dropdown-form d-flex flex-column">       
             <label>Category:</label>
             <select onChange={(e) => setCategory(e.target.value)}>
