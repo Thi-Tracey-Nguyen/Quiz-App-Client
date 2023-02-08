@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "../styles/CommonStyles.css";
+import "../styles/CommonStyles.css"
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const TakeAQuiz = ({ quiz, onChange }) => {
@@ -78,21 +78,21 @@ const TakeAQuiz = ({ quiz, onChange }) => {
 
     //this function shuffles elements in an array
     function shuffle(array) {
-      let currentIndex = array.length, randomIndex;
+      let currentIndex = array.length, randomIndex
 
       // While there remain elements to shuffle.
       while (currentIndex != 0) {
 
         // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--
 
         // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex], array[currentIndex]];
+          array[randomIndex], array[currentIndex]]
       }
 
-      return array;
+      return array
     }
 
     // call shuffle on answersArray
@@ -124,14 +124,14 @@ const TakeAQuiz = ({ quiz, onChange }) => {
         </div>
         <br/>
         <div className="d-flex justify-content-between">
+        <button>
+          <Link to='/quizzes'> Quit </Link>
+        </button>
         {index < quiz.questions.length - 1 ?
           <button onClick={handleClickNext}> Next </button> :
           <button onClick={handleSubmit}> Submit </button>
         }
 
-        <button>
-          <Link to='/quizzes'> Quit </Link>
-        </button>
         </div>
         <p>{index + 1}/{quiz.questions.length}</p>        
       </div>
