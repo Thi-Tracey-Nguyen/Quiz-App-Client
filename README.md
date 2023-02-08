@@ -265,6 +265,34 @@ Manual testing of routes and CRUD operations were checked via Postman.
 
 <summary><strong>Postman screenshots</strong></summary>
 
+|  Tests                                                                                        |   Passed | Note  |   
+|-----------------------------------------------------------------------------------------------|----------|-------|
+| All quizzes retrieved successfully                                                            |     P    |       | 
+| All category retrieved successfully                                                           |     P    |       | 
+| All questions retrieved successfully                                                          |     P    |       | 
+| Get a quiz by id                                                                              |     P    |       | 
+| Get a category by id                                                                          |     P    |       | 
+| Get a question by id                                                                          |     P    |       | 
+| Post a new quiz                                                                               |     P    |       | 
+| Post a new category                                                                           |     P    |       | 
+| Post a new question                                                                           |     P    |       | 
+| Delete a quiz                                                                                 |     P    |       | 
+| Delete a category                                                                             |     P    |       | 
+| Delete a question                                                                             |     P    |       | 
+| Update a quiz                                                                                 |     P    |       | 
+| Update a category                                                                             |     P    |       | 
+| Update a question                                                                             |     P    |       | 
+| Error thrown when quiz with duplicated name is created                                        |     P    |       | 
+| Error thrown when posting a quiz with a invalid category                                      |     P    |       | 
+| Error thrown when posting a quiz without an author                                            |     P    |       | 
+| Error thrown when quiz name is too short                                                      |     P    |       |  
+| Error thrown when category with duplicated name is created                                    |     P    |       | 
+| Error thrown when category name is too short                                                  |     P    |       | 
+| Error thrown when duplicated questions are created in the same quiz                           |     P    |       | 
+| Error thrown when posting a question without a question (e.g. "What is the color of the sky?" |     P    |       | 
+| Error thrown when posting a question without a correct answer                                 |     P    |       | 
+| Error thrown when posting a question without 3 incorrect answers                              |     P    |       | 
+|-----------------------------------------------------------------------------------------------|----------|-------|
 </details>
 <br/>
 
