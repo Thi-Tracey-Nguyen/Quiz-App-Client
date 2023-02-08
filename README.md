@@ -273,6 +273,17 @@ Automated unit tests were created to check the routes and CRUD operations were f
 <details>
 
 <summary><strong>Unit test log screenshots</strong></summary>
+   Test of the Home page
+   <img width="1270" alt="Screen Shot 2023-02-08 at 1 10 22 pm" src="https://user-images.githubusercontent.com/103707253/217412633-b82d7543-d2b6-44bf-aac1-da0f849dc4fc.png">
+   
+   Tests of Category route
+   <img width="1261" alt="Screen Shot 2023-02-08 at 11 56 25 am" src="https://user-images.githubusercontent.com/103707253/217412717-fae51d18-7bc5-420b-8fa7-0c22de90f90c.png">
+
+   Test of Quiz route
+   <img width="1265" alt="Screen Shot 2023-02-08 at 1 08 49 pm" src="https://user-images.githubusercontent.com/103707253/217412774-09db16fb-49d8-4909-9d43-8fa1df2f9811.png">
+
+   Test of Question Route
+   <img width="1265" alt="Screen Shot 2023-02-08 at 11 56 53 am" src="https://user-images.githubusercontent.com/103707253/217412862-7d852136-c0eb-4b92-9b23-05c726a3ab46.png">
 
 </details>
 <br/>
