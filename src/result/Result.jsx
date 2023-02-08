@@ -75,7 +75,7 @@ const Result = ({ answers, quiz }) => {
             }
           </div>          
           <div className='container'>
-            <p className='fw-bold'>Correct answers are:</p>
+            <p className='fw-bold'>Correct answers:</p>
             {
               quiz.questions.map((question, index) =>
                 <p key={index}>Question {index + 1}<br />{question.correctAnswer}</p>)
