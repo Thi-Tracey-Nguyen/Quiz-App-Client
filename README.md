@@ -350,4 +350,9 @@ Automated integration tests were created to check the application was functionin
 
 <summary><strong>Integration test log screenshots</strong></summary>
 
+   To replicate the application's function as a whole, the user should be able able to create a new category, then add a quiz to that category and then add a question to the quiz.
+   
+   <img width="1255" alt="Screen Shot 2023-02-08 at 2 48 13 pm" src="https://user-images.githubusercontent.com/103707253/217427997-f537e869-f601-457c-a2b3-9d12cfb1f10f.png">
+
+   
 </details>
