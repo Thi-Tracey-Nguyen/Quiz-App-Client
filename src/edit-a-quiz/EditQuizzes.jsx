@@ -125,14 +125,18 @@ const EditQuizzes = ({ quizzes }) => {
           <DeleteConfirmation
             show={showPopup}
             value={false}
-            onHide={(e) => setShowPopup(e.target.value)}
+            onHide={(e) => {
+              setSelectedQuiz(null)
+            }}
           />
         )}
         {selectedQuizEdit && (
           <EditConfirmation
             show={showPopup}
             value={false}
-            onHide={(e) => setShowPopup(e.target.value)}
+            onHide={(e) => {
+              setSelectedQuizEdit(null)
+            }}
           />
         )}
       </div>
