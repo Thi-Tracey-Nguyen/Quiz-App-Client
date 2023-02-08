@@ -126,7 +126,7 @@ const App = () => {
       getQuiz()
     }, [quizId])
 
-    return quiz ? <EditQuestions quiz={quiz} /> : <h4>Loading... </h4>
+    return quiz ? <EditQuestions quiz={quiz} questions={questions} setQuestions={setQuestions} /> : <h4>Loading... </h4>
   }
   
   // HOC for QuestionsForm to access quizTitle in the URL
