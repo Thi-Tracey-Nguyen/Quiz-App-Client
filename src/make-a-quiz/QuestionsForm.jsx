@@ -15,10 +15,9 @@ const QuestionsForm = ({ questions, setQuestions }) => {
 
   const nav = useNavigate()
 
-  //validation
+  //validation incorrect answers
   function validate() {
-    if (correctAnswer !== '' && question !== '' && incorrectAns1 !== '' 
-      && incorrectAns2 !== '' && incorrectAns3 !== '') {
+    if (incorrectAns1 !== '' && incorrectAns2 !== '' && incorrectAns3 !== '') {
         return true
     } else {
       return false
@@ -27,9 +26,7 @@ const QuestionsForm = ({ questions, setQuestions }) => {
   // Function to put incorrect answers into array and set quizId from URL
   function getParams(e) {
     e.preventDefault()
-    if (!validate()) {
-      alert('Please provide required information')
-    } else {
+    if (validate()) {
       setIncorrectAnswers(
         incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
       addQuestion(quizId, question, correctAnswer, incorrectAnswers)
@@ -38,6 +35,8 @@ const QuestionsForm = ({ questions, setQuestions }) => {
       } else {
         alert('Question added successfully!')
       }
+    } else {
+      alert('Please provide all required information.')
     }
     
   }
@@ -67,7 +66,7 @@ const QuestionsForm = ({ questions, setQuestions }) => {
       incorrectAnswers: incorrectAnswers,
     }
     // Post new question to API
-    const createdQuestion = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -75,10 +74,27 @@ const QuestionsForm = ({ questions, setQuestions }) => {
       },
       body: JSON.stringify(newQuestion)
     })
-    const data = await createdQuestion.json()
+    
+    //handle validation error
+    if (res.status === 400) {
+      alert('Please provide all required information.')
+    } else if (res.status === 409) {
+      alert('Question already exists in the same quiz. Please provide another question.')
+    }  else {
+      const data = await res.json()
     // Make sure questions state is updated
-    setQuestions([...questions, data])
-    resetForm()
+      setQuestions([...questions, data])
+      resetForm()
+    }
+  }
+
+  //handle quit
+  async function handleQuit() {
+    //deletes the quiz from db
+    await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`, {
+      method: 'DELETE',
+    })
+    nav('/quizzes')
   }
 
   return (
@@ -155,9 +171,8 @@ const QuestionsForm = ({ questions, setQuestions }) => {
             </button>
           </div>
         </form>
-        <button  className='text-dark fw-bold'>
-          <Link to={'/'} className='d-flex justify-content-center fw-normal'>Quit</Link>
-        </button>
+        <button  className='text-light d-flex justify-content-center fw-normal' 
+          onClick={ handleQuit }> Quit </button>
       </div>
     </>
   )

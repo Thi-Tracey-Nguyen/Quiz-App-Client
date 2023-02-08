@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/CommonStyles.css'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 function HighScorePopup(props) {
   return (
@@ -81,6 +82,9 @@ const Result = ({ answers, quiz }) => {
                 <p key={index}>Question {index + 1}<br />{question.correctAnswer}</p>)
             }
           </div>
+          <button className="d-flex justify-content-between fw-normal">
+            <Link to={'/quizzes'}>Take another quiz</Link>
+          </button>
         </div>
       </div>
     </>
