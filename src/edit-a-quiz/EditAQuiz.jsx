@@ -73,9 +73,9 @@ const EditAQuiz = ({ categories }) => {
   return (
     quiz ? 
       <>
-        <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-          <h1>Edit quiz</h1>
+        <div className="main-body flex-wrap" style={{ height: "100vh" }}>          
           <form onSubmit={submitQuiz}>
+          <h1>Edit quiz</h1>
             <div className="category-dropdown-form d-flex flex-column">       
               <label>Category:</label>
               <select onChange={(e) => setCategory(e.target.value)} defaultValue={quiz.category.name}>

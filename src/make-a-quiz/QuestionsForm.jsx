@@ -171,7 +171,7 @@ const QuestionsForm = ({ questions, setQuestions }) => {
             </button>
           </div>
         </form>
-        <button  className='text-light d-flex justify-content-center fw-normal' 
+        <button  className='d-flex justify-content-center fw-normal' 
           onClick={ handleQuit }> Quit </button>
       </div>
     </>
