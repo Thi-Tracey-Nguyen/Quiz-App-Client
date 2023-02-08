@@ -19,7 +19,7 @@ const AddCategory = ({ categories, setCategories }) => {
       name: name
     }
     // Post new category to the API
-    const createdCategory = await fetch(
+    const res = await fetch(
       'https://quiz-app-server-production-09e8.up.railway.app/categories',
       {
         method: 'POST',
@@ -30,10 +30,14 @@ const AddCategory = ({ categories, setCategories }) => {
         body: JSON.stringify(newCategory),
       }
     )
-    const data = await createdCategory.json()
-    // Update categories state
-    setCategories([...categories, data])
-    nav('/make-a-quiz')
+    if (res.status === 409) {
+      alert('Category already exists. Please choose another name.')
+    } else if (res.status === 201) {
+      // Update categories state
+      setCategories([...categories, data])
+      nav('/make-a-quiz')
+    }
+    
   }
 
   return (
