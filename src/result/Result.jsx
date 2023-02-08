@@ -3,6 +3,7 @@ import '../styles/CommonStyles.css'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
+import ReturnToTop from '../UI/ReturnToTop'
 
 function HighScorePopup(props) {
   return (
@@ -48,8 +49,6 @@ const Result = ({ answers, quiz }) => {
     }
   }, [])
 
-  console.log(quiz.questions)
-
   return (
     <>
       <div>
@@ -59,33 +58,38 @@ const Result = ({ answers, quiz }) => {
           onHide={(e) => setShowPopup(e.target.value)}
         />
       </div>
-      <div className='main-body flex-wrap' style={{ height: '100vh' }}>
-
+      <div className='main-body'>
         <h1>Result!</h1>
         <h2>{points} / {quiz.questions.length}</h2>
         <br />
         <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
         <h4>Review Answers</h4>
-        <div className='d-flex'>
-          <div className='container'>
-            <p className='fw-bold'>Your answers:</p>
-            {
-              answers.map((answer, index) =>
-                <p key={index}>Question {index + 1}<br />{answer}</p>
-              )
-            }
-          </div>          
-          <div className='container'>
-            <p className='fw-bold'>Correct answers:</p>
-            {
-              quiz.questions.map((question, index) =>
-                <p key={index}>Question {index + 1}<br />{question.correctAnswer}</p>)
-            }
-          </div>
-          <button className="d-flex justify-content-between fw-normal">
+        {quiz.questions.map((question, index) => 
+        (
+          <>
+            <div className="card" style={{ width: '18rem' }} key={index}>
+            <div className="card-header">
+              {question.question}
+            </div>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item bg-success">{ question.correctAnswer }</li>
+              {question.incorrectAnswers.map((incorrectAnswer, index2) => 
+                incorrectAnswer === answers[index] ? <li className="list-group-item bg-danger" key={index2}> {incorrectAnswer} </li> :
+                <li className="list-group-item" key={index2}>{ incorrectAnswer }</li>
+              )}
+            </ul>
+            </div>
+            <br />
+          </>
+        ))}
+        <br />
+        <button className="d-flex justify-content-between fw-normal">
             <Link to={'/quizzes'}>Take another quiz</Link>
-          </button>
-        </div>
+        </button>
+        <br />
+      </div>
+      <div>
+        <ReturnToTop />
       </div>
     </>
 
