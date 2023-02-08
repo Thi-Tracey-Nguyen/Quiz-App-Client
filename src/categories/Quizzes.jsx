@@ -20,7 +20,7 @@ const Quizzes = ({ quizzes, setQuizzes, questions }) => {
         <h1>All Quizzes</h1>
           <ul className="d-flex justify-content-center flex-wrap ">
             {isNaN(quizzes) ? quizzes.map((quiz, index) => (
-                <div key={index} className="card m-3" style={{ width: "15rem" }} >
+                <div key={index} data-testid='quiz' className="card m-3" style={{ width: "15rem" }} >
                   <ShowQuiz quiz={quiz} />
                 </div>
               )) : 'Loading...' 
