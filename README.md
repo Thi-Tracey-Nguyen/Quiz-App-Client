@@ -254,6 +254,8 @@ Automated integration tests were created to check the application was functionin
 
 <summary><strong>Integration test log screenshots</strong></summary>
 
+   <img width="1055" alt="Screen Shot 2023-02-08 at 6 58 30 pm" src="https://user-images.githubusercontent.com/106674758/217469024-34f8c330-93aa-4486-86ca-c055587341b4.png">
+
 </details>
 <br/>
 
