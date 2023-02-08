@@ -235,7 +235,31 @@ Manual testing of the sites functionality were checked by using the site and che
 <details>
 
 <summary><strong>Website screenshots</strong></summary>
+   
+   
+|  Tests                                                                                        |   Passed | Note  |   
+|-----------------------------------------------------------------------------------------------|----------|-------|
+| Quiz App Home page is displayed                                                               |     P    |       | 
+| Quiz App Home page has 3 Quizzes are featured in home page                                    |     P    |       | 
+| Featured Quizzes can be clicked to view the quiz                                              |     P    |       | 
+| Navigation bar display's the correct navigation options                                       |     P    |       | 
+| All Quizzes page is displayed correctly with all quizzes displayed                            |     P    |       | 
+| All Quizzes page has Random Quiz Button displayed at the end of the page                      |     P    |       | 
+| Random quiz button click invokes random quiz topics                                           |     P    |       | 
+| Take a quiz shows the questions and timer countdown                                           |     P    |       | 
+| Results page displays the quiz results, answers chosen and correct answers                    |     P    |       | 
+| Categories page is displayed                                                                  |     P    |       | 
+| Categories page has Random Category button displayed at the end of the page                   |     P    |       | 
+| Random Category button click displays quizzes from a random cateogry                          |     P    |       | 
+| Make a quiz page is displayed correctly                                                       |     P    |       | 
+| Make a quiz page has option to add new category                                               |     P    |       | 
+| Make a quiz page has next button which invokes page to add questions                          |     P    |       | 
+| Add questions page is displayed correctly                                                     |     P    |       | 
+| Edit a quiz page is displayed correcty                                                        |     P    |       | 
+| Edit a quiz shows option to edit/delete any quizzes                                           |     P    |       | 
+|-----------------------------------------------------------------------------------------------|----------|-------|
 
+   
 </details>
 <br/>
 
