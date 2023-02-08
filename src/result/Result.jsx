@@ -3,6 +3,7 @@ import '../styles/CommonStyles.css'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
+import ReturnToTop from '../UI/ReturnToTop'
 
 function HighScorePopup(props) {
   return (
@@ -57,8 +58,7 @@ const Result = ({ answers, quiz }) => {
           onHide={(e) => setShowPopup(e.target.value)}
         />
       </div>
-      <div className='main-body' style={{ height: '100vh' }}>
-
+      <div className='main-body'>
         <h1>Result!</h1>
         <h2>{points} / {quiz.questions.length}</h2>
         <br />
@@ -73,10 +73,10 @@ const Result = ({ answers, quiz }) => {
             </div>
             <ul className="list-group list-group-flush">
               <li className="list-group-item bg-success">{ question.correctAnswer }</li>
-              {question.incorrectAnswers.map(incorrectAnswer => 
-                incorrectAnswer === answers[index] ? <li className="list-group-item bg-danger">        {incorrectAnswer} </li> :
-                <li className="list-group-item">{ incorrectAnswer }</li>
-                )}
+              {question.incorrectAnswers.map((incorrectAnswer, index2) => 
+                incorrectAnswer === answers[index] ? <li className="list-group-item bg-danger" key={index2}> {incorrectAnswer} </li> :
+                <li className="list-group-item" key={index2}>{ incorrectAnswer }</li>
+              )}
             </ul>
             </div>
             <br />
@@ -86,6 +86,10 @@ const Result = ({ answers, quiz }) => {
         <button className="d-flex justify-content-between fw-normal">
             <Link to={'/quizzes'}>Take another quiz</Link>
         </button>
+        <br />
+      </div>
+      <div>
+        <ReturnToTop />
       </div>
     </>
 
