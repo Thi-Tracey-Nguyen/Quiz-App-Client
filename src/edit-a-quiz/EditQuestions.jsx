@@ -246,15 +246,24 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
               />
           </div> 
         </form>
-        { confirm && confirmForm() }
-        <button onClick={() => nav('/edit-a-quiz')}>Quit</button> 
-        { (index < quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSaveNext }> Save & Next </button> }
-        { (index === quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSave }> Save </button> }
+        { confirm && confirmForm() }  
+        <br/> 
+        <div className="d-flex justify-content-between">
         { newQuestion && <button onClick={ handleConfirmAdd }> Save Question </button> } 
         { (!confirm && !newQuestion) && <button onClick={ handleClickDelete }> Delete this question </button> }  
         { (index === quiz.questions.length-1 && !confirm) &&  <button onClick={ handleAddQuestion }> Add a new question </button>}
+        </div>
+        <br/>
         { index === quiz.questions.length-1 && <button onClick={handleSubmit}> Submit </button> }
+        <br/>
+        <div className="d-flex justify-content-between">
+        <button onClick={() => nav('/edit-a-quiz')}>Quit</button> 
+        { (index < quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSaveNext }> Save & Next </button> }
+        { (index === quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSave }> Save </button> }
+        </div> 
+        
       </div>
+
     </>
   )
 }
