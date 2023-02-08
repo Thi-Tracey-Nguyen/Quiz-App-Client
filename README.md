@@ -254,6 +254,7 @@ Manual testing of the sites functionality were checked by using the site and che
 | Add questions page is displayed correctly                                                     |     P    |       | 
 | Edit a quiz page is displayed correcty                                                        |     P    |       | 
 | Edit a quiz shows option to edit/delete any quizzes                                           |     P    |       | 
+| Error handling when not entering all fields in add question                                   |     P    |       | 
 |-----------------------------------------------------------------------------------------------|----------|-------|
 
 Home Page
@@ -287,7 +288,8 @@ Add a category
 Make a quiz question 
    
    ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-add-questions-63e3761cf8f3dabad40170e3-2023-02-08-21_16_21](https://user-images.githubusercontent.com/106674758/217501339-76e8f7c0-921f-427c-91c0-bd651b46fab0.png)
-   
+![Error-handling-questions](https://user-images.githubusercontent.com/110761232/217523167-77821a75-8d08-46ed-bef3-6239fa669f54.png)
+
    
 Edit a quiz
    
