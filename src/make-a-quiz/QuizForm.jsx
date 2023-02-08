@@ -38,7 +38,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       image: image,
     }
     // Post new quiz to the API
-    const createdQuiz = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes', {
+    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -46,12 +46,18 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       },
       body: JSON.stringify(newQuiz)
     })
-    const data = await createdQuiz.json()
+    //catch error when quiz of the same name already exists
+    if (res.status === 409) {
+      alert('Quiz with the same name already exists. Please choose a different name.')
+    } else{
+      const data = await res.json()
+      const updatedQuizzes = quizzes.push(data)
+      setQuizzes(updatedQuizzes)
+      // Navigate to add questions to the new quiz
+      navToNewQuiz(data)
+    }
     // Update quizzes state with the new quiz
-    const updatedQuizzes = quizzes.push(data)
-    setQuizzes(updatedQuizzes)
-    // Navigate to add questions to the new quiz
-    navToNewQuiz(data)
+    
     // const findTitle = data.title
     // const quiz = quizzes.find(quiz => quiz.title === findTitle)
     // console.log(quizzes)
