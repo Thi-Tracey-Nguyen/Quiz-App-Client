@@ -37,26 +37,33 @@ describe("App Component", () => {
    // Categories
    it("Shows Categories", async () => {
      await userEvent.click(screen.getByText('Categories'))
-     expect(container.querySelector("h2")).toBeDefined()
-     expect(container.querySelector("h2")).toHaveTextContent('Categories')
+     expect(container.querySelector("h1")).toBeDefined()
+     expect(container.querySelector("h1")).toHaveTextContent('Categories')
  
    })   
    // Make a quiz
    it("Shows Make a quiz", async () => {
      await userEvent.click(screen.getByText('Make a quiz'))
-     expect(container.querySelector("div")).toBeDefined()
-     expect(container.querySelector("div")).toHaveClass
-     expect(container.querySelector("label")).toBeDefined()
-     expect(container.querySelector("label")).toHaveTextContent('Quiz title')       
- 
- 
+     expect(container.querySelector("h1")).toBeDefined()
+     expect(container.querySelector("h1")).toHaveTextContent('Make a new Quiz')             
+     const labels = container.querySelectorAll("label")
+     expect(labels[0]).toHaveTextContent('Category:') 
+     expect(labels[1]).toHaveTextContent('Quiz name:') 
+     expect(labels[2]).toHaveTextContent('Created by:')
+     const div = container.querySelectorAll("div")
+     expect(div[2]).toHaveTextContent('Choose an image:') 
+     const p = container.querySelectorAll("p")
+     expect(p[0]).toHaveTextContent('Don\'t see a Category that fits your Quiz idea?') 
+     const btn = container.querySelectorAll("button")
+     expect(btn[2]).toHaveTextContent('Next') 
+
    })     
    // Edit a quiz
-   it("Shows Make a quiz", async () => {
+   it("Shows Edit a quiz", async () => {
      await userEvent.click(screen.getByText('Edit a quiz'))     
      expect(container.querySelector("h1")).toBeDefined()
      expect(container.querySelector("h1")).toHaveTextContent('Choose a Quiz to edit or delete')
-
+     
    })  
    
    // Random Category Quiz
@@ -76,6 +83,6 @@ describe("App Component", () => {
             <RandomQuiz />  
        </BrowserRouter>    
      )
-     expect(container.querySelector("p")).toBeDefined()     
+     expect(container.querySelector("p")).toBeDefined()          
    })       
 })
