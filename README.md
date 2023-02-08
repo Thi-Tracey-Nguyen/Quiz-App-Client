@@ -138,7 +138,6 @@ Deletes one quiz by its id
 ## Resources
 
 - [Bootstrap](https://getbootstrap.com/)
-- [Font Awesome](https://fontawesome.com/)
 - [Unsplash](https://unsplash.com/)
 
 #
@@ -208,7 +207,7 @@ The Trello board can be viewed [here](https://trello.com/b/8A98I9sW/mern-quiz-ap
 ![04-02-23-Partway-through-SPRINT5](https://user-images.githubusercontent.com/110761232/217202821-102eac71-add1-4b4c-ad83-c9bb5002aeb4.png)
 ![06-02-23-Start-SPRINT6](https://user-images.githubusercontent.com/110761232/217202840-651f66d0-b313-43df-add5-9082b8a25415.png)
 ![07-02-23-Card-example-SPRINT6](https://user-images.githubusercontent.com/110761232/217202861-47575de9-8bd6-48ec-8495-c86680aa37b5.png)
-
+![08-02-23-Final-screenshot-SPRINT6](https://user-images.githubusercontent.com/110761232/217499257-c0b39777-351a-4921-af27-1a933689e93c.png)
 
 </details>
 
@@ -216,11 +215,9 @@ The Trello board can be viewed [here](https://trello.com/b/8A98I9sW/mern-quiz-ap
 
 ## The final application
 
-We were able to implement all MVP features and functionalities listed in the planning documentation. Although we had to make some changes to the way certain features were implemented due to complexity.
+We were able to implement all MVP features and functionalities listed in the planning documentation. Although we had to make some small stylistic changes and changes to the way certain features were implemented due to complexity.
 
-On the results page after a user has completed a quiz, laying out the questions and answers as planned was difficult due to way the data was captured and stored. Therefore rather than having the question and correct answers listed together, they are listed separately, with the user able to reference which ones were incorrect by question number.
-
-The decision to not allow users to upload their own images was made when we realised images could not be stored within MongoDB Atlas without badly affecting the performance of the application. Therefore this issue was solved by having 12 images users could choose between to represent their quiz, and changing questions to just be text based.
+We made the decision not allow users to upload their own images when we realised images could not be stored within MongoDB Atlas without badly affecting the performance of the application. Therefore this issue was solved by having 12 images users could choose between to represent their quiz, and changing questions to just be text based.
 
 ---
 
