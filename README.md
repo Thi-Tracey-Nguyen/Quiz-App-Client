@@ -265,6 +265,62 @@ Manual testing of routes and CRUD operations were checked via Postman.
 
 <summary><strong>Postman screenshots</strong></summary>
 
+|  Tests                                                                                        |   Passed | Note  |   
+|-----------------------------------------------------------------------------------------------|----------|-------|
+| All quizzes retrieved successfully                                                            |     P    |       | 
+| All category retrieved successfully                                                           |     P    |       | 
+| All questions retrieved successfully                                                          |     P    |       | 
+| Get a quiz by id                                                                              |     P    |       | 
+| Get a category by id                                                                          |     P    |       | 
+| Get a question by id                                                                          |     P    |       | 
+| Post a new quiz                                                                               |     P    |       | 
+| Post a new category                                                                           |     P    |       | 
+| Post a new question                                                                           |     P    |       | 
+| Delete a quiz                                                                                 |     P    |       | 
+| Delete a category                                                                             |     P    |       | 
+| Delete a question                                                                             |     P    |       | 
+| Update a quiz                                                                                 |     P    |       | 
+| Update a category                                                                             |     P    |       | 
+| Update a question                                                                             |     P    |       | 
+| Error thrown when quiz with duplicated name is created                                        |     P    |       | 
+| Error thrown when posting a quiz with an invalid category                                     |     P    |       | 
+| Error thrown when posting a quiz without an author                                            |     P    |       | 
+| Error thrown when quiz name is too short                                                      |     P    |       |  
+| Error thrown when category with duplicated name is created                                    |     P    |       | 
+| Error thrown when category name is too short                                                  |     P    |       | 
+| Error thrown when duplicated questions are created in the same quiz                           |     P    |       | 
+| Error thrown when posting a question without a question (e.g. "What is the color of the sky?")|     P    |       | 
+| Error thrown when posting a question without a correct answer                                 |     P    |       | 
+| Error thrown when posting a question without 3 incorrect answers                              |     P    |       | 
+|-----------------------------------------------------------------------------------------------|----------|-------|
+
+Get all categories
+   <img width="1364" alt="Screen Shot 2023-02-08 at 2 05 09 pm" src="https://user-images.githubusercontent.com/103707253/217418533-5c7348f4-6685-42a2-a693-3ac794fb8bd1.png">
+
+Get all quizzes
+   <img width="1272" alt="Screen Shot 2023-02-08 at 2 07 45 pm" src="https://user-images.githubusercontent.com/103707253/217418772-38f5113a-648e-431d-8f56-cb772ca85153.png">
+
+Get all questions
+  <img width="1268" alt="Screen Shot 2023-02-08 at 2 08 30 pm" src="https://user-images.githubusercontent.com/103707253/217418986-320387e0-6175-47ec-80bc-2ade3b38b69d.png">
+   
+Post a new question
+   <img width="1297" alt="Screen Shot 2023-02-08 at 2 12 54 pm" src="https://user-images.githubusercontent.com/103707253/217419496-29a02f06-b978-46f0-955c-8c80c556d082.png">
+
+Post a new quiz
+   <img width="1261" alt="Screen Shot 2023-02-08 at 2 16 51 pm" src="https://user-images.githubusercontent.com/103707253/217420016-2397837e-aa7b-41b4-b91f-31349940b3f6.png">
+
+Error thrown when category already exists
+   <img width="1265" alt="Screen Shot 2023-02-08 at 2 18 04 pm" src="https://user-images.githubusercontent.com/103707253/217420121-7d93537a-cb1d-4b11-ae26-2085a233d82a.png">
+
+Error thrown when the same question already exists in the same quiz
+   <img width="1410" alt="Screen Shot 2023-02-08 at 2 19 26 pm" src="https://user-images.githubusercontent.com/103707253/217420292-96f5c15a-32f0-475f-b213-2faa2621e424.png">
+
+Error thrown when correct answer is not provided
+   <img width="1479" alt="Screen Shot 2023-02-08 at 2 20 48 pm" src="https://user-images.githubusercontent.com/103707253/217420545-9e210e50-0aac-48d9-8150-213dbbefd248.png">
+
+Error thrown when less then 3 incorrect answers are provided
+   <img width="1160" alt="Screen Shot 2023-02-08 at 2 22 33 pm" src="https://user-images.githubusercontent.com/103707253/217420727-243d5577-07f0-4006-a45c-fba53aa89767.png">
+   
 </details>
 <br/>
 
@@ -294,4 +350,9 @@ Automated integration tests were created to check the application was functionin
 
 <summary><strong>Integration test log screenshots</strong></summary>
 
+   To replicate the application's function as a whole, the user should be able able to create a new category, then add a quiz to that category and then add a question to the quiz.
+   
+   <img width="1255" alt="Screen Shot 2023-02-08 at 2 48 13 pm" src="https://user-images.githubusercontent.com/103707253/217427997-f537e869-f601-457c-a2b3-9d12cfb1f10f.png">
+
+   
 </details>

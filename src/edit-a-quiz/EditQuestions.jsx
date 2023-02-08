@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/CommonStyles.css"
 
-const EditQuestions = ({ quiz }) => {
+const EditQuestions = ({ quiz, questions, setQuestions }) => {
   const [index, setIndex] = useState(0);
   const nav = useNavigate();
 
@@ -102,7 +102,7 @@ const EditQuestions = ({ quiz }) => {
       question: question,
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers,
-    };
+    }
     // Post new question to API
     await fetch(
       "https://quiz-app-server-production-09e8.up.railway.app/questions",
@@ -114,7 +114,7 @@ const EditQuestions = ({ quiz }) => {
         },
         body: JSON.stringify(newQuestion),
       }
-    );
+    )
     // console.log(createdQuestion)
     // const data = await createdQuestion.json()
     // const updatedQuestions = questions.push(data)
@@ -193,6 +193,7 @@ const EditQuestions = ({ quiz }) => {
     setNewQuestion(false)
     setQuestionObject(newQuestion)
     quiz.questions.push(data)
+    setQuestions([...questions, data])
     alert('Question added successfully')
   } 
 
