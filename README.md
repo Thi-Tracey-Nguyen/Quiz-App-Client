@@ -245,6 +245,21 @@ Automated unit tests were created to test individual functions and features were
 
 <summary><strong>Unit test log screenshots</strong></summary>
 
+Screenshots throughout the testing process
+![Categories-test-failed-map-length](https://user-images.githubusercontent.com/110761232/217474653-b99cc1f5-f364-4177-af98-4cd0ce05b7ff.png)
+![Edit-a-quiz-test-progress](https://user-images.githubusercontent.com/110761232/217474702-e40de9f7-e192-4c49-a55a-9afb4d6e0a02.png)
+![All-3-tests-passing-class-error](https://user-images.githubusercontent.com/110761232/217474720-f1445c8c-81dc-4dcf-8f45-4ce8dd66d1d9.png)
+![All-tests-passing-no-error](https://user-images.githubusercontent.com/110761232/217474776-267d2881-86d8-4b29-a327-58b0ad8bb087.png)
+
+Categories
+![Categories-test-passing](https://user-images.githubusercontent.com/110761232/217475596-f21768e3-ad02-4277-b91e-74b9a1f11f45.png)
+
+Quizzes
+![Quizzes-test-passing](https://user-images.githubusercontent.com/110761232/217475637-291b6373-f3d0-4acb-872b-ede66cb0233d.png)
+
+Edit a Quiz
+![EditAQuiz-test-passing](https://user-images.githubusercontent.com/110761232/217475696-dbfc7a33-122b-41d4-be86-f5b0abbbc597.png)
+
 </details>
 <br/>
 
