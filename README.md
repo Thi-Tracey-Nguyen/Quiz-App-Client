@@ -256,6 +256,47 @@ Manual testing of the sites functionality were checked by using the site and che
 | Edit a quiz shows option to edit/delete any quizzes                                           |     P    |       | 
 |-----------------------------------------------------------------------------------------------|----------|-------|
 
+Home Page
+   
+   ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-2023-02-08-20_00_32](https://user-images.githubusercontent.com/106674758/217483906-8aad227f-0209-48a1-8bda-633d2a7e0e58.png)
+
+ 
+
+Take Quiz page
+   
+   ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-quizzes-63e31ba05949e9712593fd62-2023-02-08-20_07_00](https://user-images.githubusercontent.com/106674758/217484772-8b6a31eb-b9f8-47c1-b204-7c34296947af.png)
+ 
+All Quizzes Page
+   
+   <img width="1503" alt="Screen Shot 2023-02-08 at 9 09 01 pm" src="https://user-images.githubusercontent.com/106674758/217499660-a86b8b9d-8b97-401a-9aed-7aa0086a886c.png">
+   
+   <img width="1503" alt="Screen Shot 2023-02-08 at 9 10 08 pm" src="https://user-images.githubusercontent.com/106674758/217499875-8495f438-0ae8-4597-baf5-19b8576a95d6.png">
+
+Categories
+   
+   <img width="1503" alt="Screen Shot 2023-02-08 at 9 26 31 pm" src="https://user-images.githubusercontent.com/106674758/217503893-40bb80dd-01b7-447a-9c69-1d07e19e2116.png">
+
+Make a quiz
+   
+   ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-make-a-quiz-2023-02-08-21_10_25](https://user-images.githubusercontent.com/106674758/217499989-4aa35b1e-c362-4507-8879-9fab532a8bef.png)
+
+Add a category
+   
+   ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-add-a-category-2023-02-08-21_11_28](https://user-images.githubusercontent.com/106674758/217500222-ac376df6-d377-4dc3-8c17-f3dae9a4d667.png)
+
+Make a quiz question 
+   
+   ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-add-questions-63e3761cf8f3dabad40170e3-2023-02-08-21_16_21](https://user-images.githubusercontent.com/106674758/217501339-76e8f7c0-921f-427c-91c0-bd651b46fab0.png)
+   
+   
+Edit a quiz
+   
+<img width="1503" alt="Screen Shot 2023-02-08 at 9 17 49 pm" src="https://user-images.githubusercontent.com/106674758/217501699-bd82a1d8-2a27-4a58-9cde-c0fb7d03ef7c.png">
+
+ ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-edit-a-quiz-63e31ba05949e9712593fd65-2023-02-08-21_20_17](https://user-images.githubusercontent.com/106674758/217502267-ff6d2178-5773-4406-bbba-a46630a29e35.png)
+
+   ![screencapture-deploy-preview-79-the-mern-quiz-app-netlify-app-edit-a-quiz-63e31ba05949e9712593fd65-questions-2023-02-08-21_20_48](https://user-images.githubusercontent.com/106674758/217502445-f0180133-4277-404c-b50d-197d3e52da82.png)
+
    
 </details>
 <br/>
