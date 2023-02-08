@@ -15,18 +15,31 @@ const QuestionsForm = ({ questions, setQuestions }) => {
 
   const nav = useNavigate()
 
+  //validation
+  function validate() {
+    if (correctAnswer !== '' && question !== '' && incorrectAns1 !== '' 
+      && incorrectAns2 !== '' && incorrectAns3 !== '') {
+        return true
+    } else {
+      return false
+    } 
+  }
   // Function to put incorrect answers into array and set quizId from URL
   function getParams(e) {
     e.preventDefault()
-    setIncorrectAnswers(
-      incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3)
-    )
-    addQuestion(quizId, question, correctAnswer, incorrectAnswers)
-    if (lastQuestion) {
-      nav('/quizzes')
+    if (!validate()) {
+      alert('Please provide required information')
     } else {
-      alert('Question added successfully!')
+      setIncorrectAnswers(
+        incorrectAnswers.push(incorrectAns1, incorrectAns2, incorrectAns3))
+      addQuestion(quizId, question, correctAnswer, incorrectAnswers)
+      if (lastQuestion) {
+        nav('/quizzes')
+      } else {
+        alert('Question added successfully!')
+      }
     }
+    
   }
 
   // Function to reset the state of the form after submitting a question
