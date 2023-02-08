@@ -52,14 +52,6 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
     setQuizzes(updatedQuizzes)
     // Navigate to add questions to the new quiz
     navToNewQuiz(data)
-    // const findTitle = data.title
-    // const quiz = quizzes.find(quiz => quiz.title === findTitle)
-    // console.log(quizzes)
-    // nav(`/add-questions/${quiz._id}`)
-    // const convertedTitle = await data.title.replaceAll(' ', '%20')
-    // console.log(convertedTitle)
-    // nav(`/add-questions/${convertedTitle}`)
-    // console.log(convertedTitle)
   }
 
   // // Uses the new quiz data to get the ID of the new quiz from the DB
@@ -72,9 +64,9 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
 
   return (
     <>
-      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-        <h1>Make a new Quiz</h1>
-        <form onSubmit={submitQuiz}>
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>     
+        <form onSubmit={submitQuiz} >        
+        <h1 className="d-flex justify-content-center">Make a new Quiz</h1>
           <div className="category-dropdown-form d-flex flex-column">       
             <label>Category:</label>
             <select onChange={(e) => setCategory(e.target.value)}>
@@ -100,7 +92,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
               onChange={(e) => setAuthor(e.target.value)}
             />
           </div>
-          <div className='image-form '>
+          <div className='image-form'>
             Choose an image: <br/>
             {imgArray.map((img, index) => (
               <label htmlFor='image-form' key={index}>
@@ -115,8 +107,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
                 <img src={img} width={100} height={100}/>
               </label>
             ))}
-          </div>
-          <br />
+          </div>          
           <p>Don't see a Category that fits your Quiz idea?
             <br/>
           <Link to={"/add-a-category"}>Add a new Category</Link>

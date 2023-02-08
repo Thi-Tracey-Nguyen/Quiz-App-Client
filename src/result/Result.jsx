@@ -60,7 +60,7 @@ const Result = ({ answers, quiz }) => {
       </div>
       <div className='main-body flex-wrap' style={{ height: '100vh' }}>
 
-        <h1>Result!</h1>
+        <h1 className="d-flex justify-content-center">Result!</h1>
         <h2>{points} / {quiz.questions.length}</h2>
         <br />
         <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
@@ -75,7 +75,7 @@ const Result = ({ answers, quiz }) => {
             }
           </div>          
           <div className='container'>
-            <p className='fw-bold'>Correct answers are:</p>
+            <p className='fw-bold'>Correct answers:</p>
             {
               quiz.questions.map((question, index) =>
                 <p key={index}>Question {index + 1}<br />{question.correctAnswer}</p>)
