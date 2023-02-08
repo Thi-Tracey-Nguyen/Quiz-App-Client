@@ -46,10 +46,13 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       },
       body: JSON.stringify(newQuiz)
     })
+    console.log(res)
     //catch error when quiz of the same name already exists
     if (res.status === 409) {
       alert('Quiz with the same name already exists. Please choose a different name.')
-    } else{
+    } else if (res.status === 400) {
+      alert('Quiz name has to be at least 4 character long.')
+    } else { 
       const data = await res.json()
       const updatedQuizzes = quizzes.push(data)
       setQuizzes(updatedQuizzes)

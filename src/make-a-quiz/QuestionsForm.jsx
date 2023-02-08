@@ -86,7 +86,15 @@ const QuestionsForm = ({ questions, setQuestions }) => {
       setQuestions([...questions, data])
       resetForm()
     }
-    
+  }
+
+  //handle quit
+  async function handleQuit() {
+    //deletes the quiz from db
+    await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`, {
+      method: 'DELETE',
+    })
+    nav('/quizzes')
   }
 
   return (
@@ -163,9 +171,8 @@ const QuestionsForm = ({ questions, setQuestions }) => {
             </button>
           </div>
         </form>
-        <button  className='text-dark fw-bold'>
-          <Link to={'/'} className='d-flex justify-content-center fw-normal'>Quit</Link>
-        </button>
+        <button  className='text-light d-flex justify-content-center fw-normal' 
+          onClick={ handleQuit }> Quit </button>
       </div>
     </>
   )
