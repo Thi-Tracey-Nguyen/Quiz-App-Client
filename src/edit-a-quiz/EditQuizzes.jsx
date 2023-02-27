@@ -98,7 +98,7 @@ const EditQuizzes = ({ quizzes }) => {
 
   return (
     <>
-      <div className="main-body flex-wrap">
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
         <h1>Choose a Quiz to edit or delete</h1>
         <ul className="d-flex justify-content-center flex-wrap ">
           {quizzes.length === 0
@@ -111,10 +111,10 @@ const EditQuizzes = ({ quizzes }) => {
               >
                 <ShowQuiz quiz={quiz} />
                 <ul>
-                  <button onClick={() => setSelectedQuizEdit(quiz)}>
+                  <button className='btn-inside' onClick={() => setSelectedQuizEdit(quiz)}>
                     Edit
                   </button>
-                  <button onClick={() => setSelectedQuiz(quiz)}>
+                  <button className='btn-inside' onClick={() => setSelectedQuiz(quiz)}>
                     Delete
                   </button>
                 </ul>

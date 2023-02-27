@@ -16,7 +16,7 @@ const Quizzes = ({ quizzes, setQuizzes, questions }) => {
 
   return (
     <>
-      <div className="main-body flex-wrap">
+      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
         <h1>All Quizzes</h1>
           <ul className="d-flex justify-content-center flex-wrap ">
             {isNaN(quizzes) ? quizzes.map((quiz, index) => (

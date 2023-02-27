@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ShowQuiz = ({ quiz }) => {
   return (
     <>
-      <div className="d-flex justify-content-center flex-wrap ">
+      <div className="d-flex justify-content-center flex-wrap">
         <img
           src={quiz.image}
           alt="Alt text for quiz image"
