@@ -5,7 +5,7 @@ import NavBar from './home/NavBar'
 import Footer from './home/Footer'
 import Categories from './categories/Categories'
 import Leaderboard from './leaderboard/Leaderboard'
-import LogIn from './login/LogIn'
+import LogIn from './auth/LogIn'
 import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
@@ -19,6 +19,7 @@ import EditQuestions from './edit-a-quiz/EditQuestions'
 import EditAQuiz from './edit-a-quiz/EditAQuiz'
 import CategoryForm from './make-a-quiz/CategoryForm'
 import Loading from './loading/Loading'
+import Register from './auth/Register'
 
 const App = () => {
   const [categories, setCategories] = useState([])
@@ -147,7 +148,8 @@ const App = () => {
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
-          <Route path='/log-in' element={<LogIn />} />
+          <Route path='/login' element={<LogIn />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/result/:quizId' element={<ResultWrapper />} />
           <Route path='*' element={<h4>Page not found</h4>} />
