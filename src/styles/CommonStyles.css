@@ -11,3 +11,42 @@
 .card {
   display: block;
 }
+
+/* format for quiz card */
+.container {
+  /* height: 30vh;
+  width: 80vw; */
+  /* border: 2px solid black; */
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.container img {
+  height: 100%;
+  width: 100%;
+}
+
+title {
+  position: absolute;
+  top: 30px;
+  left: 0;
+}
+
+.content {
+  color: white;
+  background: rgba(0,0,0,0.8);
+  top: -100%;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  text-align: center; 
+  padding: 60px 20px;   
+  transition: all 0.5s; 
+}
+
+.container:hover .content {
+  top: 0; 
+}
