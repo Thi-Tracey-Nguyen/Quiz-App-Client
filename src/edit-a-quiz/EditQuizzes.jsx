@@ -99,28 +99,20 @@ const EditQuizzes = ({ quizzes }) => {
 
   return (
     <>
-      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
+      <div>
         <h1>Choose a Quiz to edit or delete</h1>
-        <ul className="d-flex justify-content-center flex-wrap ">
-          {quizzes.length === 0
-            ? "Loading..."
-            : quizzes.map((quiz, index) => (
-              <div
-                key={index}
-                className="card m-3"
-                style={{ width: "15rem" }}
-              >
-                <ShowQuiz quiz={quiz} />
-                <ul>
-                  <button className='btn-inside' onClick={() => setSelectedQuizEdit(quiz)}>
-                    Edit
-                  </button>
-                  <button className='btn-inside' onClick={() => setSelectedQuiz(quiz)}>
-                    Delete
-                  </button>
-                </ul>
-              </div>
-            ))}
+        <ul>
+          {quizzes.length === 0 ? "Loading..." : quizzes.map((quiz, index) => (
+            <div key={index} className='edit-container'>
+              <ShowQuiz quiz={quiz} />
+              <button className="edit" onClick={() => setSelectedQuizEdit(quiz)}>
+                Edit
+              </button>
+              <button className="delete" onClick={() => setSelectedQuiz(quiz)}>
+                Delete
+              </button>
+            </div>
+          ))}
         </ul>
         {selectedQuiz && (
           <DeleteConfirmation

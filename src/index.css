@@ -12,6 +12,20 @@ body {
   place-items: center;
 }
 
+.footer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(to top, #000000,#3e4545);
+}
+
+.footer a {
+  margin-top: 1rem;
+  color: #D86D18;
+}
+
 div {
   display: block;
   margin: auto;
@@ -53,16 +67,17 @@ a:hover {
   color: #535bf2;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1, h2 {
+  font-size: 8vw;
+  margin: 0.5rem;
+  text-align: center;
 }
 
 .title {
   color: white;
-  text-shadow: 0.2rem 0.2rem black;
+  text-shadow: 0.1rem 0.1rem black;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 6vw;
   text-align: center;
   margin: 1rem;
 }
@@ -77,11 +92,6 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-
-/* for edit & delete buttons when edit a quiz */
-.btn-inside {
-  margin: 0 0.25em 0.6em 0.25em;
 }
 
 button:hover {
@@ -100,8 +110,15 @@ button:hover {
 }
 
 /* format for quiz card */
+.card-container {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 
 .card {
+  /* width: 80vw; */
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -113,13 +130,16 @@ button:hover {
 .card img {
   height: 100%;
   width: 100%;
+  max-width: 30rem;
   border-radius: 0.5rem;
 }
 
 .info {
   width: 100%;
   height: 20%;
-  background: rgb(27, 27, 27, 0.85);
+  /* frosted glass effect */
+  background: rgba(225, 225, 225, 0.1);
+  backdrop-filter: blur(1rem);
   bottom: 0;
   left: 0;
   position: absolute;
@@ -127,25 +147,16 @@ button:hover {
 
 .info a {
   color: white;
-  text-shadow: 0.2rem 0.2rem black;
+  text-align: center;
+  font-size: 4vw;
+  text-shadow: 0.1rem 0.1rem black;
   visibility: hidden;
   opacity: 0; 
   transition: .5s;
 }
 
-.content {
-  color: white;
-  background: rgba(0,0,0,0.8);
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  text-align: center; 
-  padding: 60px 20px;   
-}
-
 .card:hover .info {
-  height: 40%; 
-  background: black; 
+  height: 45%; 
 }
 
 .card:hover a {
@@ -153,12 +164,50 @@ button:hover {
   opacity: 1;
 }
 
-.card:hover img {
-  transform: scale(1.1) rotate(-3deg);
-  transition: 0.5s;
+/* Container in edit-a-quiz */
+.edit-container {
+  position: relative;
 }
 
-/* responsive design */
+.edit-container button {
+  position: absolute;
+  color: white;
+  text-shadow: 0.1rem 0.1rem black;
+  background: rgba(225, 225, 225, 0.1);
+  border: 0.1rem solid orangered;
+  backdrop-filter: blur(1rem);
+}
 
-@media (min-width: 2000px) {
+.edit {
+  top: 2rem;
+  left: 2rem;
+}
+
+.delete {
+  top: 2rem;
+  right: 2rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  h1, h2 {
+    font-size: 40px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .info a {
+    font-size: 20px;
+  }
+
+  .card:hover .info {
+    height: 40%; 
+  }
 }

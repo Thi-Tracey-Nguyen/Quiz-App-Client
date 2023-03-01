@@ -15,23 +15,21 @@ const Quizzes = ({ quizzes, setQuizzes, questions }) => {
   }, [questions])
 
   return (
-    <>
-      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-        <h1>All Quizzes</h1>
-          <ul className="d-flex justify-content-center flex-wrap">
-            {isNaN(quizzes) ? quizzes.map((quiz, index) => (
-                <div key={index} data-testid='quiz' className="card m-3" style={{ width: "15rem" }} >
-                  <ShowQuiz quiz={quiz} />
-                </div>
-              )) : 'Loading...' 
-            }
-          </ul>
-        <RandomQuiz quizzes={quizzes} />
-        <div>
-          <ReturnToTop />
-        </div>
+    <div>
+      <h1>All Quizzes</h1>
+        <ul>
+          {isNaN(quizzes) ? quizzes.map((quiz, index) => (
+              <div key={index} data-testid='quiz' >
+                <ShowQuiz quiz={quiz} />
+              </div>
+            )) : 'Loading...' 
+          }
+        </ul>
+      <RandomQuiz quizzes={quizzes} />
+      <div>
+        <ReturnToTop />
       </div>
-    </>
+    </div>
   )
 }
 

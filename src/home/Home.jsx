@@ -9,19 +9,17 @@ const Home = ({ quizzes }) => {
   return (
     <>
       <div>
-        <div>
-          <img src={logo} alt="Logo" className="logo" />
-        </div>
-        <h2>Test your knowledge and have fun!</h2>
+        <img src={logo} alt="Logo" className="logo" />
+        <h2>Test your knowledge <br/> and have fun!</h2>
         <br />
       </div>
-      <ul> 
+      <div className='card-container'>
         {slicedQuizzes.length === 0 ? 'Loading...' : slicedQuizzes.map((quiz, index) => (              
-            <div key={index}>
-              <ShowQuiz quiz={quiz}/>
-            </div>
+          <div key={index}>
+            <ShowQuiz quiz={quiz}/>
+          </div>
         ))}
-      </ul>
+      </div>
     </>   
   )
 }
