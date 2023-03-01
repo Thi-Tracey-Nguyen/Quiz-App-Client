@@ -3,16 +3,44 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+body {
+  background: linear-gradient(to top, #D86D18,#FFFFFF);
+  width: 100vw;    
+  display: flex;
+  place-items: center;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+div {
+  display: block;
+  margin: auto;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* logo  */
+.logo {
+  height: 15vh;
+}
+
+/* logo on navbar */
+.logo-nav {
+  width: 3rem; 
+  height: 3rem;
+}
+.logo-nav:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+ul {
+  padding: 0;
+  margin: 2rem;
 }
 
 a {
@@ -20,21 +48,23 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.title {
+  color: white;
+  text-shadow: 0.2rem 0.2rem black;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 1rem;
 }
 
 button {
@@ -57,23 +87,6 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
 .return-to-top {
   position:fixed;
@@ -86,4 +99,66 @@ button:focus-visible {
   border: solid black 1px;
 }
 
-/* special card format for quiz */
+/* format for quiz card */
+
+.card {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-bottom: 2rem;
+  box-shadow: 5px 5px 20px black;
+  border: none;
+}
+
+.card img {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.info {
+  width: 100%;
+  height: 20%;
+  background: rgb(27, 27, 27, 0.85);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.info a {
+  color: white;
+  text-shadow: 0.2rem 0.2rem black;
+  visibility: hidden;
+  opacity: 0; 
+  transition: .5s;
+}
+
+.content {
+  color: white;
+  background: rgba(0,0,0,0.8);
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  text-align: center; 
+  padding: 60px 20px;   
+}
+
+.card:hover .info {
+  height: 40%; 
+  background: black; 
+}
+
+.card:hover a {
+  visibility: visible;
+  opacity: 1;
+}
+
+.card:hover img {
+  transform: scale(1.1) rotate(-3deg);
+  transition: 0.5s;
+}
+
+/* responsive design */
+
+@media (min-width: 2000px) {
+}

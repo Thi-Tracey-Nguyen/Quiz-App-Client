@@ -8,23 +8,21 @@ const Home = ({ quizzes }) => {
   
   return (
     <>
-    <div className='main-body flex-wrap'>
       <div>
-        <div className="d-flex justify-content-center">
-           <img src={logo} alt="Logo" width="200" height="200" />
+        <div>
+          <img src={logo} alt="Logo" className="logo" />
         </div>
         <h2>Test your knowledge and have fun!</h2>
         <br />
       </div>
-        <ul className='d-flex justify-content-center flex-wrap '> 
-          {slicedQuizzes.length === 0 ? 'Loading...' : slicedQuizzes.map((quiz, index) => (              
-              <div key={index} className="card m-3" style={{width: "15rem"}}>
-                <ShowQuiz quiz={quiz}/>
-              </div>
-          ))}
-        </ul>
-     </div>   
-    </>
+      <ul> 
+        {slicedQuizzes.length === 0 ? 'Loading...' : slicedQuizzes.map((quiz, index) => (              
+            <div key={index}>
+              <ShowQuiz quiz={quiz}/>
+            </div>
+        ))}
+      </ul>
+    </>   
   )
 }
 

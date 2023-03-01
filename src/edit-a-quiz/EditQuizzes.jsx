@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import ShowQuiz from "../categories/ShowQuiz"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
+import '../styles/CommonStyles.css'
 
 
 const EditQuizzes = ({ quizzes }) => {
