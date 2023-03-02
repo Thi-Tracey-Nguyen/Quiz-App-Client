@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import "../styles/CommonStyles.css";
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 
 const TakeAQuiz = ({ quiz, onChange }) => {
 
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
   const [answers, setAnswers] = useState([])
-  const [timeLeft, setTimeLeft] = useState(8)
+  const [timeLeft, setTimeLeft] = useState(20)
   const nav = useNavigate()
 
   // console.log(quiz.questions)
@@ -21,7 +21,7 @@ const TakeAQuiz = ({ quiz, onChange }) => {
       } else {
         if (index < quiz.questions.length - 1) {
           setAnswer('')
-          setTimeLeft(8)
+          setTimeLeft(20)
           handleClickNext()
         } else {
           setAnswer('')
@@ -34,7 +34,7 @@ const TakeAQuiz = ({ quiz, onChange }) => {
 
   //function to reset timer
   const restartTimer = () => {
-    setTimeLeft(8)
+    setTimeLeft(20)
   }
 
   // when a radio button is chosen, set the target value as the answer
@@ -101,41 +101,49 @@ const TakeAQuiz = ({ quiz, onChange }) => {
   }, [index]) // shuffle answers when index changes (for next question)
 
   return (
-    <>
-      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-        <h1 className="justify-content-center text-dark fw-bold"
-          style={{ width: "15rem", height: "5rem" }}>Timer: {timeLeft}</h1>
-        <h1 className="justify-content-center text-dark fw-bold">{quiz.title}</h1>
-        <h4 className="d-flex justify-content-center">{question.question}</h4>
+    <div className="main-body flex-wrap" style={{ height: "100vh" }}>
+      <h1 className="justify-content-center text-dark fw-bold"
+        style={{ width: "15rem", height: "5rem" }}>Timer: {timeLeft}</h1>
+      <h1 className="justify-content-center text-dark fw-bold">{quiz.title}</h1>
+      <h4 className="d-flex justify-content-center">{question.question}</h4>
 
-        <div>
-          {seededAnswers.map((seededAnswer, index) => (
-            <>
-              <input
-                type='radio'
-                name={answer}
-                value={seededAnswer}
-                onChange={handleChange}
-                key={index}
-                checked={answer === seededAnswer}
-              /> {seededAnswer} <br />
-            </>
-          ))}
-        </div>
-        <br/>
-        <div className="d-flex justify-content-between">
-        {index < quiz.questions.length - 1 ?
-          <button onClick={handleClickNext}> Next </button> :
-          <button onClick={handleSubmit}> Submit </button>
-        }
-
-        <button>
-          <Link to='/quizzes'> Quit </Link>
-        </button>
-        </div>
-        <p>{index + 1}/{quiz.questions.length}</p>        
+      <div className='question-container'>
+        {seededAnswers.map((seededAnswer, index) => (
+          <div index={index} className='question'>
+            <input
+              type='radio'
+              name={answer}
+              value={seededAnswer}
+              onChange={handleChange}
+              key={index}
+              checked={answer === seededAnswer}
+              className='radio'
+              id={seededAnswer}
+            /> 
+            <label htmlFor={seededAnswer} className='answer'>{seededAnswer}</label>
+          </div>
+        ))}
       </div>
-    </>
+      {/* <div className="question-container">
+        {seededAnswers.map((seededAnswer, index) => (
+            <div index={index} className='question'>
+              <button onClick={handleChange} value={seededAnswer}>{seededAnswer}</button>
+            </div>
+          ))}
+      </div> */}
+      <br/>
+      <div className="d-flex justify-content-between">
+      {index < quiz.questions.length - 1 ?
+        <button onClick={handleClickNext}> Next </button> :
+        <button onClick={handleSubmit}> Submit </button>
+      }
+
+      <button>
+        <Link to='/quizzes'> Quit </Link>
+      </button>
+      </div>
+      <p>{index + 1}/{quiz.questions.length}</p>        
+    </div>
   )
 }
 

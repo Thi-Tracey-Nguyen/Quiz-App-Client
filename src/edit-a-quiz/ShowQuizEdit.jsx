@@ -15,12 +15,14 @@ const ShowQuizEdit = ({ quiz, setSelectedQuizEdit, setSelectedQuiz }) => {
             ) : ` ${quiz.questions.length}`}
           </p>
         </Link>
-        <button className="edit" onClick={() => setSelectedQuizEdit(quiz)}>
-          Edit
-        </button>
-        <button className="delete" onClick={() => setSelectedQuiz(quiz)}>
-          Delete
-        </button>
+        <div className='edit-delete'>
+          <button className="edit" onClick={() => setSelectedQuizEdit(quiz)}>
+            Edit
+          </button>
+          <button className="delete" onClick={() => setSelectedQuiz(quiz)}>
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ const Home = ({ quizzes }) => {
       <div>
         <img src={logo} alt="Logo" className="logo" />
         <h2>Test your knowledge <br/> and have fun!</h2>
-        <br />
       </div>
       <div className='card-container'>
         {slicedQuizzes.length === 0 ? <h3>Loading...</h3> : slicedQuizzes.map((quiz, index) => (              
