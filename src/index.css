@@ -113,7 +113,9 @@ button:hover {
 /* format for quiz card */
 .card-container {
   width: 80vw;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20rem);
+  gap: 1rem;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -128,6 +130,7 @@ button:hover {
   margin: 1rem;
   box-shadow: 5px 5px 20px black;
   border: none;
+  border-radius: 0.5rem;
 }
 
 .card img {
@@ -140,6 +143,8 @@ button:hover {
 .info {
   width: 100%;
   height: 20%;
+  display: flex;
+  flex-direction: column;
   /* frosted glass effect */
   background: rgba(225, 225, 225, 0.1);
   backdrop-filter: blur(2.7rem);
@@ -162,6 +167,10 @@ button:hover {
   transition: .5s;
 }
 
+.info p {
+  margin-top: 4%;
+}
+
 .card:hover .info {
   height: 100%; 
   transition: 0.5s;
@@ -181,10 +190,9 @@ a.play {
   color: rgb(249,200,106);
   font-size: 1.2rem;
   position: relative;
-  top: 5rem;
-  left: 40%;
   border: 0.2rem solid rgb(249,200,106);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
+  margin: auto;
   border-radius: 0.5rem;
 }
 
@@ -205,14 +213,6 @@ div.info button {
   background: none;
 }
 
-button.delete {
-  left: 40%;
-}
-
-button.edit {
-  left: 10%;
-}
-
 button.delete:hover, button.edit:hover {
   transform: scale(1.2);
 }
@@ -222,6 +222,36 @@ button.delete:hover, button.edit:hover {
   position: relative;
 }
 
+/* styling for questions */
+div.question-container {
+  
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+div.question input {
+  display: none;
+}
+
+div.question label {
+  /* frosted glass effect */
+  background: rgba(96, 94, 94, 0.2);
+  backdrop-filter: blur(2.7rem);
+  -webkit-backdrop-filter: blur(2.7rem);
+  border: 0.1rem solid rgb(96, 94, 94);
+  border-radius: 1rem;
+  width: 25rem;
+  /* height: 4rem; */
+  padding: 1rem 0;
+  margin: 0.2rem;
+  text-align: center;
+}
+
+div.question input:checked ~ label {
+  background-color: rgb(231, 133, 97);
+}
 
 @media only screen and (min-width: 600px) {
   .card-container {
