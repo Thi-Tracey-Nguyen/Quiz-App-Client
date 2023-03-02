@@ -15,6 +15,7 @@ const ShowQuiz = ({ quiz }) => {
             ) : ` ${quiz.questions.length}`}
           </p>
         </Link>
+        <Link to={`/quizzes/${quiz._id}`} className='play'>PLAY</Link>
       </div>
     </div>
   );
