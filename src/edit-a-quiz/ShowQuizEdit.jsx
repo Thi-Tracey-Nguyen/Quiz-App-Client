@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ShowQuiz = ({ quiz }) => {
+const ShowQuizEdit = ({ quiz, setSelectedQuizEdit, setSelectedQuiz }) => {
   return (
     <div className="card">
       <img src={quiz.image} alt="Alt text for quiz image" />
@@ -15,8 +15,14 @@ const ShowQuiz = ({ quiz }) => {
             ) : ` ${quiz.questions.length}`}
           </p>
         </Link>
+        <button className="edit" onClick={() => setSelectedQuizEdit(quiz)}>
+          Edit
+        </button>
+        <button className="delete" onClick={() => setSelectedQuiz(quiz)}>
+          Delete
+        </button>
       </div>
     </div>
   );
 };
-export default ShowQuiz;
+export default ShowQuizEdit;

@@ -20,6 +20,7 @@ import EditAQuiz from './edit-a-quiz/EditAQuiz'
 import CategoryForm from './make-a-quiz/CategoryForm'
 import Loading from './loading/Loading'
 import Register from './auth/Register'
+import Test from './test/Test'
 
 const App = () => {
   const [categories, setCategories] = useState([])
@@ -152,6 +153,7 @@ const App = () => {
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/result/:quizId' element={<ResultWrapper />} />
+          <Route path='/test' element={<Test />} />
           <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
       <Footer />
