@@ -102,7 +102,7 @@ const EditQuizzes = ({ quizzes }) => {
       <div>
         <h1>Choose a Quiz to edit or delete</h1>
         <div className='card-container'>
-          {quizzes.length === 0 ? "Loading..." : quizzes.map((quiz, index) => (
+          {quizzes.length === 0 ? <h1>Loading...</h1> : quizzes.map((quiz, index) => (
             <div key={index}>
               <ShowQuizEdit 
                 quiz={quiz} 

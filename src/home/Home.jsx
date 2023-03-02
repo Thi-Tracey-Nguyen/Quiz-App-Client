@@ -14,7 +14,7 @@ const Home = ({ quizzes }) => {
         <br />
       </div>
       <div className='card-container'>
-        {slicedQuizzes.length === 0 ? 'Loading...' : slicedQuizzes.map((quiz, index) => (              
+        {slicedQuizzes.length === 0 ? <h3>Loading...</h3> : slicedQuizzes.map((quiz, index) => (              
           <div key={index}>
             <ShowQuiz quiz={quiz}/>
           </div>
