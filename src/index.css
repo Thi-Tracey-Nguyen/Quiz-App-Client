@@ -176,6 +176,21 @@ button:hover {
   opacity: 1;
 }
 
+a.play {
+  color: rgb(249,200,106);
+  font-size: 1.2rem;
+  position: relative;
+  top: 5rem;
+  left: 40%;
+  border: 0.2rem solid rgb(249,200,106);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+a.play:hover {
+  color: rgb(243, 80, 21);
+  border: 0.2rem solid rgb(243, 80, 21);
+}
 
 /* styling for edit & delete buttons in edit-a-quiz */
 div.info button {
