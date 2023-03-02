@@ -19,6 +19,7 @@ body {
   align-items: center;
   flex-direction: column;
   background: linear-gradient(to top, #000000,#3e4545);
+  margin-top: 2rem;
 }
 
 .footer a {
@@ -122,7 +123,7 @@ button:hover {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  margin-bottom: 2rem;
+  margin: 1rem;
   box-shadow: 5px 5px 20px black;
   border: none;
 }
@@ -130,7 +131,7 @@ button:hover {
 .card img {
   height: 100%;
   width: 100%;
-  max-width: 30rem;
+  max-width: 20rem;
   border-radius: 0.5rem;
 }
 
@@ -139,13 +140,16 @@ button:hover {
   height: 20%;
   /* frosted glass effect */
   background: rgba(225, 225, 225, 0.1);
-  backdrop-filter: blur(1rem);
+  backdrop-filter: blur(2.7rem);
   bottom: 0;
   left: 0;
   position: absolute;
+  transition: 0.5s;
 }
 
 .info a {
+  position: relative;
+  top: 10%;
   color: white;
   text-align: center;
   font-size: 4vw;
@@ -156,7 +160,8 @@ button:hover {
 }
 
 .card:hover .info {
-  height: 45%; 
+  height: 100%; 
+  transition: 0.5s;
 }
 
 .card:hover a {
@@ -164,29 +169,41 @@ button:hover {
   opacity: 1;
 }
 
+.card:hover button {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* styling for edit & delete buttons in edit-a-quiz */
+div.info button {
+  position: relative;
+  top: 30%;
+  border-style: none;
+  visibility: hidden;
+  opacity: 0; 
+  color: white;
+  text-shadow: 0.1rem 0.1rem black;
+  background: none;
+}
+
+button.delete {
+  left: 40%;
+}
+
+button.edit {
+  left: 10%;
+}
+
+button.delete:hover, button.edit:hover {
+  transform: scale(1.2);
+}
+
 /* Container in edit-a-quiz */
 .edit-container {
   position: relative;
 }
 
-.edit-container button {
-  position: absolute;
-  color: white;
-  text-shadow: 0.1rem 0.1rem black;
-  background: rgba(225, 225, 225, 0.1);
-  border: 0.1rem solid orangered;
-  backdrop-filter: blur(1rem);
-}
-
-.edit {
-  top: 2rem;
-  left: 2rem;
-}
-
-.delete {
-  top: 2rem;
-  right: 2rem;
-}
 
 @media only screen and (min-width: 600px) {
   .card-container {
@@ -200,14 +217,11 @@ button:hover {
   }
 
   .title {
-    font-size: 40px;
+    font-size: 30px;
   }
 
   .info a {
-    font-size: 20px;
+    font-size: 15px;
   }
 
-  .card:hover .info {
-    height: 40%; 
-  }
 }

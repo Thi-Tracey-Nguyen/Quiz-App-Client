@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import ShowQuiz from "../categories/ShowQuiz"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import '../styles/CommonStyles.css'
+import ShowQuizEdit from "./ShowQuizEdit"
 
 
 const EditQuizzes = ({ quizzes }) => {
@@ -101,19 +101,17 @@ const EditQuizzes = ({ quizzes }) => {
     <>
       <div>
         <h1>Choose a Quiz to edit or delete</h1>
-        <ul>
+        <div className='card-container'>
           {quizzes.length === 0 ? "Loading..." : quizzes.map((quiz, index) => (
-            <div key={index} className='edit-container'>
-              <ShowQuiz quiz={quiz} />
-              <button className="edit" onClick={() => setSelectedQuizEdit(quiz)}>
-                Edit
-              </button>
-              <button className="delete" onClick={() => setSelectedQuiz(quiz)}>
-                Delete
-              </button>
+            <div key={index}>
+              <ShowQuizEdit 
+                quiz={quiz} 
+                setSelectedQuizEdit={setSelectedQuizEdit} 
+                setSelectedQuiz={setSelectedQuiz}
+              />
             </div>
           ))}
-        </ul>
+        </div>
         {selectedQuiz && (
           <DeleteConfirmation
             show={showPopup}

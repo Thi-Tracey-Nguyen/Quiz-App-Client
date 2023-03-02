@@ -17,14 +17,14 @@ const Quizzes = ({ quizzes, setQuizzes, questions }) => {
   return (
     <div>
       <h1>All Quizzes</h1>
-        <ul>
+        <div className='card-container'>
           {isNaN(quizzes) ? quizzes.map((quiz, index) => (
               <div key={index} data-testid='quiz' >
                 <ShowQuiz quiz={quiz} />
               </div>
             )) : 'Loading...' 
           }
-        </ul>
+        </div>
       <RandomQuiz quizzes={quizzes} />
       <div>
         <ReturnToTop />
