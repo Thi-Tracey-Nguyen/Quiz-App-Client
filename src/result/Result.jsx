@@ -49,22 +49,10 @@ const Result = ({ answers, quiz }) => {
     }
   }, [])
 
-  return (
-    <>
-      <div>
-        <HighScorePopup
-          show={showPopup}
-          value={false}
-          onHide={(e) => setShowPopup(e.target.value)}
-        />
-      </div>
-      <div className='main-body'>
-        <h1>Result!</h1>
-        <h2>{points} / {quiz.questions.length}</h2>
-        <br />
-        <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
-        <h4>Review Answers</h4>
-        {quiz.questions.map((question, index) => 
+  //function renders answers to used in carousel
+  function reviewAnswer() {
+    return (
+      quiz.questions.map((question, index) => 
         (
           <>
             <div className="card" style={{ width: '18rem' }} key={index}>
@@ -81,7 +69,37 @@ const Result = ({ answers, quiz }) => {
             </div>
             <br />
           </>
-        ))}
+        ))
+    )
+  }
+
+  //function renders buttons to used in carousel
+  // function renderButtons() {
+  //   return (
+  //     quiz.questions.map((question, index) => {
+  //       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+  //     })
+  //   )
+  // }
+
+  return (
+    <>
+      <div>
+        <HighScorePopup
+          show={showPopup}
+          value={false}
+          onHide={(e) => setShowPopup(e.target.value)}
+        />
+      </div>
+      <div>
+        <h1>Result!</h1>
+        <h2>Correct Answer(s): {points} / {quiz.questions.length}</h2>
+        <br />
+        <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
+        <h4 className='text-center'>Review Answers</h4>
+        <div className='d-flex flex-column align-items-center'>
+          {reviewAnswer()}
+        </div>
         <br />
         <button className="d-flex justify-content-between fw-normal">
             <Link to={'/quizzes'}>Take another quiz</Link>
