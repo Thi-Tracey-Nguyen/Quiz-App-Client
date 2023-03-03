@@ -30,6 +30,7 @@ function HighScorePopup(props) {
 
 const Result = ({ answers, quiz }) => {
   const [showPopup, setShowPopup] = useState(false)
+  const [slideIndex, setSlideIndex] = useState(0)
 
   let points = 0
 
@@ -49,13 +50,28 @@ const Result = ({ answers, quiz }) => {
     }
   }, [])
 
+  function handleClickNext() {
+    if (slideIndex !== quiz.questions.length - 1) {
+      setSlideIndex(slideIndex+1)
+    } else if (slideIndex === quiz.questions.length - 1) {
+      setSlideIndex(0)
+    } 
+  }
+
+  function handleClickPrev() {
+    if (slideIndex !== 0) {
+      setSlideIndex(slideIndex-1)
+    } else if (slideIndex === 0) {
+      setSlideIndex(slideIndex+1)
+    } 
+  }
+
   //function renders answers to used in carousel
   function reviewAnswer() {
     return (
       quiz.questions.map((question, index) => 
-        (
-          <>
-            <div className="card" style={{ width: '18rem' }} key={index}>
+        <div className={slideIndex === index ? 'slide active' : 'slide'}>
+          <div className="card" style={{ width: '18rem', height: '18rem' }} key={index}>
             <div className="card-header">
               {question.question}
             </div>
@@ -66,21 +82,12 @@ const Result = ({ answers, quiz }) => {
                 <li className="list-group-item" key={index2}>{ incorrectAnswer }</li>
               )}
             </ul>
-            </div>
-            <br />
-          </>
-        ))
-    )
+          </div>
+        </div>
+      ))
   }
 
-  //function renders buttons to used in carousel
-  // function renderButtons() {
-  //   return (
-  //     quiz.questions.map((question, index) => {
-  //       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-  //     })
-  //   )
-  // }
+  console.log(slideIndex)
 
   return (
     <>
@@ -92,15 +99,17 @@ const Result = ({ answers, quiz }) => {
         />
       </div>
       <div>
-        <h1>Result!</h1>
-        <h2>{points === 1 ? 'Correct Answer:' : 'Correct Answers:'}</h2>
-        <h2>{points} / {quiz.questions.length}</h2>
-        <br />
+        <h2>{points === 1 ? 'Your Point:' : 'Your Points:'}</h2>
+        <h3>{points} / {quiz.questions.length}</h3>
         <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
-        <h4 className='text-center'>Review Answers</h4>
-        <div className='d-flex flex-column align-items-center'>
-          {reviewAnswer()}
-        </div>
+        <div className='carousel'>
+          <div className='container-slider'>
+            {reviewAnswer()}
+            <button className="btn-slide slider-prev" onClick={handleClickPrev}>&#8656;</button>
+            <button className="btn-slide slider-next" onClick={handleClickNext}>&#8658;</button>
+          </div>
+        </div >
+
         <br />
         <div className='random-wrapper'>
           <button className='another-quiz'>
