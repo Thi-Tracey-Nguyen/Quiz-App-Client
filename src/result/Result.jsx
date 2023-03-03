@@ -93,7 +93,8 @@ const Result = ({ answers, quiz }) => {
       </div>
       <div>
         <h1>Result!</h1>
-        <h2>Correct Answer(s): {points} / {quiz.questions.length}</h2>
+        <h2>{points === 1 ? 'Correct Answer:' : 'Correct Answers:'}</h2>
+        <h2>{points} / {quiz.questions.length}</h2>
         <br />
         <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
         <h4 className='text-center'>Review Answers</h4>
@@ -101,9 +102,11 @@ const Result = ({ answers, quiz }) => {
           {reviewAnswer()}
         </div>
         <br />
-        <button className="d-flex justify-content-between fw-normal">
-            <Link to={'/quizzes'}>Take another quiz</Link>
-        </button>
+        <div className='random-wrapper'>
+          <button className='another-quiz'>
+              <Link to={'/quizzes'}>Take another quiz</Link>
+          </button>
+        </div>
         <br />
       </div>
       <div>
