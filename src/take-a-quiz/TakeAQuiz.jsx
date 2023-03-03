@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "../styles/CommonStyles.css";
 import { Link, useNavigate} from 'react-router-dom'
 
-const TakeAQuiz = ({ quiz, onChange }) => {
+const TakeAQuiz = ({ quiz, onChange }) => { 
 
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
@@ -101,46 +101,38 @@ const TakeAQuiz = ({ quiz, onChange }) => {
   }, [index]) // shuffle answers when index changes (for next question)
 
   return (
-    <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-      <h1 className="justify-content-center text-dark fw-bold"
-        style={{ width: "15rem", height: "5rem" }}>Timer: {timeLeft}</h1>
-      <h1 className="justify-content-center text-dark fw-bold">{quiz.title}</h1>
-      <h4 className="d-flex justify-content-center">{question.question}</h4>
-
-      <div className='question-container'>
-        {seededAnswers.map((seededAnswer, index) => (
-          <div index={index} className='question'>
-            <input
-              type='radio'
-              name={answer}
-              value={seededAnswer}
-              onChange={handleChange}
-              key={index}
-              checked={answer === seededAnswer}
-              className='radio'
-              id={seededAnswer}
-            /> 
-            <label htmlFor={seededAnswer} className='answer'>{seededAnswer}</label>
+    <div className='main-body'>
+      <h1>Timer: {timeLeft}</h1>
+      <h1>{quiz.title}</h1>
+      <div className='wrapper'>
+        <h4 className="question">{question.question}</h4>
+        <div className='question-inner'>
+            {seededAnswers.map((seededAnswer, index) => (
+              <div index={index} className='question'>
+                <input
+                  type='radio'
+                  name={answer}
+                  value={seededAnswer}
+                  onChange={handleChange}
+                  key={index}
+                  checked={answer === seededAnswer}
+                  className='radio'
+                  id={seededAnswer}
+                /> 
+                <label htmlFor={seededAnswer}>{seededAnswer}</label>
+              </div>
+            ))}
           </div>
-        ))}
+          
       </div>
-      {/* <div className="question-container">
-        {seededAnswers.map((seededAnswer, index) => (
-            <div index={index} className='question'>
-              <button onClick={handleChange} value={seededAnswer}>{seededAnswer}</button>
-            </div>
-          ))}
-      </div> */}
-      <br/>
-      <div className="d-flex justify-content-between">
-      {index < quiz.questions.length - 1 ?
-        <button onClick={handleClickNext}> Next </button> :
-        <button onClick={handleSubmit}> Submit </button>
+      {index < quiz.questions.length - 1 ? 
+          <button className='next' onClick={handleClickNext}>&#10132;</button> : ''
       }
-
-      <button>
-        <Link to='/quizzes'> Quit </Link>
-      </button>
+      <div className="d-flex justify-content-between">
+        <button>
+          <Link to='/quizzes'> Quit </Link>
+        </button>
+        {index < quiz.questions.length - 1 ? '' : <button onClick={handleSubmit}> Submit </button>}
       </div>
       <p>{index + 1}/{quiz.questions.length}</p>        
     </div>

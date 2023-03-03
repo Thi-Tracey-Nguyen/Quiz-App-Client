@@ -1,11 +1,12 @@
-/* .main-body {
+.main-body {
     background: linear-gradient(to top, #D86D18,#FFFFFF);
     display: flex;
     flex-direction: column;
     /*justify-content: center;*/
     align-items: center;
-    /*height: 100vh;*/
+    height: 100vh;
     width: 100vw;    
+
   }
 
 .card {
