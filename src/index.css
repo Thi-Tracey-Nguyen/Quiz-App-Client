@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .footer {
@@ -37,6 +38,33 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* radom button */
+div.random-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;
+}
+
+div.random-wrapper > p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+button.random {
+  /* frosted glass effect */
+  background: rgba(176, 175, 175, 0.6);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+  box-shadow: 0.1rem 0.1rem 0.2rem black;
+}
+
+button.random a {
+  color: rgb(255, 254, 254);
+  text-shadow: 0.1rem 0.1rem 0.1rem black;
 }
 
 /* logo  */
@@ -69,12 +97,20 @@ a:hover {
   color: #535bf2;
 }
 
-h1, h2 {
-  font-size: 8vw;
-  margin: 0.5rem;
+h1, h2, h3, p {
+  margin-bottom: 2rem;
   text-align: center;
 }
 
+h1 {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 2.5rem;
+}
 .title {
   color: white;
   text-shadow: 0.1rem 0.1rem black;
@@ -93,7 +129,7 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: 0.25s;
 }
 
 button:hover {
@@ -111,6 +147,31 @@ button:hover {
   border: solid black 1px;
 }
 
+/* styling for categories page */
+a.category {
+  font-weight: bold; 
+  font-size: 1.5rem;
+  color: white;
+}
+
+div.cat-card {
+  background: rgba(85, 85, 85, 0.6);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0.1rem 0.1rem 0.3rem black;
+}
+
+div.cat-card:hover {
+  background: rgba(226, 75, 10, 0.6);
+  backdrop-filter: blur(1rem);
+}
+
 /* format for quiz card */
 .card-container {
   width: 80vw;
@@ -119,8 +180,6 @@ button:hover {
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
 }
 
 .card {
@@ -322,9 +381,23 @@ button.next:hover {
 
   button.next {
     position: absolute;
-    right: 15vw; 
-    top: 55vh;
+    right: 25vw; 
+    top: 57vh;
   }
+}
+
+/* styling for result page */
+button.another-quiz {
+  background: rgba(176, 175, 175, 0.6);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+  box-shadow: 0.1rem 0.1rem 0.2rem black;
+  margin: auto;
+}
+
+button.another-quiz a {
+  color: rgb(255, 254, 254);
+  text-shadow: 0.1rem 0.1rem 0.1rem black;
 }
 
 @media only screen and (min-width: 800px) {

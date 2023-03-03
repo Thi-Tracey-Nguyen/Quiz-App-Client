@@ -15,19 +15,19 @@ const RandomCat = ({ categories }) => {
 
   return (
     <>
-    <div className='flex-wrap'>
-      { category ? (
-      <>
-        <p className = 'd-flex justify-content-center text-dark fw-bold'>Can't choose?</p>
-        <button>
-          <Link to={`/categories/${category.name}` } className = 'd-flex justify-content-center fw-normal' >
-            Random Category
-          </Link>
-        </button>
-      </>
-      ) : '' 
-    }
-    </div>
+      <div className='random-wrapper'>
+        { category ? (
+        <>
+          <p>Can't choose?</p>
+          <button className='random'>
+            <Link to={`/categories/${category.name}`} >
+              Random Category
+            </Link>
+          </button>
+        </>
+        ) : '' 
+      }
+      </div>
     </>
   )
 }
