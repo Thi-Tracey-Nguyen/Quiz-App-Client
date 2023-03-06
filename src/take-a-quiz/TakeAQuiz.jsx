@@ -14,23 +14,23 @@ const TakeAQuiz = ({ quiz, onChange }) => {
   const question = quiz.questions[index]
 
   // countdown timer
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (timeLeft > 0) {
-         setTimeLeft(timeLeft -1)
-      } else {
-        if (index < quiz.questions.length - 1) {
-          setAnswer('')
-          setTimeLeft(20)
-          handleClickNext()
-        } else {
-          setAnswer('')
-          handleSubmit()
-        }
-      }
-    }, 1000)
-    return () => clearInterval(timer)
-  })
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     if (timeLeft > 0) {
+  //        setTimeLeft(timeLeft -1)
+  //     } else {
+  //       if (index < quiz.questions.length - 1) {
+  //         setAnswer('')
+  //         setTimeLeft(20)
+  //         handleClickNext()
+  //       } else {
+  //         setAnswer('')
+  //         handleSubmit()
+  //       }
+  //     }
+  //   }, 1000)
+  //   return () => clearInterval(timer)
+  // })
 
   //function to reset timer
   const restartTimer = () => {
@@ -102,38 +102,39 @@ const TakeAQuiz = ({ quiz, onChange }) => {
 
   return (
     <div className='main-body'>
-      <h1>Timer: {timeLeft}</h1>
       <h1>{quiz.title}</h1>
-      <div className='wrapper'>
-        <h4 className="question">{question.question}</h4>
-        <div className='question-inner'>
-            {seededAnswers.map((seededAnswer, index) => (
-              <div index={index} className='question'>
-                <input
-                  type='radio'
-                  name={answer}
-                  value={seededAnswer}
-                  onChange={handleChange}
-                  key={index}
-                  checked={answer === seededAnswer}
-                  className='radio'
-                  id={seededAnswer}
-                /> 
-                <label htmlFor={seededAnswer}>{seededAnswer}</label>
-              </div>
-            ))}
-          </div>
-      </div>
-      {index < quiz.questions.length - 1 ? 
+      <h1>Timer: {timeLeft}</h1>
+      <div className='container'>
+        <div className='wrapper'>
+          <h4 className="question">{question.question}</h4>
+          <div className='question-inner'>
+              {seededAnswers.map((seededAnswer, index) => (
+                <div index={index} className='question'>
+                  <input
+                    type='radio'
+                    name={answer}
+                    value={seededAnswer}
+                    onChange={handleChange}
+                    key={index}
+                    checked={answer === seededAnswer}
+                    className='radio'
+                    id={seededAnswer}
+                  /> 
+                  <label htmlFor={seededAnswer}>{seededAnswer}</label>
+                </div>
+              ))}
+            </div>
+            <p>{index + 1}/{quiz.questions.length}</p> 
+        </div>
+        {index < quiz.questions.length - 1 ? 
           <button className='next' onClick={handleClickNext}>&#10132;</button> : ''
-      }
-      <div className="quit">
-        <button>
-          <Link to='/quizzes'> Quit </Link>
-        </button>
-        {index < quiz.questions.length - 1 ? '' : <button onClick={handleSubmit}> Submit </button>}
+        }
       </div>
-      <p>{index + 1}/{quiz.questions.length}</p>        
+      
+      <div className="links">
+        <Link to='/quizzes' className='quit'> Quit </Link>
+        {index < quiz.questions.length - 1 ? '' : <button className="submit" onClick={handleSubmit}> Submit </button>}
+      </div>       
     </div>
   )
 }
