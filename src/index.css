@@ -180,6 +180,7 @@ div.cat-card:hover {
   gap: 1rem;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .card {
@@ -217,7 +218,6 @@ div.cat-card:hover {
 
 .info a {
   position: relative;
-  top: 10%;
   color: white;
   text-align: center;
   font-size: 4vw;
@@ -234,6 +234,7 @@ div.cat-card:hover {
 .card:hover .info {
   height: 100%; 
   transition: 0.5s;
+  padding: 2rem 0;
 }
 
 .card:hover a {
@@ -346,6 +347,7 @@ button.next {
   border-radius: 2rem;
   color: rgb(241, 237, 236);
   box-shadow: 1px 1px 5px black;
+  margin: 1rem;
 }
 
 button.next:hover {
@@ -440,6 +442,10 @@ button.another-quiz a {
     position: absolute;
     right: 25vw; 
     top: 57vh;
+  }
+
+  button.quit {
+    margin: 2rem;
   }
 
   .slider-prev {
