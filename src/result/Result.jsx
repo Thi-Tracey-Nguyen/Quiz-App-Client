@@ -69,22 +69,25 @@ const Result = ({ answers, quiz }) => {
   //function renders answers to used in carousel
   function reviewAnswer() {
     return (
-      quiz.questions.map((question, index) => 
-        <div className={slideIndex === index ? 'slide active' : 'slide'}>
-          <div className="card" style={{ width: '18rem', height: '18rem' }} key={index}>
-            <div className="card-header">
-              {question.question}
+      <div className="container-slider">
+        {quiz.questions.map((question, index) => 
+          <div className={slideIndex === index ? 'slide active' : 'slide'}>
+            <div className="card-result" key={index}>
+              <p className='card-header'>
+                {question.question}
+              </p>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item bg-success">{ question.correctAnswer }</li>
+                {question.incorrectAnswers.map((incorrectAnswer, index2) => 
+                  incorrectAnswer === answers[index] ? <li className="list-group-item bg-danger" key={index2}> {incorrectAnswer} </li> :
+                  <li className="list-group-item" key={index2}>{ incorrectAnswer }</li>
+                )}
+              </ul>
             </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item bg-success">{ question.correctAnswer }</li>
-              {question.incorrectAnswers.map((incorrectAnswer, index2) => 
-                incorrectAnswer === answers[index] ? <li className="list-group-item bg-danger" key={index2}> {incorrectAnswer} </li> :
-                <li className="list-group-item" key={index2}>{ incorrectAnswer }</li>
-              )}
-            </ul>
           </div>
-        </div>
-      ))
+        )}
+      </div>
+    )
   }
 
   console.log(slideIndex)
@@ -102,12 +105,10 @@ const Result = ({ answers, quiz }) => {
         <h2>{points === 1 ? 'Your Point:' : 'Your Points:'}</h2>
         <h3>{points} / {quiz.questions.length}</h3>
         <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
-        <div className='carousel'>
-          <div className='container-slider'>
-            {reviewAnswer()}
-            <button className="btn-slide slider-prev" onClick={handleClickPrev}>&#8656;</button>
-            <button className="btn-slide slider-next" onClick={handleClickNext}>&#8658;</button>
-          </div>
+        <div className='container-result'>
+          <button className="btn-slide slider-prev" onClick={handleClickPrev}>&#8656;</button>
+          {reviewAnswer()}
+          <button className="btn-slide slider-next" onClick={handleClickNext}>&#8658;</button>
         </div >
 
         <br />
