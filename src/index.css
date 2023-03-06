@@ -310,7 +310,6 @@ h4.question {
 div.container {
   background: rgb(236, 232, 230);
   width: 80vw;
-  height: 50vh;
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -420,19 +419,50 @@ button.another-quiz a {
 /* carousel styling */
 .container-slider {
   height: 40vh;
-  width: 80vw;
-  position: relative;
-  overflow: hidden;
+  width: 80%;
+  background: rgb(236, 232, 230);
+  border-radius: 2rem;
+  box-shadow: 1px 1px 5px black;
+  display: flex;
+  margin: 0;
+}
+
+.card-result {
+  width: 100%;
+  box-sizing: border-box;
+  /* background: blue; */
+  font-size: 3vw;
+  height: 100%;
+}
+
+div.container-result {
   margin-top: 2rem;
+  width:100%;
+  max-width: 500px;
+  height: 60%;
+  max-height: 500px;
+  /* background: teal; */
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+p.card-header {
+  margin: 0;
+  border-style: none none solid none;
+  border-width: 0.2rem;
+  padding-bottom: 1rem;
+  text-align: center;
 }
 
 .slide {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity ease-in-out 0.4s;
+  width: 70%;
 }
 
 .active {
@@ -444,25 +474,27 @@ button.another-quiz a {
   background: rgba(255, 255, 255, 0.995);
   backdrop-filter: blur(1rem);
   border: 1px solid rgba(34, 34, 34, 0.287);
-  position: absolute;
   cursor: pointer;
+  height: 2%;
 }
 
 .slider-prev {
   left: 0%;
   top: 80%;
-  transform: translateY(-50%);
 }
 
 .slider-next {
   right: 0%;
   top: 80%;
-  transform: translateY(-50%);
 }
 
 @media only screen and (min-width: 450px) {
   .cat-card-container {
     width: 70vw;
+  }
+
+  .card-result {
+    font-size: 1rem;
   }
 
   .cat-card {
@@ -526,13 +558,11 @@ button.another-quiz a {
   .slider-prev {
     left: 30%;
     top: 50%;
-    transform: translateY(-50%);
   }
   
   .slider-next {
     right: 30%;
     top: 50%;
-    transform: translateY(-50%);
   }
 }
 
