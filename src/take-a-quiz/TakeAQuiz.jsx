@@ -123,12 +123,11 @@ const TakeAQuiz = ({ quiz, onChange }) => {
               </div>
             ))}
           </div>
-          
       </div>
       {index < quiz.questions.length - 1 ? 
           <button className='next' onClick={handleClickNext}>&#10132;</button> : ''
       }
-      <div className="d-flex justify-content-between">
+      <div className="quit">
         <button>
           <Link to='/quizzes'> Quit </Link>
         </button>
