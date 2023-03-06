@@ -7,10 +7,9 @@ import '../styles/CommonStyles.css'
 const Categories = ({ categories }) => {
 
   return (
-    <>
-    <div className='main-body flex-wrap' style = {{height: '100vh'}}>
+    <div className='main-body'>
       <h1>Categories</h1>
-      <div className='card-container'>
+      <div className='cat-card-container'>
         {categories.length === 0 ? 'Loading...' : categories.map((category, index) => (
           <div key={index} className="cat-card">
             <Link to={`/categories/${category.name}`} class='category'>{category.name}</Link>
@@ -19,9 +18,7 @@ const Categories = ({ categories }) => {
       </div>
       <RandomCat categories={categories}/>      
       <ReturnToTop />
-      
     </div>    
-    </>
   )
 }
 

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ShowQuiz from './ShowQuiz'
-import '../styles/CommonStyles.css'
 
 const CategoryQuizzes = ({ quizzes, categories }) => {
 
@@ -17,7 +16,7 @@ const CategoryQuizzes = ({ quizzes, categories }) => {
 	const quizzesByCat = quizzes.filter(quiz => quiz.category === cat._id)
 
 	return (
-		<div className='main-body'>
+		<div className='main-body-centered'>
 			<h1>{categoryNameConverted} category</h1>
 			<div className='card-container'>
 				{quizzesByCat.map((quizByCat, index) => (
