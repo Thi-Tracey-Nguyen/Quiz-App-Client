@@ -194,7 +194,7 @@ div.cat-card:hover {
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  /* margin-bottom: 1rem; */
+  margin-bottom: 1rem;
 }
 
 .card {
@@ -297,7 +297,7 @@ button.delete:hover, button.edit:hover {
   position: relative;
 }
 
-/* styling for questions */
+/* styling for questions in take-a-quiz */
 h4.question {
   margin: 0;
   border-style: none none solid none;
@@ -318,11 +318,11 @@ div.container {
 }
 
 div.question-container {
-  width: 80%;
+  width: 0%;
   display: flex;
 }
 
-div.question-wrapper {
+div.wrapper {
   width: 100%;
 }
 
@@ -527,10 +527,14 @@ p.card-header {
   }
 
   div.container {
-    width: 70%;
-    max-width: 500px;
+    width: 80%;
+    max-width: 600px;
     height: 60%;
     max-height: 500px;
+  }
+
+  div.wrapper {
+    width: 80%;
   }
 
   .cat-card-container {
@@ -550,7 +554,7 @@ p.card-header {
 
   button.next {
     position: absolute;
-    right: 0%; 
+    right: 2%; 
     top: 50%;
   }
 
