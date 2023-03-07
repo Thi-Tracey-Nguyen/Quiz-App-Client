@@ -5,6 +5,15 @@ Version 2 deployed site: [Version 2](https://mern-quiz-app-v2.netlify.app/).
 
 Link to the group project: [Version 1](https://github.com/MERN-Quiz-App/Quiz-App-Client).
 
+# Improvements
+1. Better implement of CSS to create a more aesthetically pleasing appearance, including:
+   * Card display with animation for each quiz in Home and All Quizzes page
+   * Card display and 'next' button for each question in Taking A Quiz page
+   * Question reviews are displayed as carousel in Result page
+   
+2. (Work in progress) Implementation of authentication (register and login)
+
+
 ## Screenshots
 
 Quiz Card  
@@ -20,10 +29,3 @@ Result page with carousel
 ![Screen Shot 2023-03-07 at 11 51 56 am](https://user-images.githubusercontent.com/103707253/223290742-aa412351-2623-4993-992e-7d1d97d68067.png)
 
 
-# Improvements
-1. Better implement of CSS to create a more aesthetically pleasing appearance, including:
-   * Card display with animation for each quiz in Home and All Quizzes page
-   * Card display and 'next' button for each question in Taking A Quiz page
-   * Question reviews are displayed as carousel in Result page
-   
-2. (Work in progress) Implementation of authentication (register and login)
