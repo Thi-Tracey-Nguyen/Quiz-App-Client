@@ -13,7 +13,7 @@ const TakeAQuiz = ({ quiz, onChange }) => {
   // console.log(quiz.questions)
   const question = quiz.questions[index]
 
-  countdown timer
+  // countdown timer
   useEffect(() => {
     const timer = setInterval(() => {
       if (timeLeft > 0) {
