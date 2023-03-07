@@ -13,24 +13,24 @@ const TakeAQuiz = ({ quiz, onChange }) => {
   // console.log(quiz.questions)
   const question = quiz.questions[index]
 
-  // countdown timer
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     if (timeLeft > 0) {
-  //        setTimeLeft(timeLeft -1)
-  //     } else {
-  //       if (index < quiz.questions.length - 1) {
-  //         setAnswer('')
-  //         setTimeLeft(20)
-  //         handleClickNext()
-  //       } else {
-  //         setAnswer('')
-  //         handleSubmit()
-  //       }
-  //     }
-  //   }, 1000)
-  //   return () => clearInterval(timer)
-  // })
+  countdown timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (timeLeft > 0) {
+         setTimeLeft(timeLeft -1)
+      } else {
+        if (index < quiz.questions.length - 1) {
+          setAnswer('')
+          setTimeLeft(20)
+          handleClickNext()
+        } else {
+          setAnswer('')
+          handleSubmit()
+        }
+      }
+    }, 1000)
+    return () => clearInterval(timer)
+  })
 
   //function to reset timer
   const restartTimer = () => {
