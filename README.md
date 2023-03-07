@@ -1,5 +1,5 @@
 # Overview
-This is a version 2 of a group project which I was a part of during my study at Coder Academy.  
+This app is an updated version of a group project which I was a part of during my study at Coder Academy.  
 
 Version 2 deployed site: [Version 2](https://mern-quiz-app-v2.netlify.app/). 
 
