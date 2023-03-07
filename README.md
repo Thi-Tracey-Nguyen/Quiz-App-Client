@@ -14,7 +14,7 @@ Link to the group project: [Version 1](https://github.com/MERN-Quiz-App/Quiz-App
 2. (Work in progress) Implementation of authentication (register and login)
 
 
-## Screenshots
+# Screenshots
 
 Quiz Card  
 ![Quiz card](https://user-images.githubusercontent.com/103707253/223289670-8e12cd2a-1c9b-42a2-aaec-9bb067596aeb.png)
