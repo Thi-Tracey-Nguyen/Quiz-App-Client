@@ -123,7 +123,7 @@ const EditAQuiz = ({ categories }) => {
             <Link to={"/add-a-category"}>Add a new Category</Link>
             </p>
             <br />
-            <div className="d-flex justify-content-between">
+            <div className="edit-quiz-button">
               <button className='random'>
                 <Link to="/quizzes">
                   Quit

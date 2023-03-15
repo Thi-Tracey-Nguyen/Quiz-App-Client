@@ -15,7 +15,7 @@ const Quizzes = ({ quizzes, setQuizzes, questions }) => {
   }, [questions])
 
   return (
-    <div>
+    <div className='home'>
       <h1>All Quizzes</h1>
         <div className='card-container'>
           {isNaN(quizzes) ? quizzes.map((quiz, index) => (
