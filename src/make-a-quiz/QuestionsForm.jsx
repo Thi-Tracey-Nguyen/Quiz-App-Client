@@ -99,80 +99,91 @@ const QuestionsForm = ({ questions, setQuestions }) => {
 
   return (
     <>
-      <div className='main-body flex-wrap' style={{ height: '100vh' }}>
+      <div className='home'>
         <h2>Add questions to your new Quiz</h2>
         <p>
           You can always quit and do this later from the Edit a Quiz page, your
           quiz has been saved.
         </p>
-        <form onSubmit={getParams} className='d-flex flex-column flex-wrap' style={{width:'400px'}}>
-          <div className='question-form d-flex flex-column'>
-            <label>Question:</label>
-            <input
-              type='text'
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              placeholder='Type question here..'
-              aria-label='Type Question Here'
-            />
-          </div>
-          <div className='correct-answer-form  d-flex flex-column'>
-            <label>Correct answer:</label>
-            <input
-              type='text'
-              value={correctAnswer}
-              onChange={(e) => setCorrectAnswer(e.target.value)}
-              placeholder='Correct answer is..'
-              aria-label='Type Question Here'
-            />
-          </div>
-          <div className='incorrect-answers-form d-flex flex-column'>
-            <label>Incorrect answers:</label>
-            <input
-              type='text'
-              value={incorrectAns1}
-              onChange={(e) => setIncorrectAns1(e.target.value)}
-              placeholder='Incorrect answer 1'
-              aria-label='Incorrect Answer 1'
-            />
-
-            <input
-              type='text'
-              value={incorrectAns2}
-              onChange={(e) => setIncorrectAns2(e.target.value)}
-              placeholder='Incorrect answer 2'
-              aria-label='Incorrect Answer 2'
-            />
-            <input
-              type='text'
-              value={incorrectAns3}
-              onChange={(e) => setIncorrectAns3(e.target.value)}
-              placeholder='Incorrect answer 3'
-              aria-label='Incorrect Answer 3'
-            />
-          </div>
-          <br/>
-          <div className='d-flex justify-content-between'>
-            <button
-              onClick={() => setLastQuestion(lastQuestion)}
-              type='submit'
-              name='add-question'
-              className='fw-normal'
-            >
-              Add new question
-            </button>
-            <button
-              onClick={() => setLastQuestion(true)}
-              type='submit'
-              name='submit-form'
-              className='fw-normal'
-            >
-              Save and publish
-            </button>
-          </div>
-        </form>
-        <button  className='d-flex justify-content-center fw-normal' 
-          onClick={ handleQuit }> Quit </button>
+        <div className='edit-container'>
+          <form onSubmit={getParams} className='edit-form'>
+            <div className='edit-question'>
+              <label className='edit-label'>Question:</label>
+              <input
+                type='text'
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder='Type question here..'
+                aria-label='Type Question Here'
+                className='edit-input'
+              />
+            </div>
+            <div>
+              <label className='edit-label'>Correct answer:</label>
+              <input
+                type='text'
+                value={correctAnswer}
+                onChange={(e) => setCorrectAnswer(e.target.value)}
+                placeholder='Correct answer is..'
+                aria-label='Type Question Here'
+                className='edit-input'
+              />
+            </div>
+            <div>
+              <label className='edit-label'>Incorrect answers:</label>
+              <input
+                type='text'
+                value={incorrectAns1}
+                onChange={(e) => setIncorrectAns1(e.target.value)}
+                placeholder='Incorrect answer 1'
+                aria-label='Incorrect Answer 1'
+                className='edit-input'
+              />
+  
+              <input
+                type='text'
+                value={incorrectAns2}
+                onChange={(e) => setIncorrectAns2(e.target.value)}
+                placeholder='Incorrect answer 2'
+                aria-label='Incorrect Answer 2'
+                className='edit-input'
+              />
+              <input
+                type='text'
+                value={incorrectAns3}
+                onChange={(e) => setIncorrectAns3(e.target.value)}
+                placeholder='Incorrect answer 3'
+                aria-label='Incorrect Answer 3'
+                className='edit-input'
+              />
+            </div>
+            <br/>
+            <div className='edit-button top'>
+              <button
+                onClick={() => setLastQuestion(lastQuestion)}
+                type='submit'
+                name='add-question'
+                className='random'
+              >
+                Add new question
+              </button>
+              <button
+                onClick={() => setLastQuestion(true)}
+                type='submit'
+                name='submit-form'
+                className='random'
+              >
+                Save and publish
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className='random-wrapper'>
+          <button  className='random'
+            onClick={ handleQuit }> 
+            Quit 
+          </button>
+        </div>
       </div>
     </>
   )
