@@ -93,7 +93,7 @@ const Result = ({ answers, quiz }) => {
   console.log(slideIndex)
 
   return (
-    <>
+    <div> 
       <div>
         <HighScorePopup
           show={showPopup}
@@ -101,7 +101,7 @@ const Result = ({ answers, quiz }) => {
           onHide={(e) => setShowPopup(e.target.value)}
         />
       </div>
-      <div>
+      <div className='home'>
         <h2>{points === 1 ? 'Your Point:' : 'Your Points:'}</h2>
         <h3>{points} / {quiz.questions.length}</h3>
         <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
@@ -122,7 +122,7 @@ const Result = ({ answers, quiz }) => {
       <div>
         <ReturnToTop />
       </div>
-    </>
+    </div>
 
   )
 }

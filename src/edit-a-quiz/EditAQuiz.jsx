@@ -71,11 +71,11 @@ const EditAQuiz = ({ categories }) => {
   }
 
   return (
-    quiz ? 
-      <>
-        <div className="main-body flex-wrap" style={{ height: "100vh" }}>          
+    <div className='home'>    
+      <h1>Edit quiz</h1> 
+      {quiz ?
+        <div>
           <form onSubmit={submitQuiz}>
-          <h1>Edit quiz</h1>
             <div className="category-dropdown-form d-flex flex-column">       
               <label>Category:</label>
               <select onChange={(e) => setCategory(e.target.value)} defaultValue={quiz.category.name}>
@@ -124,18 +124,18 @@ const EditAQuiz = ({ categories }) => {
             </p>
             <br />
             <div className="d-flex justify-content-between">
-              <button>
-                <Link to="/quizzes" className="fw-normal">
+              <button className='random'>
+                <Link to="/quizzes">
                   Quit
                 </Link>
               </button>
-              <button  className="fw-normal" type='submit'>Save changes & Exit</button>
-              <button onClick={handleClickQuestions} className="fw-normal" >Edit questions</button>
+              <button  className='random' type='submit'>Save changes & Exit</button>
+              <button onClick={handleClickQuestions} className='random' >Edit questions</button>
             </div>
-          </form>
-        </div>
-      </>
-    : <h4>Loading</h4>
+          </form> 
+        </div> : <h4>Loading...</h4>
+      }
+    </div>
   )
 }
 

@@ -1,17 +1,32 @@
-:root {
+#root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 body {
   background: linear-gradient(to top, #D86D18,#FFFFFF);
-  width: 100vw;    
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.loading {
+  flex-grow: 1;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.home {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100vw;
 }
 
 .footer {
@@ -63,6 +78,8 @@ button.random {
   backdrop-filter: blur(1rem);
   -webkit-backdrop-filter: blur(1rem);
   box-shadow: 0.1rem 0.1rem 0.2rem black;
+  color: rgb(255, 254, 254);
+  text-shadow: 0.1rem 0.1rem 0.1rem black;
 }
 
 button.random a {
@@ -101,8 +118,6 @@ a:hover {
 }
 
 h1, h2, h3, h4, p {
-  margin-bottom: 2rem;
-  margin-top: 2rem;
   text-align: center;
   font-weight: bold;
 }
@@ -162,11 +177,12 @@ a.category {
   display: grid;
   grid-template-columns: repeat(auto-fit, 10rem);
   gap: 2rem;
+  margin-bottom: 1rem;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
   margin-top: 0;
 }
+
 
 div.cat-card {
   background: rgba(85, 85, 85, 0.6);
@@ -192,9 +208,12 @@ div.cat-card:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, 20rem);
   gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
+}
+
+.card-container-wrapper {
+  flex-grow: 1;
+  margin: auto;
+  display: flex;
 }
 
 .card {
