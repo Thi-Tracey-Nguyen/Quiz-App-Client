@@ -66,7 +66,7 @@ const QuestionsForm = ({ questions, setQuestions }) => {
       incorrectAnswers: incorrectAnswers,
     }
     // Post new question to API
-    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+    const res = await fetch('https://quiz-app-server.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -91,7 +91,7 @@ const QuestionsForm = ({ questions, setQuestions }) => {
   //handle quit
   async function handleQuit() {
     //deletes the quiz from db
-    await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`, {
+    await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`, {
       method: 'DELETE',
     })
     nav('/quizzes')

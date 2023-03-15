@@ -7,7 +7,7 @@ import "../styles/CommonStyles.css";
 const Quizzes = ({ quizzes, setQuizzes, questions }) => {
   useEffect(() => {
     async function getQuizzes() {
-      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
+      const res = await fetch('https:quiz-app-server.up.railway.app/quizzes')
       const data = await res.json()
       setQuizzes(data)
     }

@@ -20,7 +20,7 @@ const AddCategory = ({ categories, setCategories }) => {
     }
     // Post new category to the API
     const res = await fetch(
-      'https://quiz-app-server-production-09e8.up.railway.app/categories',
+      'https://quiz-app-server.up.railway.app/categories',
       {
         method: 'POST',
         headers: {

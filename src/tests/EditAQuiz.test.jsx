@@ -19,7 +19,7 @@ describe('Edit a Quiz component', () => {
 	const handleDeleteQuiz = async (id) => {
     try {
       const res = await fetch(
-        `https://quiz-app-server-production-09e8.up.railway.app/quizzes/${id}`,
+        `https://quiz-app-server.up.railway.app/quizzes/${id}`,
         {
           method: "DELETE",
         }

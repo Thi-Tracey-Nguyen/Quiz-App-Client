@@ -27,7 +27,7 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
       incorrectAnswers: [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3]
     }
     // fetch to API
-    const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
+    const res = await fetch(`https://quiz-app-server.up.railway.app/questions/${questionObject._id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -104,7 +104,7 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
     }
     // Post new question to API
     await fetch(
-      "https://quiz-app-server-production-09e8.up.railway.app/questions",
+      "https://quiz-app-server.up.railway.app/questions",
       {
         method: "POST",
         headers: {
@@ -136,7 +136,7 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
       alert('Cannot delete this question. Quiz is required to have at least one question.')
     } else {
       try {
-        await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
+        await fetch(`https://quiz-app-server.up.railway.app/questions/${questionObject._id}`, {
             method: "DELETE"
         })
         // setIndex(index+1)
@@ -180,7 +180,7 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
     };
     // Post new question to API
 
-    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
+    const res = await fetch('https://quiz-app-server.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

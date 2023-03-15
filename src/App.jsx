@@ -30,7 +30,7 @@ const App = () => {
 
   useEffect(() => {
     async function getCategories() {
-      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/categories')
+      const res = await fetch('https://quiz-app-server.up.railway.app/categories')
       const data = await res.json()
       setCategories(data)
     }
@@ -39,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     async function getQuizzes() {
-      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes')
+      const res = await fetch('https://quiz-app-server.up.railway.app/quizzes')
       const data = await res.json()
       setQuizzes(data)
     }
@@ -48,7 +48,7 @@ const App = () => {
 
   useEffect(() => {
     async function getQuestions() {
-      const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions')
+      const res = await fetch('https://quiz-app-server.up.railway.app/questions')
       const data = await res.json()
       setQuestions(data)
     }
@@ -72,7 +72,7 @@ const App = () => {
 
     useEffect(() => {
       async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
         const data = await res.json()
         setQuiz(data)
       }
@@ -89,7 +89,7 @@ const App = () => {
     
     useEffect(() => {
       async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
         const data = await res.json()
         setQuiz(data)
       }
@@ -106,7 +106,7 @@ const App = () => {
     
     useEffect(() => {
       async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
         const data = await res.json()
         setQuiz(data)
       }
@@ -122,7 +122,7 @@ const App = () => {
     
     useEffect(() => {
       async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
         const data = await res.json()
         setQuiz(data)
       }

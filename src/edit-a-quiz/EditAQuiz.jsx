@@ -19,7 +19,7 @@ const EditAQuiz = ({ categories }) => {
 
   useEffect(() => {
     async function getQuiz() {
-      const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quizId}`)
+      const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
       const data = await res.json()
       setQuiz(data)
     }
@@ -45,7 +45,7 @@ const EditAQuiz = ({ categories }) => {
 
     console.log(editedQuiz)
     // Post new quiz to the API
-    const newQuiz = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/quizzes/${quiz._id}`, {
+    const newQuiz = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quiz._id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

@@ -38,7 +38,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       image: image,
     }
     // Post new quiz to the API
-    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/quizzes', {
+    const res = await fetch('https://quiz-app-server.up.railway.app/quizzes', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
