@@ -12,7 +12,6 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
   const [question, setQuestion] = useState(questionObject.question)
   const [confirm, setConfirm] = useState(false)
   const [correctAnswer, setCorrectAnswer] = useState(questionObject.correctAnswer)
-  const [incAnswersNew, setIncAnswersNew] = useState([])
   const [incorrectAnswer1, setIncorrectAnswer1] = useState(questionObject.incorrectAnswers[0])
   const [incorrectAnswer2, setIncorrectAnswer2] = useState(questionObject.incorrectAnswers[1])
   const [incorrectAnswer3, setIncorrectAnswer3] = useState(questionObject.incorrectAnswers[2])
@@ -140,16 +139,17 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
         await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
             method: "DELETE"
         })
-        setIndex(index+1)
-        setConfirm(false)
+        // setIndex(index+1)
+        
       } catch (error) {
         console.log(error)
       }
       // index === quiz.questions.length-1 ? resetForm() : setIndex(index+1) 
+      setConfirm(false)
       // checks if the question is the last before moving to next question. 
       if (index !== quiz.questions.length-1) {
-        setIndex(index+1)
-        setQuestionObject(quiz.questions[index+1])
+        setIndex(index-1)
+        // setQuestionObject(quiz.questions[index+1])
       } else {
         resetForm() //if last question, only reset form
       }
@@ -160,12 +160,11 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
   // handles click on delete a question
   const confirmForm = () => {
     return (
-      <>
+      <div className='confirm'>
         <p> Do you want to delete this question? </p>
-        <button onClick={handleConfirmDelete}> Confirm </button>
-        <button onClick={ () => setConfirm(false) }> Cancel </button>
-        <br />
-      </>
+        <button className='random' onClick={handleConfirmDelete}> Confirm </button>
+        <button className='random' onClick={ () => setConfirm(false) }> Cancel </button>
+      </div>
     );
   };
 
@@ -189,82 +188,87 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
       },
       body: JSON.stringify(newQuestion)
     })
-    const data = await res.json()
-    setNewQuestion(false)
-    setQuestionObject(newQuestion)
-    quiz.questions.push(data)
-    setQuestions([...questions, data])
-    alert('Question added successfully')
+    if (!res.ok) {
+      alert('Bad Request. Ensure question is longer than 5 characters, 1 correct answer and 3 incorrect answers are provided')
+    } else {
+      const data = await res.json()
+      setNewQuestion(false)
+      setQuestionObject(newQuestion)
+      quiz.questions.push(data)
+      setQuestions([...questions, data])
+      alert('Question added successfully')
+    }
   } 
 
   return (
-    <>
-      <div className="main-body flex-wrap" style={{ height: "100vh" }}>
-        <h2>Edit {quiz.title}</h2>
-        <form
-          className="container d-flex flex-column flex-wrap"
-          key={index}
-          style={{ width: "400px" }}
-        >
-          <div className="question-form d-flex flex-column">
-            <label> Question </label>
-            <input
-              type="text"
-              defaultValue={questionObject.question}
-              // value={questionObject.question}
-              onChange={(e) => setQuestion(e.target.value)}
-            />
-          </div>
-          <div className="correct-answer-form d-flex flex-column">
-            <label>Correct answer:</label>
-            <input
-              type="text"
-              defaultValue={questionObject.correctAnswer}
-              // value={questionObject.correctAnswer}
-              onChange={(e) => setCorrectAnswer(e.target.value)}
-            />
-          </div>
-          <div className="incorrect-answers-form d-flex flex-column">
-            <label>Incorrect answers:</label>
-            <input
-              type='text'
-              defaultValue={questionObject.incorrectAnswers[0]}
-              // value={questionObject.incorrectAnswers[2]}
-              onChange={(e) => setIncorrectAnswer1(e.target.value)} 
+    <div className='home'>
+      <h2>Edit {quiz.title}</h2>
+      <div className='edit-container'>
+          <form
+            className='edit-form'
+            key={index}
+          >
+            <div className='edit-question'>
+              <label className='edit-label'> Question: </label>
+              <input
+                className='edit-input'
+                type="text"
+                defaultValue={questionObject.question}
+                // value={questionObject.question}
+                onChange={(e) => setQuestion(e.target.value)}
               />
-            <input
-              type='text'
-              defaultValue={questionObject.incorrectAnswers[1]}
-              // value={questionObject.incorrectAnswers[2]}
-              onChange={(e) => setIncorrectAnswer2(e.target.value)} 
+            </div>
+            <div>
+              <label className='edit-label'>Correct answer:</label>
+              <input
+                className='edit-input'
+                type="text"
+                defaultValue={questionObject.correctAnswer}
+                // value={questionObject.correctAnswer}
+                onChange={(e) => setCorrectAnswer(e.target.value)}
               />
-            <input
-              type='text'
-              defaultValue={questionObject.incorrectAnswers[2]}
-              // value={questionObject.incorrectAnswers[2]}
-              onChange={(e) => setIncorrectAnswer3(e.target.value)} 
-              />
-          </div> 
-        </form>
-        { confirm && confirmForm() }  
-        <br/> 
-        <div className="d-flex justify-content-between">
-        { newQuestion && <button onClick={ handleConfirmAdd }> Save Question </button> } 
-        { (!confirm && !newQuestion) && <button onClick={ handleClickDelete }> Delete this question </button> }  
-        { (index === quiz.questions.length-1 && !confirm) &&  <button onClick={ handleAddQuestion }> Add a new question </button>}
-        </div>
-        <br/>
-        { index === quiz.questions.length-1 && <button onClick={handleSubmit}> Submit </button> }
-        <br/>
-        <div className="d-flex justify-content-between">
-        <button onClick={() => nav('/edit-a-quiz')}>Quit</button> 
-        { (index < quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSaveNext }> Save & Next </button> }
-        { (index === quiz.questions.length-1 && !confirm) && <button onClick={ handleClickSave }> Save </button> }
-        </div> 
-        
+            </div>
+            <div>
+              <label className='edit-label'>Incorrect answers:</label>
+              <input
+                className='edit-input'
+                type='text'
+                defaultValue={questionObject.incorrectAnswers[0]}
+                // value={questionObject.incorrectAnswers[2]}
+                onChange={(e) => setIncorrectAnswer1(e.target.value)} 
+                />
+              <input
+                className='edit-input'
+                type='text'
+                defaultValue={questionObject.incorrectAnswers[1]}
+                // value={questionObject.incorrectAnswers[2]}
+                onChange={(e) => setIncorrectAnswer2(e.target.value)} 
+                />
+              <input
+                className='edit-input'
+                type='text'
+                defaultValue={questionObject.incorrectAnswers[2]}
+                // value={questionObject.incorrectAnswers[2]}
+                onChange={(e) => setIncorrectAnswer3(e.target.value)} 
+                />
+            </div> 
+          </form>
       </div>
-
-    </>
+      { confirm && confirmForm() } 
+      <div className='edit-button top'>
+        { newQuestion && <button className='random' onClick={ handleConfirmAdd }> Add </button> } 
+        { (!confirm && !newQuestion) && <button className='random' onClick={ handleClickDelete }> Delete this question </button> }  
+        { (index === quiz.questions.length-1 && !confirm) &&  <button className='random' onClick={ handleAddQuestion }> Add a new question </button>}
+      </div>
+      
+      <div className='edit-button bottom'>
+        <button className='random' onClick={() => nav('/edit-a-quiz')}>Quit</button> 
+        { index === quiz.questions.length-1 && <button className='random' onClick={handleSubmit}> Submit </button> }
+        { (index < quiz.questions.length-1 && !confirm) && <button className='random' onClick={ handleClickSaveNext }> Save & Next </button> }
+        {/* { (index !== quiz.questions.length-1 && !confirm) && <button className='random' onClick={ handleClickSave }> Save </button> } */}
+      </div> 
+      
+    </div>
   )
 }
 
