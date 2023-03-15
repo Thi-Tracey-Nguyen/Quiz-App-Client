@@ -14,7 +14,7 @@ const Register = () => {
     }
 
     async function register(user) {
-      const res = await fetch(`https://quiz-app-server-production-09e8.up.railway.app/register`, {
+      const res = await fetch(`https://quiz-app-server.up.railway.app/register`, {
         method: 'POST', 
         headers: {
           Accept: 'application/json',
