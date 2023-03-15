@@ -16,14 +16,16 @@ const CategoryQuizzes = ({ quizzes, categories }) => {
 	const quizzesByCat = quizzes.filter(quiz => quiz.category === cat._id)
 
 	return (
-		<div className='main-body-centered'>
+		<div className='home'>
 			<h1>{categoryNameConverted} category</h1>
-			<div className='card-container'>
-				{quizzesByCat.map((quizByCat, index) => (
-					<div key={index}>
-						<ShowQuiz quiz={quizByCat} />
-					</div>
-				))}
+			<div className='card-container-wrapper'>
+				<div className='card-container'>
+					{quizzesByCat.map((quizByCat, index) => (
+						<div key={index}>
+							<ShowQuiz quiz={quizByCat} />
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	)

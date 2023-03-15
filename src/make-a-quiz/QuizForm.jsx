@@ -132,12 +132,12 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
           </p>
           <br />
           <div className="d-flex justify-content-between">
-            <button >
-              <Link to={"/"} className="fw-normal">
+            <button className='random'>
+              <Link to={"/"}>
                 Quit
               </Link>
             </button>
-            <button>Next</button>
+            <button className='random'>Next</button>
           </div>
         </form>
       </div>
