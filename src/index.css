@@ -206,7 +206,7 @@ div.cat-card:hover {
 .card-container {
   width: 80vw;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 20rem);
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1rem;
 }
 
@@ -217,7 +217,6 @@ div.cat-card:hover {
 }
 
 .card {
-  /* width: 80vw; */
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -538,7 +537,7 @@ p.card-header {
 }
 
 .top {
-  width: 30%;
+  width: 50%;
   justify-content: center;
 }
 
