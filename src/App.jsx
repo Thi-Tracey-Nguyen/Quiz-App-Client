@@ -5,7 +5,6 @@ import NavBar from './home/NavBar'
 import Footer from './home/Footer'
 import Categories from './categories/Categories'
 import Leaderboard from './leaderboard/Leaderboard'
-import LogIn from './auth/LogIn'
 import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
@@ -20,7 +19,8 @@ import EditAQuiz from './edit-a-quiz/EditAQuiz'
 import CategoryForm from './make-a-quiz/CategoryForm'
 import Loading from './loading/Loading'
 import Register from './auth/Register'
-import Test from './test/Test'
+import LogIn from './auth/Login'
+
 
 const App = () => {
   const [categories, setCategories] = useState([])
@@ -153,7 +153,8 @@ const App = () => {
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/result/:quizId' element={<ResultWrapper />} />
-          <Route path='/test' element={<Test />} />
+          <Route path='/auth/login' element={<LogIn />} />
+          <Route path='/auth/register' element={<Register />} />
           <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
       <Footer />

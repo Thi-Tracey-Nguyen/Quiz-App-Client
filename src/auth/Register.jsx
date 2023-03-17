@@ -5,6 +5,20 @@ const Register = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  async function register(user) {
+    const res = await fetch(`http://localhost:4001/auth/register`, {
+      method: 'POST', 
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(user)
+    })
+    const data = await res.json()
+    console.log(data)
+    return res
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
 
@@ -12,29 +26,22 @@ const Register = () => {
       username,
       password
     }
+    console.log(newUser)
 
-    async function register(user) {
-      const res = await fetch(`https://quiz-app-server.up.railway.app/register`, {
-        method: 'POST', 
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(user)
-      })
-      const data = res.json()
-      console.log(data)
+    const res = register(newUser)
+   
+    if (res.status === 201) {
+      alert('User created sucessfully!')
     }
-
-    register(newUser)
   }
+  
 
   return (
-    <div className='main-body flex-wrap' style={{ height: "100vh" }} onSubmit={handleSubmit}>
+    <div className='main-body flex-wrap' style={{ height: "100vh" }}>
       <h1>Register</h1>
       <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
       <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
-      <button type='submit'>Register</button>
+      <button onClick={handleSubmit}> Register </button>
     </div> 
   )
 }
