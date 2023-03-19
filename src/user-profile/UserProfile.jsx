@@ -44,8 +44,8 @@ const UserProfile = () => {
     <>
       <div className="home">
         <h1>User Portal</h1>
-        {user !== null ? <h3>Welcome back, {user.username}!</h3> : ''}
-        <button onClick={handleLogOut}>Log out</button>
+        {user !== null ? <h3>Welcome back, {user.username}!</h3> : <h3>Please log in to continue</h3>}
+        <button className='random' onClick={handleLogOut}>Log out</button>
       </div>
     </>
   )

@@ -43,14 +43,16 @@ const LogIn = () => {
   }
 
   return (
-    <div className='main-body flex-wrap' style={{ height: "100vh" }}>
-      <h1>Login form</h1>
+    <div className='home small'>
+      <h1>Login</h1>
       <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
       <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
       {message !== '' ? <p>{message}</p> : ''}
-      <button className='random' onClick={handleSubmit}> Login now </button>
+      <button className='random' onClick={handleSubmit}> Login </button>
       <p>Or</p>
-      <Link to='/auth/register'>Register</Link>
+      <button className='random'>
+        <Link to='/auth/register'>Register</Link>
+      </button>
     </div>
   )
 }

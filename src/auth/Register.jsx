@@ -37,7 +37,7 @@ const Register = () => {
   
 
   return (
-    <div className='main-body flex-wrap' style={{ height: "100vh" }}>
+    <div className='home small'>
       <h1>Register</h1>
       <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
       <input placeholder='password' onChange={e => setPassword(e.target.value)}/>

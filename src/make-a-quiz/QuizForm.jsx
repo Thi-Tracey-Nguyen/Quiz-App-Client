@@ -80,68 +80,66 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   }
 
   return (
-    <>
-      <div className="main-body flex-wrap" style={{ height: "100vh" }}>        
-        <form onSubmit={submitQuiz}>
-        <h1 className="d-flex justify-content-center">Make a new Quiz</h1>
-          <div className="category-dropdown-form d-flex flex-column">       
-            <label>Category:</label>
-            <select onChange={(e) => setCategory(e.target.value)}>
-              <option>Select...</option>
-              {categories.map((cat, index) => (
-                <option key={index}>{cat.name}</option>
-              ))}
-            </select>
-          </div>
-          <div className="quiz-name-form d-flex flex-column">
-            <label>Quiz name:</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div className="author-form d-flex flex-column">
-            <label>Created by:</label>
-            <input
-              type="text"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-            />
-          </div>
-          <div className='image-form '>
-            Choose an image: <br/>
-            {imgArray.map((img, index) => (
-              <label htmlFor='image-form' key={index}>
-                  <input 
-                    type='radio'
-                    name={image}
-                    value={img}
-                    onChange={(e) => setImage(e.target.value)}
-                    key={index}
-                    checked={image === img}
-                  />
-                <img src={img} width={100} height={100}/>
-              </label>
+    <div className="home small">        
+      <form onSubmit={submitQuiz}>
+      <h1 className="d-flex justify-content-center">Make a new Quiz</h1>
+        <div className="category-dropdown-form d-flex flex-column">       
+          <label>Category:</label>
+          <select onChange={(e) => setCategory(e.target.value)}>
+            <option>Select...</option>
+            {categories.map((cat, index) => (
+              <option key={index}>{cat.name}</option>
             ))}
-          </div>
-          <br />
-          <p>Don't see a Category that fits your Quiz idea?
-            <br/>
-          <Link to={"/add-a-category"}>Add a new Category</Link>
-          </p>
-          <br />
-          <div className="d-flex justify-content-between">
-            <button className='random'>
-              <Link to={"/"}>
-                Quit
-              </Link>
-            </button>
-            <button className='random'>Next</button>
-          </div>
-        </form>
-      </div>
-    </>
+          </select>
+        </div>
+        <div className="quiz-name-form d-flex flex-column">
+          <label>Quiz name:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="author-form d-flex flex-column">
+          <label>Created by:</label>
+          <input
+            type="text"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+        </div>
+        <div className='image-form '>
+          Choose an image: <br/>
+          {imgArray.map((img, index) => (
+            <label htmlFor='image-form' key={index}>
+                <input 
+                  type='radio'
+                  name={image}
+                  value={img}
+                  onChange={(e) => setImage(e.target.value)}
+                  key={index}
+                  checked={image === img}
+                />
+              <img src={img} width={100} height={100}/>
+            </label>
+          ))}
+        </div>
+        <br />
+        <p>Don't see a Category that fits your Quiz idea?
+          <br/>
+        <Link to={"/add-a-category"}>Add a new Category</Link>
+        </p>
+        <br />
+        <div className="d-flex justify-content-between">
+          <button className='random'>
+            <Link to={"/"}>
+              Quit
+            </Link>
+          </button>
+          <button className='random'>Next</button>
+        </div>
+      </form>
+    </div>
   )
 }
 

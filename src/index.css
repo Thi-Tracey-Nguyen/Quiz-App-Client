@@ -27,6 +27,11 @@ body {
   flex-direction: column;
   margin-bottom: 1rem;
   width: 100vw;
+  justify-content: space-between;
+}
+
+.small {
+  width: 80%;
 }
 
 .footer {
@@ -100,6 +105,13 @@ button.random a {
 .logo-nav:hover {
   transform: scale(1.1);
   transition: 0.5s;
+}
+
+ul.icon {
+}
+
+ul.navbar-nav:nth-child(2) {
+  margin: 2rem 2rem 0.5rem 0;
 }
 
 ul {
@@ -560,6 +572,9 @@ p.card-header {
 .confirm button {
   margin: 0.5rem 0;
 }
+
+
+
 
 @media only screen and (min-width: 450px) {
   .cat-card-container {

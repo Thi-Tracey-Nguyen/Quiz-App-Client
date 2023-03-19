@@ -41,28 +41,26 @@ const AddCategory = ({ categories, setCategories }) => {
   }
 
   return (
-    <>
-      <div className='main-body flex-wrap' style={{ height: '100vh' }}>
-        <h2>Add a new Category</h2>
-        <form onSubmit={getParams} className='container'>
-          <div className='cat-name-form  d-flex flex-column'>
-            <label>Category name:</label>
-            <input
-              type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <br />
-          <div className='d-flex justify-content-between'>
-            <button>Submit</button>
-            <button>
-              <Link to='/make-a-quiz' className='fw-normal'>Quit</Link>
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+    <div className='home'>
+      <h2>Add a new Category</h2>
+      <form onSubmit={getParams} className='container'>
+        <div className='cat-name-form  d-flex flex-column'>
+          <label>Category name:</label>
+          <input
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <br />
+        <div className='d-flex justify-content-between'>
+          <button>Submit</button>
+          <button>
+            <Link to='/make-a-quiz' className='fw-normal'>Quit</Link>
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
 

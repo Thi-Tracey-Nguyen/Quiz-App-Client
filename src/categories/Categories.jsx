@@ -7,7 +7,7 @@ import '../styles/CommonStyles.css'
 const Categories = ({ categories }) => {
 
   return (
-    <div className='main-body'>
+    <div className='home'>
       <h1>Categories</h1>
       <div className='cat-card-container'>
         {categories.length === 0 ? 'Loading...' : categories.map((category, index) => (
