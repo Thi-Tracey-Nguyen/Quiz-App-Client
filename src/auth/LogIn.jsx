@@ -20,14 +20,15 @@ const LogIn = () => {
       credentials: 'include',
       body: JSON.stringify(user)
     })
-
     const data = await res.json()
 
     if (!res.ok) {
       // const msg = `An error occurred ${res.status}`
       // throw new Error(msg)
       setMessage(data.message)
-    } 
+    } else {
+      nav(`/user/${data._id}`)
+    }
   }
   
 

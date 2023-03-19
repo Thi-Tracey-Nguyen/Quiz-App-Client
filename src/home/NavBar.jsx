@@ -7,7 +7,7 @@ const NavBar = () => {
     <nav className="navbar navbar-expand-lg bg-transparent">
       <div className="container-fluid">
           <Link className='navbar-brand' to='/'>
-          <img src={logo} alt='Logo' className='logo-nav' />
+            <img src={logo} alt='Logo' className='logo-nav' />
           </Link>
           <Link className="navbar-brand" to="/"></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,20 +16,21 @@ const NavBar = () => {
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
               <li className="nav-item">
-              <Link className='nav-link' to='/quizzes'>All Quizzes</Link>
+                <Link className='nav-link' to='/quizzes'>All Quizzes</Link>
               </li>
               <li className="nav-item">
-              <Link className='nav-link' to='/categories'>Categories</Link>
+                <Link className='nav-link' to='/categories'>Categories</Link>
               </li>
               <li className="nav-item">
-              <Link className='nav-link' to='/make-a-quiz'>Make a quiz</Link>
+                <Link className='nav-link' to='/make-a-quiz'>Make a quiz</Link>
               </li>
               <li className="nav-item">
-              <Link className='nav-link' to='/edit-a-quiz'>Edit a quiz</Link>
+                <Link className='nav-link' to='/edit-a-quiz'>Edit a quiz</Link>
               </li>
-              {/* <li className="nav-item">
-              <Link className='nav-link' to='/login'>Login</Link>
-              </li> */}
+              <li className="nav-item">
+                <Link className='nav-link' to='/auth/login'>Log In</Link>
+              </li>
+              
           </ul>
           </div>
       </div>
