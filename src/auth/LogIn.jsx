@@ -7,6 +7,7 @@ const LogIn = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
   const nav = useNavigate()
 
   async function login(user) {
@@ -20,16 +21,15 @@ const LogIn = () => {
       body: JSON.stringify(user)
     })
 
-    if (!res.ok) {
-      const msg = `An error has occured ${res.status}`
-      throw new Error(msg)
-    }
     const data = await res.json()
-    console.log(res)
-    alert(`Welcome back, ${user.username}`)
-    nav('/leaderboard')
-    
+
+    if (!res.ok) {
+      // const msg = `An error occurred ${res.status}`
+      // throw new Error(msg)
+      setMessage(data.message)
+    } 
   }
+  
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -39,7 +39,6 @@ const LogIn = () => {
       password
     }
     login(user)
-    redirect('/leaderboard')
   }
 
   return (
@@ -47,11 +46,13 @@ const LogIn = () => {
       <h1>Login form</h1>
       <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
       <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
+      {message !== '' ? <p>{message}</p> : ''}
       <button className='random' onClick={handleSubmit}> Login now </button>
       <p>Or</p>
       <Link to='/auth/register'>Register</Link>
     </div>
   )
 }
+
 
 export default LogIn

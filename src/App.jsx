@@ -4,7 +4,6 @@ import Home from './home/Home'
 import NavBar from './home/NavBar'
 import Footer from './home/Footer'
 import Categories from './categories/Categories'
-import Leaderboard from './leaderboard/Leaderboard'
 import QuizForm from './make-a-quiz/QuizForm'
 import Profile from './profile/Profile'
 import Quizzes from './categories/Quizzes'
@@ -20,6 +19,7 @@ import CategoryForm from './make-a-quiz/CategoryForm'
 import Loading from './loading/Loading'
 import Register from './auth/Register'
 import LogIn from './auth/Login'
+import UserProfile from './user-profile/UserProfile'
 
 
 const App = () => {
@@ -148,7 +148,7 @@ const App = () => {
           <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestionWrapper />} />
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
-          <Route path='/leaderboard' element={<Leaderboard />} />
+          <Route path='/user/:userId' element={<UserProfile />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
