@@ -5,6 +5,9 @@ Version 2 deployed site: [Version 2](https://mern-quiz-app-v2.netlify.app/).
 
 Link to the group project: [Version 1](https://github.com/MERN-Quiz-App/Quiz-App-Client).
 
+# Server
+[Server](https://github.com/Thi-Tracey-Nguyen/Quiz-App-Server)
+
 # Improvements
 1. Better implement of CSS to create a more aesthetically pleasing appearance, including:
    * Card display with animation for each quiz in Home and All Quizzes page
