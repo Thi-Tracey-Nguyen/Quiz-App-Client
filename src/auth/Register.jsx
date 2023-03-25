@@ -15,7 +15,6 @@ const Register = () => {
       body: JSON.stringify(user)
     })
     const data = await res.json()
-    console.log(data)
     return res
   }
 
@@ -26,7 +25,6 @@ const Register = () => {
       username,
       password
     }
-    console.log(newUser)
 
     const res = register(newUser)
    

@@ -26,7 +26,6 @@ const App = () => {
   const [categories, setCategories] = useState([])
   const [quizzes, setQuizzes] = useState([])
   const [questions, setQuestions] = useState(null)
-  const nav = useNavigate()
 
   useEffect(() => {
     async function getCategories() {
@@ -148,7 +147,7 @@ const App = () => {
           <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestionWrapper />} />
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
-          <Route path='/user/:userId' element={<UserProfile />} />
+          <Route path='/user' element={<UserProfile />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
