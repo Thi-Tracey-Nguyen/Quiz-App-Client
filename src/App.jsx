@@ -19,7 +19,7 @@ import CategoryForm from './make-a-quiz/CategoryForm'
 import Loading from './loading/Loading'
 import Register from './auth/Register'
 import LogIn from './auth/Login'
-import UserProfile from './user-profile/UserProfile'
+import UserProfile from './auth/UserProfile'
 
 
 const App = () => {

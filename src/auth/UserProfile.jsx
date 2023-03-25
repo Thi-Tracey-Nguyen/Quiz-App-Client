@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
+import { removeLocalStorageItems } from './auth-utils'
 
 const UserProfile = () => {
 
-  // const [username, setUSername] = useState('')
-  // const { userId } = useParams()
+  const [user, setUser] = useState(null)
   const nav = useNavigate()
 
-  // useEffect(() => {
-  //   async function fetchUser() {
-  //     const res = await fetch(`http://localhost:4001/auth/user/${userId}`, {
-  //       credentials: 'include',
-  //     })
-
-  //     if (!res.ok) {
-  //       const message = `An error has occurred ${res.status}`
-  //       throw new Error(message)
-  //     }
-
-  //     const data = await res.json()
-  //     console.log(data)
-  //     setUser(data)
-  //   }
-  //   fetchUser()
-  // }, [])
+  useEffect(() => {
+    const newUser = {
+      userId: localStorage.getItem('userId'),
+      username: localStorage.getItem('username'),
+      isAdmin: localStorage.getItem('isAdmin'),
+    }
+    setUser(newUser)
+  }, [])
 
   const handleLogOut = async () => {
 
@@ -37,6 +28,7 @@ const UserProfile = () => {
     const data = await res.json()
     alert(data.message)
     setUser(null)
+    removeLocalStorageItems()
     nav('/')
   }
 
@@ -46,7 +38,7 @@ const UserProfile = () => {
     <>
       <div className="home">
         <h1>User Portal</h1>
-        {username !== null ? <h3>Welcome back, {username}!</h3> : <h3>Please log in to continue</h3>}
+        {user !== null ? <h3>Welcome back, {user.username}!</h3> : <h3>Please log in to continue</h3>}
         <h2>What would you like to do?</h2>
         <button>
           <Link to={'/make-a-quiz'}>Make a quiz</Link>
