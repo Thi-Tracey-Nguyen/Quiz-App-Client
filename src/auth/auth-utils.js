@@ -2,10 +2,10 @@ import moment from 'moment'
 
 function setLocalStorageItems(jwt) {
   if (jwt !== null) {
-    localStorage.setItem('token', jwt === null ? '' : jwt.token) 
-    localStorage.setItem('username', jwt === null ? '' : jwt.user.username) 
-    localStorage.setItem('userId', jwt === null ? '' : jwt.user._id)
-    localStorage.setItem('isAdmin', jwt === null ? '' : jwt.user.isAdmin)
+    localStorage.setItem('token', jwt.token) 
+    localStorage.setItem('username', jwt.user.username) 
+    localStorage.setItem('userId', jwt.user._id)
+    localStorage.setItem('isAdmin', jwt.user.isAdmin)
 
     const expires = moment().add(jwt.expiresIn)
     localStorage.setItem('expires', JSON.stringify(expires.valueOf()))

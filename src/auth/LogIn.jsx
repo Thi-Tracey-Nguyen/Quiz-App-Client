@@ -8,7 +8,7 @@ const LogIn = () => {
 
   const [jwt, setJwt] = useState(null)
   const [user, setUser] = useState(null)
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState(localStorage.getItem('username'))
   const [password, setPassword] = useState('') 
   const [message, setMessage] = useState('')
   const nav = useNavigate()
@@ -32,9 +32,10 @@ const LogIn = () => {
     } else {
       setJwt(data)
       setUser(data.user)
-      nav('/user')
     }
   }
+  
+  console.log(user)
   
   // setup local storage from jwt data
   useEffect(() => {

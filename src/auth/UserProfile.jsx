@@ -32,7 +32,7 @@ const UserProfile = () => {
     nav('/')
   }
 
-   const username = localStorage.getItem('username')
+  const username = localStorage.getItem('username')
 
   return (
     <>

@@ -5,12 +5,31 @@ import Button from "react-bootstrap/Button"
 import '../styles/CommonStyles.css'
 import ShowQuizEdit from "./ShowQuizEdit"
 
-
-const EditQuizzes = ({ quizzes }) => {
+const EditQuizzes = () => {
+  const [quizzes, setQuizzes] = useState([])
+  const [username, setUsername] = useState(localStorage.getItem('username'))
   const [selectedQuiz, setSelectedQuiz] = useState(null)
   const [selectedQuizEdit, setSelectedQuizEdit] = useState(null)
-
   const nav = useNavigate()
+
+  if (username === null) {
+    nav('/auth/login')
+  }
+
+  useEffect(() => {
+    async function getQuizzes() {
+      const isAdmin = localStorage.getItem('isAdmin') 
+      const userId = localStorage.getItem('userId')
+      let res
+      if (isAdmin === true) {
+        res = await fetch(`http://localhost:4001/quizzes/`)
+      } else {
+        res = await fetch(`http://localhost:4001/quizzes/user/${userId}`)
+      }
+      setQuizzes(await res.json())
+    }
+    getQuizzes()
+  }, [username])
 
   const handleConfirmDelete = () => {
     handleDeleteQuiz(selectedQuiz._id)
@@ -57,11 +76,6 @@ const EditQuizzes = ({ quizzes }) => {
     )
   }
 
-  // function to reload page to remove deleted quiz. May not need it later on.
-  function refreshPage() {
-    window.location.reload(false)
-  }
-
   const handleConfirmEdit = () => {
     console.log("calling edit quiz :", selectedQuizEdit._id)
     nav(`/edit-a-quiz/${selectedQuizEdit._id}`)
@@ -98,40 +112,38 @@ const EditQuizzes = ({ quizzes }) => {
   }, [])
 
   return (
-    <>
-      <div>
-        <h1>Choose a Quiz to edit or delete</h1>
-        <div className='card-container'>
-          {quizzes.length === 0 ? <h1>Loading...</h1> : quizzes.map((quiz, index) => (
-            <div key={index}>
-              <ShowQuizEdit 
-                quiz={quiz} 
-                setSelectedQuizEdit={setSelectedQuizEdit} 
-                setSelectedQuiz={setSelectedQuiz}
-              />
-            </div>
-          ))}
-        </div>
-        {selectedQuiz && (
-          <DeleteConfirmation
-            show={showPopup}
-            value={false}
-            onHide={(e) => {
-              setSelectedQuiz(null)
-            }}
-          />
-        )}
-        {selectedQuizEdit && (
-          <EditConfirmation
-            show={showPopup}
-            value={false}
-            onHide={(e) => {
-              setSelectedQuizEdit(null)
-            }}
-          />
-        )}
+    <div className='home'>
+      <h1>Choose a Quiz to edit or delete</h1>
+      <div className='card-container'>
+        {quizzes.length === 0 ? <h1>Loading...</h1> : quizzes.map((quiz, index) => (
+          <div key={index}>
+            <ShowQuizEdit 
+              quiz={quiz} 
+              setSelectedQuizEdit={setSelectedQuizEdit} 
+              setSelectedQuiz={setSelectedQuiz}
+            />
+          </div>
+        ))}
       </div>
-    </>
+      {selectedQuiz && (
+        <DeleteConfirmation
+          show={showPopup}
+          value={false}
+          onHide={(e) => {
+            setSelectedQuiz(null)
+          }}
+        />
+      )}
+      {selectedQuizEdit && (
+        <EditConfirmation
+          show={showPopup}
+          value={false}
+          onHide={(e) => {
+            setSelectedQuizEdit(null)
+          }}
+        />
+      )}
+    </div>
   )
 }
 
