@@ -13,6 +13,10 @@ const LogIn = () => {
   const [message, setMessage] = useState('')
   const nav = useNavigate()
 
+  // if (user !== null) {
+  //   nav('/user')
+  // } 
+
   async function login(user) {
     const res = await fetch(`http://localhost:4001/auth/login`, {
       method: 'POST', 
@@ -32,6 +36,7 @@ const LogIn = () => {
     } else {
       setJwt(data)
       setUser(data.user)
+      nav('/user')
     }
   }
   

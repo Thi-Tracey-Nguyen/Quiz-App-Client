@@ -21,9 +21,9 @@ const EditQuizzes = () => {
       const isAdmin = localStorage.getItem('isAdmin') 
       const userId = localStorage.getItem('userId')
       let res
-      if (isAdmin === true) {
+      if (isAdmin === 'true') {
         res = await fetch(`http://localhost:4001/quizzes/`)
-      } else {
+      } else if (isAdmin === 'false') {
         res = await fetch(`http://localhost:4001/quizzes/user/${userId}`)
       }
       setQuizzes(await res.json())
