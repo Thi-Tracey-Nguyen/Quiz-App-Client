@@ -33,14 +33,11 @@ const LogIn = () => {
     if (!res.ok) {
       const msg = `An error occurred ${res.status}`
       throw new Error(msg)
-    } else {
-      setJwt(data)
-      setUser(data.user)
-      nav('/user')
-    }
+    } 
+    setJwt(data)
+    setUser(data.user)
+    // nav('/user')
   }
-  
-  console.log(user)
   
   // setup local storage from jwt data
   useEffect(() => {

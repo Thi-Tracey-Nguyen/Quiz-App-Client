@@ -8,12 +8,20 @@ const UserProfile = () => {
   const nav = useNavigate()
 
   useEffect(() => {
-    const newUser = {
-      userId: localStorage.getItem('userId'),
-      username: localStorage.getItem('username'),
-      isAdmin: localStorage.getItem('isAdmin'),
+    async function fetchUser() {
+      const userId = localStorage.getItem('userId')
+      const token = localStorage.getItem('token')
+      const res = await fetch(`http://localhost:4001/auth/user/${userId}`, {
+        headers: { 'Authorization': token }
+      })
+      if (!res.ok) {
+        const message = res.status
+        throw new Error(message)
+      }
+      const data = await res.json()
+      setUser(data)
     }
-    setUser(newUser)
+    fetchUser()
   }, [])
 
   const handleLogOut = async () => {
@@ -32,7 +40,6 @@ const UserProfile = () => {
     nav('/')
   }
 
-  const username = localStorage.getItem('username')
 
   return (
     <>

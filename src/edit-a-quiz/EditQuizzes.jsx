@@ -12,21 +12,30 @@ const EditQuizzes = () => {
   const [selectedQuizEdit, setSelectedQuizEdit] = useState(null)
   const nav = useNavigate()
 
-  if (username === null) {
-    nav('/auth/login')
-  }
-
   useEffect(() => {
     async function getQuizzes() {
-      const isAdmin = localStorage.getItem('isAdmin') 
-      const userId = localStorage.getItem('userId')
-      let res
-      if (isAdmin === 'true') {
-        res = await fetch(`http://localhost:4001/quizzes/`)
-      } else if (isAdmin === 'false') {
-        res = await fetch(`http://localhost:4001/quizzes/user/${userId}`)
+      try {
+        const userId = localStorage.getItem('userId')
+        const isAdmin = localStorage.getItem('isAdmin')
+        console.log(isAdmin)
+        const token = localStorage.getItem('token')
+        let res
+        if (isAdmin) {
+          res = await fetch(`http://localhost:4001/quizzes/admin`, {
+            headers: { 'Authorization': token }
+            })
+        } else {
+          res = await fetch(`http://localhost:4001/quizzes/user/${userId}`, {
+            headers: { 'Authorization': token }
+            })
+        }
+        const data = await res.json()
+        console.log(res)
+        setQuizzes(data)
+      } catch (error) {
+        const message = error.message
+        throw new Error(message)
       }
-      setQuizzes(await res.json())
     }
     getQuizzes()
   }, [username])

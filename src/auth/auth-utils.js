@@ -3,7 +3,7 @@ import moment from 'moment'
 function setLocalStorageItems(jwt) {
   if (jwt !== null) {
     localStorage.setItem('token', jwt.token) 
-    localStorage.setItem('username', jwt.user.username) 
+    // localStorage.setItem('username', jwt.user.username) 
     localStorage.setItem('userId', jwt.user._id)
     localStorage.setItem('isAdmin', jwt.user.isAdmin)
 
@@ -14,9 +14,9 @@ function setLocalStorageItems(jwt) {
 
 function removeLocalStorageItems() {
   localStorage.removeItem('token')
-  localStorage.removeItem('username')
+  // localStorage.removeItem('username')
   localStorage.removeItem('userId')
-  localStorage.removeItem('isAdmin')
+  // localStorage.removeItem('isAdmin')
   localStorage.removeItem('expires')
 }
 
