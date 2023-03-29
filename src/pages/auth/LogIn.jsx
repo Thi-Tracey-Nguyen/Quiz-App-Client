@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { redirect, useNavigate } from "react-router-dom";
 import Register from './Register'
 import { Link } from 'react-router-dom'
-import { setLocalStorageItems } from './auth-utils'
+import { setLocalStorageItems } from '../../utils/auth-utils'
+import './login-register.css'
 
 const LogIn = () => {
 
@@ -55,16 +56,18 @@ const LogIn = () => {
   }
 
   return (
-    <div className='home small'>
+    <div className='home-login'>
       <h1>Login</h1>
-      <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
-      <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
-      {message !== '' ? <p>{message}</p> : ''}
-      <button className='random' onClick={handleSubmit}> Login </button>
-      <p>Or</p>
-      <button className='random'>
-        <Link to='/auth/register'>Register</Link>
-      </button>
+      <form className='auth'>
+          <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
+          <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
+          {message !== '' ? <p>{message}</p> : ''}
+          <button className='random' onClick={handleSubmit}> Login </button>
+          <p>Or</p>
+          <button className='random'>
+            <Link to='/auth/register'>Register</Link>
+          </button>
+      </form>
     </div>
   )
 }

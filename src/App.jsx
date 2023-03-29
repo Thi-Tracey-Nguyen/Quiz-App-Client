@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route, useParams, useNavigate } from 'react-router-dom'
-import Home from './home/Home'
-import NavBar from './home/NavBar'
-import Footer from './home/Footer'
-import Categories from './categories/Categories'
-import QuizForm from './make-a-quiz/QuizForm'
-import Profile from './profile/Profile'
-import Quizzes from './categories/Quizzes'
-import CategoryQuizzes from './categories/CategoryQuizzes'
-import EditQuizzes from './edit-a-quiz/EditQuizzes'
-import Result from './result/Result'
-// import ShowQuestion from './take-a-quiz/ShowQuestion'
-import TakeAQuiz from './take-a-quiz/TakeAQuiz'
-import QuestionsForm from './make-a-quiz/QuestionsForm'
-import EditQuestions from './edit-a-quiz/EditQuestions'
-import EditAQuiz from './edit-a-quiz/EditAQuiz'
-import CategoryForm from './make-a-quiz/CategoryForm'
-import Loading from './loading/Loading'
-import Register from './auth/Register'
-import LogIn from './auth/Login'
-import UserProfile from './auth/UserProfile'
+import Home from './pages/home/Home'
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
+import Categories from './pages/categories/Categories'
+import QuizForm from './pages/make-a-quiz/QuizForm'
+import Profile from './pages/profile/Profile'
+import AllQuizzes from './pages/all-quizzes/AllQuizzes'
+import CategoryQuizzes from './pages/category-quizzes/CategoryQuizzes'
+import EditQuizzes from './pages/edit-quizzes/EditQuizzes'
+import Result from './pages/result/Result'
+import TakeAQuiz from './pages/take-a-quiz/TakeAQuiz'
+import QuestionsForm from './pages/make-a-quiz/QuestionsForm'
+import EditQuestions from './pages/edit-questions/EditQuestions'
+import EditAQuiz from './pages/edit-a-quiz/EditAQuiz'
+import CategoryForm from './pages/make-a-quiz/CategoryForm'
+import Loading from './pages/loading/Loading'
+import Register from './pages/auth/Register'
+import LogIn from './pages/auth/Login'
+import UserProfile from './pages/auth/UserProfile'
 
 
 const App = () => {
@@ -137,7 +136,7 @@ const App = () => {
       <NavBar />
         <Routes>
           <Route path='/' element={<Home quizzes={quizzes}/>} />
-          <Route path='/quizzes' element={<Quizzes quizzes={quizzes} questions={questions} setQuizzes={setQuizzes} setQuestions={setQuestions} />} />
+          <Route path='/quizzes' element={<AllQuizzes quizzes={quizzes} questions={questions} setQuizzes={setQuizzes} setQuestions={setQuestions} />} />
           <Route path='/categories' element={<Categories categories={categories}/>} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />

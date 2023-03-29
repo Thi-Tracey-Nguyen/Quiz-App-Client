@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import RandomQuiz from "./RandomQuiz";
-import ShowQuiz from "./ShowQuiz";
-import ReturnToTop from "../UI/ReturnToTop";
-import "../styles/CommonStyles.css";
+import React, { useEffect, useState } from "react"
+import RandomQuiz from "../../components/RandomQuiz"
+import ShowQuiz from "../../components/ShowQuiz"
+import ReturnToTop from "../../components/UI/ReturnToTop"
 
-const Quizzes = ({ quizzes, setQuizzes, questions }) => {
+const AllQuizzes = ({ quizzes, setQuizzes, questions }) => {
   useEffect(() => {
     async function getQuizzes() {
       const res = await fetch('https:quiz-app-server.up.railway.app/quizzes')
@@ -33,4 +32,4 @@ const Quizzes = ({ quizzes, setQuizzes, questions }) => {
   )
 }
 
-export default Quizzes
+export default AllQuizzes

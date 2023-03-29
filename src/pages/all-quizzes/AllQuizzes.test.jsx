@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from "react-router-dom"
 import { expect } from 'vitest'
-import Quizzes from '../categories/Quizzes'
+import AllQuizzes from './AllQuizzes'
 
 describe('Categories component', () => {
 	let container
@@ -19,7 +19,7 @@ describe('Categories component', () => {
 	beforeEach(function () {
 		container = render(
 			<BrowserRouter>
-				<Quizzes quizzes={quizzes}/>
+				<AllQuizzes quizzes={quizzes}/>
 			</BrowserRouter>
 		).container
 	})

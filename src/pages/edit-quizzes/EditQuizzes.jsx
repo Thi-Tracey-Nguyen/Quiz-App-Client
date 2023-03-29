@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
-import '../styles/CommonStyles.css'
-import ShowQuizEdit from "./ShowQuizEdit"
+import ShowQuizEdit from "../../components/ShowQuizEdit"
 
 const EditQuizzes = () => {
   const [quizzes, setQuizzes] = useState([])

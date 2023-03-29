@@ -1,6 +1,5 @@
 import React, { useState, Image } from 'react'
-import { Link, redirect, useNavigate } from 'react-router-dom'
-import "../styles/CommonStyles.css"
+import { Link, useNavigate } from 'react-router-dom'
 
 const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   const [category, setCategory] = useState('')
@@ -80,7 +79,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   }
 
   return (
-    <div className="home small">        
+    <div className="main-body-centered">        
       <form onSubmit={submitQuiz}>
       <h1 className="d-flex justify-content-center">Make a new Quiz</h1>
         <div className="category-dropdown-form d-flex flex-column">       
@@ -108,7 +107,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
-        <div className='image-form '>
+        <div className='image-form'>
           Choose an image: <br/>
           {imgArray.map((img, index) => (
             <label htmlFor='image-form' key={index}>

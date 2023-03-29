@@ -1,7 +1,6 @@
 import React from 'react'
-import ShowQuiz from '../categories/ShowQuiz'
-import '../styles/CommonStyles.css'
-import logo from '../assets/logo.png'
+import ShowQuiz from '../../components/ShowQuiz'
+import logo from '../../assets/logo.png'
 
 const Home = ({ quizzes }) => {
   const slicedQuizzes = quizzes.slice(0, 3)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import "../styles/CommonStyles.css";
 import { Link, useNavigate} from 'react-router-dom'
+import './take-a-quiz.css'
 
 const TakeAQuiz = ({ quiz, onChange }) => { 
 
@@ -14,23 +14,23 @@ const TakeAQuiz = ({ quiz, onChange }) => {
   const question = quiz.questions[index]
 
   // countdown timer
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (timeLeft > 0) {
-         setTimeLeft(timeLeft -1)
-      } else {
-        if (index < quiz.questions.length - 1) {
-          setAnswer('')
-          setTimeLeft(20)
-          handleClickNext()
-        } else {
-          setAnswer('')
-          handleSubmit()
-        }
-      }
-    }, 1000)
-    return () => clearInterval(timer)
-  })
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     if (timeLeft > 0) {
+  //        setTimeLeft(timeLeft -1)
+  //     } else {
+  //       if (index < quiz.questions.length - 1) {
+  //         setAnswer('')
+  //         setTimeLeft(20)
+  //         handleClickNext()
+  //       } else {
+  //         setAnswer('')
+  //         handleSubmit()
+  //       }
+  //     }
+  //   }, 1000)
+  //   return () => clearInterval(timer)
+  // })
 
   //function to reset timer
   const restartTimer = () => {
@@ -103,7 +103,7 @@ const TakeAQuiz = ({ quiz, onChange }) => {
   return (
     <div className='main-body'>
       <h1>{quiz.title}</h1>
-      <h1>Timer: {timeLeft}</h1>
+      <h2>Timer: {timeLeft}</h2>
       <div className='container'>
         <div className='wrapper'>
           <h4 className="question">{question.question}</h4>

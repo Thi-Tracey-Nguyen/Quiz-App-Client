@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import ReturnToTop from '../UI/ReturnToTop'
-import RandomCat from './RandomCat'
-import '../styles/CommonStyles.css'
+import ReturnToTop from '../../components/UI/ReturnToTop'
+import RandomCat from '../../components/RandomCat'
 
 const Categories = ({ categories }) => {
 

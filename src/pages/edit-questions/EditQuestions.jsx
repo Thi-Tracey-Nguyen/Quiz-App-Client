@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import "../styles/CommonStyles.css"
 
 const EditQuestions = ({ quiz, questions, setQuestions }) => {
   const [index, setIndex] = useState(0);

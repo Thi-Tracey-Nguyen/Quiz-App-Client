@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import '../styles/CommonStyles.css'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
-import ReturnToTop from '../UI/ReturnToTop'
+import ReturnToTop from '../../components/UI/ReturnToTop'
+import './result.css'
 
 function HighScorePopup(props) {
   return (
@@ -89,8 +89,6 @@ const Result = ({ answers, quiz }) => {
       </div>
     )
   }
-
-  console.log(slideIndex)
 
   return (
     <div> 

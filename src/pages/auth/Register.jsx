@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './login-register.css'
 
 const Register = () => {
 
@@ -18,7 +19,7 @@ const Register = () => {
     return res
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     const newUser = {
@@ -26,8 +27,9 @@ const Register = () => {
       password
     }
 
-    const res = register(newUser)
-   
+    const res = await register(newUser)
+    console.log(res)
+
     if (res.status === 201) {
       alert('User created sucessfully!')
     }
@@ -35,11 +37,13 @@ const Register = () => {
   
 
   return (
-    <div className='home small'>
+    <div className='home-login'>
       <h1>Register</h1>
-      <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
-      <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
-      <button onClick={handleSubmit}> Register </button>
+      <form className='auth'>
+        <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
+        <input placeholder='password' type='password' onChange={e => setPassword(e.target.value)}/>
+        <button className='random' onClick={handleSubmit}> Register </button>
+      </form>
     </div> 
   )
 }

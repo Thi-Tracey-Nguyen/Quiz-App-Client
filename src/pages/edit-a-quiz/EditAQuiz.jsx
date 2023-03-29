@@ -1,6 +1,5 @@
 import React, { useState, Image, useEffect } from 'react'
 import { Link, redirect, useNavigate, useParams } from 'react-router-dom'
-import "../styles/CommonStyles.css";
 
 const EditAQuiz = ({ categories }) => {
   const [quiz, setQuiz] = useState('')
