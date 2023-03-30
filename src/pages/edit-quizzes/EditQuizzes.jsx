@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import ShowQuizEdit from "../../components/ShowQuizEdit"
+import { UserContext } from "../../UserContext"
 
 const EditQuizzes = () => {
   const [quizzes, setQuizzes] = useState([])
-  const [username, setUsername] = useState(localStorage.getItem('username'))
+  const { user, setUser } = useContext(UserContext)
   const [selectedQuiz, setSelectedQuiz] = useState(null)
   const [selectedQuizEdit, setSelectedQuizEdit] = useState(null)
   const nav = useNavigate()
@@ -16,10 +17,9 @@ const EditQuizzes = () => {
       try {
         const userId = localStorage.getItem('userId')
         const isAdmin = localStorage.getItem('isAdmin')
-        console.log(isAdmin)
         const token = localStorage.getItem('token')
         let res
-        if (isAdmin) {
+        if (isAdmin === 'true') {
           res = await fetch(`http://localhost:4001/quizzes/admin`, {
             headers: { 'Authorization': token }
             })
@@ -29,7 +29,6 @@ const EditQuizzes = () => {
             })
         }
         const data = await res.json()
-        console.log(res)
         setQuizzes(data)
       } catch (error) {
         const message = error.message
@@ -37,7 +36,7 @@ const EditQuizzes = () => {
       }
     }
     getQuizzes()
-  }, [username])
+  }, [user])
 
   const handleConfirmDelete = () => {
     handleDeleteQuiz(selectedQuiz._id)

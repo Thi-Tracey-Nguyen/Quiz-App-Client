@@ -38,6 +38,10 @@ form > p {
   width: 100vw;
 }
 
+button.random {
+  margin: 1rem;
+}
+
 @media screen and (min-width: 600px) {
   form.auth {
     width: 30vw;

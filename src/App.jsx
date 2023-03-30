@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Routes, Route, useParams, useNavigate } from 'react-router-dom'
 import Home from './pages/home/Home'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import Categories from './pages/categories/Categories'
 import QuizForm from './pages/make-a-quiz/QuizForm'
-import Profile from './pages/profile/Profile'
 import AllQuizzes from './pages/all-quizzes/AllQuizzes'
 import CategoryQuizzes from './pages/category-quizzes/CategoryQuizzes'
 import EditQuizzes from './pages/edit-quizzes/EditQuizzes'
@@ -18,49 +17,35 @@ import CategoryForm from './pages/make-a-quiz/CategoryForm'
 import Loading from './pages/loading/Loading'
 import Register from './pages/auth/Register'
 import LogIn from './pages/auth/Login'
-import UserProfile from './pages/auth/UserProfile'
+import UserProfile from './pages/user-profile/UserProfile'
+import { getDataTest } from './utils/fetch-API'
+import { UserContext } from './UserContext'
 
 
 const App = () => {
   const [categories, setCategories] = useState([])
   const [quizzes, setQuizzes] = useState([])
   const [questions, setQuestions] = useState(null)
+  const [answers, setAnswers] = useState(null) 
+  const [user, setUser] = useState(null)
 
+  //set up UserContext
+  const value = useMemo(() => ({ user, setUser }), [user, setUser])
+
+  //fetch all quizzes, categories and questions using one-call API
   useEffect(() => {
-    async function getCategories() {
-      const res = await fetch('https://quiz-app-server.up.railway.app/categories')
-      const data = await res.json()
-      setCategories(data)
+    async function fetchAPI () {
+      const data = await getDataTest('onecall/')
+      setQuizzes(data.quizzes)
+      setCategories(data.categories)
+      setQuestions(data.questions)
     }
-    getCategories()
+    fetchAPI()
   }, [])
 
-  useEffect(() => {
-    async function getQuizzes() {
-      const res = await fetch('https://quiz-app-server.up.railway.app/quizzes')
-      const data = await res.json()
-      setQuizzes(data)
-    }
-    getQuizzes()
-  }, [])
-
-  useEffect(() => {
-    async function getQuestions() {
-      const res = await fetch('https://quiz-app-server.up.railway.app/questions')
-      const data = await res.json()
-      setQuestions(data)
-    }
-    getQuestions()
-  }, [])
-
-  const [answers, setAnswers] = useState([])
-
-  
   //this function gets points sent from TakeAQuiz component (child to parent)
   function getAnswers(data) {
     setAnswers(data)
-    console.log(data)
-    // nav(`/result/${quizId}`)
   }
   
   // HOC for ShowQuestion to access quizId in the URL and to fetch a quiz
@@ -80,39 +65,7 @@ const App = () => {
     return quiz ? <TakeAQuiz quiz={quiz} onChange={getAnswers} /> : <Loading />
   }
 
-  // HOC for EditAQuiz to access quizId in the URL
-  const EditAQuizWrapper = () => {
-    const { quizId } = useParams()
-    const [quiz, setQuiz] = useState('')
-    
-    useEffect(() => {
-      async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
-        const data = await res.json()
-        setQuiz(data)
-      }
-      getQuiz()
-    }, [quizId])
-
-    return quiz ? <EditAQuiz quiz={quiz} /> : <Loading />
-  }
-
-  // HOC for Result to access quizId in the URL
-  const ResultWrapper = () => {
-    const { quizId } = useParams()
-    const [quiz, setQuiz] = useState('')
-    
-    useEffect(() => {
-      async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
-        const data = await res.json()
-        setQuiz(data)
-      }
-      getQuiz()
-    }, [quizId])
-
-    return quiz ? <Result quiz={quiz} answers={answers} /> : <Loading />
-  }
+  
 
   const EditQuestionWrapper = () => {
     const { quizId } = useParams()
@@ -129,10 +82,10 @@ const App = () => {
 
     return quiz ? <EditQuestions quiz={quiz} questions={questions} setQuestions={setQuestions} /> : <Loading />
   }
-  
 
   return (
     <>
+      <UserContext.Provider value={value}>
       <NavBar />
         <Routes>
           <Route path='/' element={<Home quizzes={quizzes}/>} />
@@ -141,20 +94,18 @@ const App = () => {
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
           <Route path='/make-a-quiz' element={<QuizForm quizzes={quizzes} categories={categories} setQuizzes={setQuizzes} />} />
-          <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes} />} />
+          <Route path='/result/:quizId' element={<Result answers={answers} />} />
           <Route path='/edit-a-quiz/:quizId' element={<EditAQuiz categories={categories} />} />
           <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestionWrapper />} />
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
+          <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes} />} />
           <Route path='/user' element={<UserProfile />} />
-          <Route path='/login' element={<LogIn />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/result/:quizId' element={<ResultWrapper />} />
           <Route path='/auth/login' element={<LogIn />} />
           <Route path='/auth/register' element={<Register />} />
           <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
+        </UserContext.Provider>
       <Footer />
     </>
   )

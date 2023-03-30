@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import './make-quiz.css'
 
 const AddCategory = ({ categories, setCategories }) => {
   const [name, setName] = useState('')
@@ -40,9 +41,9 @@ const AddCategory = ({ categories, setCategories }) => {
   }
 
   return (
-    <div className='home'>
+    <div className='home-make-quiz'>
       <h2>Add a new Category</h2>
-      <form onSubmit={getParams} className='container'>
+      <form onSubmit={getParams} className='cat-form'>
         <div className='cat-name-form  d-flex flex-column'>
           <label>Category name:</label>
           <input
@@ -51,10 +52,9 @@ const AddCategory = ({ categories, setCategories }) => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <br />
-        <div className='d-flex justify-content-between'>
-          <button>Submit</button>
-          <button>
+        <div className='buttons'>
+          <button className='random'>Submit</button>
+          <button className='random'>
             <Link to='/make-a-quiz' className='fw-normal'>Quit</Link>
           </button>
         </div>

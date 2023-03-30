@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { redirect, useNavigate } from "react-router-dom";
 import Register from './Register'
 import { Link } from 'react-router-dom'
 import { setLocalStorageItems } from '../../utils/auth-utils'
 import './login-register.css'
+import { UserContext } from '../../UserContext';
 
 const LogIn = () => {
 
   const [jwt, setJwt] = useState(null)
-  const [user, setUser] = useState(null)
+  const { user, setUser } = useContext(UserContext) 
   const [username, setUsername] = useState(localStorage.getItem('username'))
   const [password, setPassword] = useState('') 
   const [message, setMessage] = useState('')
@@ -29,7 +30,7 @@ const LogIn = () => {
       body: JSON.stringify(user)
     })
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     setMessage(data.message)
     if (!res.ok) {
       const msg = `An error occurred ${res.status}`
@@ -37,7 +38,7 @@ const LogIn = () => {
     } 
     setJwt(data)
     setUser(data.user)
-    // nav('/user')
+    nav('/user')
   }
   
   // setup local storage from jwt data
@@ -62,11 +63,13 @@ const LogIn = () => {
           <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
           <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
           {message !== '' ? <p>{message}</p> : ''}
-          <button className='random' onClick={handleSubmit}> Login </button>
-          <p>Or</p>
-          <button className='random'>
-            <Link to='/auth/register'>Register</Link>
-          </button>
+          <div className='buttons-login'>
+            <button className='random' onClick={handleSubmit}> Login </button>
+            <p>Or</p>
+            <button className='random'>
+              <Link to='/auth/register'>Register</Link>
+            </button>
+          </div>
       </form>
     </div>
   )

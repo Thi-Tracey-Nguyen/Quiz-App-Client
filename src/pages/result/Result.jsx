@@ -1,38 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom'
+
+import { Link, useParams } from 'react-router-dom'
 import ReturnToTop from '../../components/UI/ReturnToTop'
 import './result.css'
+import { getData } from '../../utils/fetch-API'
+import Loading from '../loading/Loading'
+import HighScorePopup from '../../components/PopUpResult'
 
-function HighScorePopup(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          You got every answer correct!
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>&#127881;</p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  )
-}
-
-const Result = ({ answers, quiz }) => {
+const Result = ({ answers }) => {
   const [showPopup, setShowPopup] = useState(false)
   const [slideIndex, setSlideIndex] = useState(0)
+  const [quiz, setQuiz] = useState(null)
+  const { quizId } = useParams()
 
   let points = 0
+
+  useEffect(() => {
+    async function fetchQuiz() {
+      const data = await getData(`quizzes/${quizId}`)
+      setQuiz(data)
+    }
+    fetchQuiz()
+  }, [])
 
   function calculatePoints(answers, quiz) {
     for (let i = 0;i < answers.length;i++) {
@@ -41,8 +30,6 @@ const Result = ({ answers, quiz }) => {
       }
     }
   }
-
-  calculatePoints(answers, quiz)
 
   useEffect(() => {
     if (points === answers.length) {
@@ -66,13 +53,13 @@ const Result = ({ answers, quiz }) => {
     } 
   }
 
-  //function renders answers to used in carousel
+  // function renders answers to used in carousel
   function reviewAnswer() {
     return (
       <div className="container-slider">
         {quiz.questions.map((question, index) => 
-          <div className={slideIndex === index ? 'slide active' : 'slide'}>
-            <div className="card-result" key={index}>
+          <div key={index} className={slideIndex === index ? 'slide active' : 'slide'}>
+            <div className="card-result" >
               <p className='card-header'>
                 {question.question}
               </p>
@@ -91,37 +78,40 @@ const Result = ({ answers, quiz }) => {
   }
 
   return (
-    <div> 
-      <div>
-        <HighScorePopup
-          show={showPopup}
-          value={false}
-          onHide={(e) => setShowPopup(e.target.value)}
-        />
-      </div>
-      <div className='home'>
-        <h2>{points === 1 ? 'Your Point:' : 'Your Points:'}</h2>
-        <h3>{points} / {quiz.questions.length}</h3>
-        <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
-        <div className='container-result'>
-          <button className="btn-slide slider-prev" onClick={handleClickPrev}>&#8656;</button>
-          {reviewAnswer()}
-          <button className="btn-slide slider-next" onClick={handleClickNext}>&#8658;</button>
-        </div >
-
-        <br />
-        <div className='random-wrapper'>
-          <button className='another-quiz'>
-              <Link to={'/quizzes'}>Take another quiz</Link>
-          </button>
+    <>
+      {quiz === null ? <Loading /> : 
+      <div> 
+        <div>
+          <HighScorePopup
+            show={showPopup}
+            value={false}
+            onHide={(e) => setShowPopup(e.target.value)}
+          />
         </div>
-        <br />
-      </div>
-      <div>
-        <ReturnToTop />
-      </div>
-    </div>
+        <div className='home'>
+          <h2>{points === 1 ? 'Your Point:' : 'Your Points:'}</h2>
+          <h3>{calculatePoints(answers, quiz)} / {quiz.questions.length}</h3>
+          <img src={quiz.image} height={200} width={200} style={{ padding: 5 }} />
+          <div className='container-result'>
+            <button className="btn-slide slider-prev" onClick={handleClickPrev}>&#8656;</button>
+            {reviewAnswer()}
+            <button className="btn-slide slider-next" onClick={handleClickNext}>&#8658;</button>
+          </div >
 
+          <br />
+          <div className='random-wrapper'>
+            <button className='another-quiz'>
+                <Link to={'/quizzes'}>Take another quiz</Link>
+            </button>
+          </div>
+          <br />
+        </div>
+        <div>
+          <ReturnToTop />
+        </div>
+      </div>
+    }
+  </>
   )
 }
 

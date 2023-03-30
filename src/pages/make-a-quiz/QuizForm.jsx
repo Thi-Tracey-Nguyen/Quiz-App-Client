@@ -1,5 +1,6 @@
 import React, { useState, Image } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import './make-quiz.css'
 
 const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   const [category, setCategory] = useState('')
@@ -79,9 +80,9 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   }
 
   return (
-    <div className="main-body-centered">        
-      <form onSubmit={submitQuiz}>
-      <h1 className="d-flex justify-content-center">Make a new Quiz</h1>
+    <div className="home-make-quiz"> 
+      <h1 className="d-flex justify-content-center">Make a new Quiz</h1>       
+      <form onSubmit={submitQuiz} className='make-quiz'>
         <div className="category-dropdown-form d-flex flex-column">       
           <label>Category:</label>
           <select onChange={(e) => setCategory(e.target.value)}>
@@ -123,21 +124,22 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
             </label>
           ))}
         </div>
-        <br />
-        <p>Don't see a Category that fits your Quiz idea?
-          <br/>
-        <Link to={"/add-a-category"}>Add a new Category</Link>
-        </p>
-        <br />
-        <div className="d-flex justify-content-between">
-          <button className='random'>
-            <Link to={"/"}>
-              Quit
-            </Link>
-          </button>
-          <button className='random'>Next</button>
-        </div>
       </form>
+      <div className='new-cat'>
+        <p>Don't see a Category that fits your Quiz idea?</p>
+        <button className='random'>
+          <Link to={"/add-a-category"}>Add a new Category</Link>
+        </button>
+      </div>
+      <div className="quit-next">
+        <button className='random'>
+          <Link to={"/"}>
+            Quit
+          </Link>
+        </button>
+        <button className='random'>Next</button>
+      </div>
+      
     </div>
   )
 }

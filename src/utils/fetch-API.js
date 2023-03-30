@@ -35,4 +35,4 @@ async function postDataTest(obj, uri) {
   return await res.json()
 }
 
-export { getData, fetchData, postDataTest, getDataTest } 
+export { getData, postData, postDataTest, getDataTest } 
