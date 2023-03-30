@@ -137,7 +137,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
             Quit
           </Link>
         </button>
-        <button className='random'>Next</button>
+        <button className='random' onClick={submitQuiz}>Next</button>
       </div>
       
     </div>

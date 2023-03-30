@@ -99,7 +99,7 @@ const App = () => {
           <Route path='/edit-a-quiz/:quizId/questions' element={<EditQuestionWrapper />} />
           <Route path='/add-a-category' element={<CategoryForm categories={categories} setCategories={setCategories} />} />
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
-          <Route path='/edit-a-quiz' element={<EditQuizzes quizzes={quizzes} />} />
+          <Route path='/edit-a-quiz' element={<EditQuizzes />} />
           <Route path='/user' element={<UserProfile />} />
           <Route path='/auth/login' element={<LogIn />} />
           <Route path='/auth/register' element={<Register />} />

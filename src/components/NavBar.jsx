@@ -39,9 +39,9 @@ const NavBar = () => {
             </li>
             {user ? <Link className="nav-link" to='/user'>{capitalize(user.username)}</Link> : ""}
           </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
   )
 }
 

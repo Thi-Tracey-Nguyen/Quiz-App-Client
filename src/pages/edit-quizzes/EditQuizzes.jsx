@@ -15,20 +15,22 @@ const EditQuizzes = () => {
   useEffect(() => {
     async function getQuizzes() {
       try {
-        const userId = localStorage.getItem('userId')
-        const isAdmin = localStorage.getItem('isAdmin')
         const token = localStorage.getItem('token')
         let res
-        if (isAdmin === 'true') {
+        if (user.isAdmin) {
           res = await fetch(`http://localhost:4001/quizzes/admin`, {
             headers: { 'Authorization': token }
             })
         } else {
-          res = await fetch(`http://localhost:4001/quizzes/user/${userId}`, {
+          res = await fetch(`http://localhost:4001/quizzes/user/${user._id}`, {
             headers: { 'Authorization': token }
             })
         }
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
         const data = await res.json()
+        console.log(res)
         setQuizzes(data)
       } catch (error) {
         const message = error.message

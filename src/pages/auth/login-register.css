@@ -26,8 +26,8 @@ form > input {
   border-radius: 0.5rem; 
 }
 
-form > p {
-  margin: auto;
+.buttons-login > p {
+  margin-bottom: 0;
 }
 
 .home-login {
@@ -40,6 +40,11 @@ form > p {
 
 button.random {
   margin: 1rem;
+}
+
+span.tips {
+  font-size: 0.8rem;
+  font-style: italic;
 }
 
 @media screen and (min-width: 600px) {
