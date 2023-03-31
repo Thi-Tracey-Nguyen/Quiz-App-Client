@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { removeLocalStorageItems } from '../../utils/auth-utils'
 import { UserContext } from '../../UserContext'
+import { getData } from '../../utils/fetch-API'
 
 const UserProfile = () => {
 
@@ -10,9 +11,7 @@ const UserProfile = () => {
 
   const handleLogOut = async () => {
 
-    const res = await fetch(`http://localhost:4001/auth/logout`, {
-        credentials: 'include',
-    })
+    const res = await getData('auth/logout')
     if (!res.ok) {
       const msg = `An error has occurred ${res.status}`
       throw new Error(msg)

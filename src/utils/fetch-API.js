@@ -1,17 +1,19 @@
+const URL = 'https://quiz-app-server.up.railway.app/'
+
 async function getData(uri) {
-  const res = await fetch(`https://quiz-app-server.up.railway.app/${uri}`)
+  const res = await fetch(`${URL.concat(uri)}`)
   return res
 }
 
 async function getDataWithToken(uri, token) {
-  const res = await fetch(`https://quiz-app-server.up.railway.app/${uri}`, {
+  const res = await fetch(`${URL.concat(uri)}`, {
     headers: { 'Authorization': token }
   })
   return res
 }
 
-async function postData(obj, uri) {
-  const res = await fetch(`https://quiz-app-server.up.railway.app/${uri}`, {
+async function postDataWithObj(obj, uri) {
+  const res = await fetch(`${URL.concat(uri)}`, {
     method: 'POST', 
     headers: {
       Accept: 'application/json',
@@ -19,6 +21,18 @@ async function postData(obj, uri) {
     }, 
     credentials: 'include',
     body: JSON.stringify(obj)
+  })
+  return res
+}
+
+async function postData(uri) {
+  const res = await fetch(`${URL.concat(uri)}`, {
+    method: 'POST', 
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }, 
+    credentials: 'include',
   })
   return res
 }
@@ -42,4 +56,4 @@ async function postDataTest(obj, uri) {
   return await res.json()
 }
 
-export { getData, postData, postDataTest, getDataTest, getDataWithToken } 
+export { getData, postData, postDataWithObj, getDataWithToken } 

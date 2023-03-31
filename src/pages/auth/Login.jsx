@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { setLocalStorageItems } from '../../utils/auth-utils'
 import './login-register.css'
 import { UserContext } from '../../UserContext';
-import { postData } from '../../utils/fetch-API'
+import { postDataWithObj } from '../../utils/fetch-API'
 
 const Login = () => {
 
@@ -16,7 +16,7 @@ const Login = () => {
 
 
   async function login(user) {
-    const res = await postData(user, 'auth/login')
+    const res = await postDataWithObj(user, 'auth/login')
     const data = await res.json()
 
     if (!res.ok) {
