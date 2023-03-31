@@ -65,6 +65,8 @@ const TakeAQuiz = ({ quiz, onChange }) => {
     }
   }
 
+  console.log(answers)
+
   return (
     <div className='main-body'>
       <h1>{quiz.title}</h1>
