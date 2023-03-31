@@ -6,7 +6,7 @@ import './login-register.css'
 import { UserContext } from '../../UserContext';
 import { postData } from '../../utils/fetch-API'
 
-const LogIn = () => {
+const Login = () => {
 
   const { user, setUser } = useContext(UserContext) 
   const [username, setUsername] = useState(localStorage.getItem('username'))
@@ -60,4 +60,4 @@ const LogIn = () => {
 }
 
 
-export default LogIn
+export default Login
