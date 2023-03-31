@@ -28,6 +28,7 @@ const EditQuizzes = () => {
         }
         const data = await res.json()
         console.log(res)
+        console.log(data)
         setQuizzes(data)
       } catch (error) {
         const message = error.message
@@ -41,7 +42,6 @@ const EditQuizzes = () => {
     handleDeleteQuiz(selectedQuiz._id)
     alert("Quiz deleted successfully")
     setSelectedQuiz(null)
-    refreshPage()
   }
 
   const handleDeleteQuiz = async (id) => {
