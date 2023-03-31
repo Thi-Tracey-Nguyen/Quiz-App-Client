@@ -1,11 +1,12 @@
-import React, { useState, Image } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../UserContext';
+import { postDataWithObj } from '../../utils/fetch-API'
 import './make-quiz.css'
 
 const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   const [category, setCategory] = useState('')
   const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
   const [questions, setQuestions] = useState([])
   const [image, setImage] = useState('')
   const imgArray = [
@@ -16,6 +17,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
   ]
 
   const nav = useNavigate()
+  const { user } = useContext(UserContext)
 
   // Function to check if category entered and if so call addQuiz function
   async function submitQuiz(e) {
@@ -23,29 +25,24 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
     if (!category) {
       alert("You need to select a category")
     } else {
-      addQuiz(category, title, author, questions, image)
+      addQuiz(category, title, user, questions, image)
     }
   }
 
   // Add a new quiz to the API
-  const addQuiz = async (category, title, author, questions, image) => {
+  const addQuiz = async (category, title, user, questions, image) => {
     // Add a new quiz
     const newQuiz = {
       category: category,
       title: title,
-      author: author,
+      authorId: user && user._id,
+      author: user.username || 'Guest User',
       questions: questions,
       image: image,
     }
+    console.log(newQuiz)
     // Post new quiz to the API
-    const res = await fetch('https://quiz-app-server.up.railway.app/quizzes', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newQuiz)
-    })
+    const res = await postDataWithObj(newQuiz, 'quizzes')
     console.log(res)
     //catch error when quiz of the same name already exists
     if (res.status === 409) {
@@ -59,17 +56,9 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
       // Navigate to add questions to the new quiz
       navToNewQuiz(data)
     }
-    // Update quizzes state with the new quiz
-    
-    // const findTitle = data.title
-    // const quiz = quizzes.find(quiz => quiz.title === findTitle)
-    // console.log(quizzes)
-    // nav(`/add-questions/${quiz._id}`)
-    // const convertedTitle = await data.title.replaceAll(' ', '%20')
-    // console.log(convertedTitle)
-    // nav(`/add-questions/${convertedTitle}`)
-    // console.log(convertedTitle)
   }
+
+  console.log(user)
 
   // // Uses the new quiz data to get the ID of the new quiz from the DB
   function navToNewQuiz(data) {
@@ -104,8 +93,8 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
           <label>Created by:</label>
           <input
             type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            value={user ? user.username : 'Guest User'}
+            readOnly={true}
           />
         </div>
         <div className='image-form'>

@@ -11,7 +11,7 @@ const ShowQuiz = ({ quiz }) => {
           <p className="fw-bold">Author: {quiz.author}</p>
           <p className="fw-bold">Number of Questions: 
             {quiz.questions.length === 0 ? (
-              "0 questions"
+              " 0"
             ) : ` ${quiz.questions.length}`}
           </p>
         </Link>

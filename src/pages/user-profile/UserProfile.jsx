@@ -22,7 +22,7 @@ const UserProfile = () => {
     removeLocalStorageItems()
     nav('/')
   }
-
+  
   return (
     <>
       {user ? 
