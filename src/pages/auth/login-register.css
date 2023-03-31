@@ -1,0 +1,54 @@
+form.auth  {
+  width: 80vw;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background: rgb(236, 232, 230, 0.8); 
+  border-radius: 0.8rem;
+  padding: 2rem;
+  align-items: center;
+  box-shadow: 2px 2px 2px rgb(108, 105, 105);
+}
+
+form > input, button {
+  margin: 1rem 0;
+}
+
+form > button {
+  width: 100px;
+  padding: 0.5rem;
+}
+
+form > input {
+  width: 80%;
+  height: 5vh;
+  border-radius: 0.5rem; 
+}
+
+.buttons-login > p {
+  margin-bottom: 0;
+}
+
+.home-login {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100vw;
+}
+
+button.random {
+  margin: 1rem;
+}
+
+span.tips {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+@media screen and (min-width: 600px) {
+  form.auth {
+    width: 30vw;
+  }
+}
