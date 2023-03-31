@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import ShowQuizEdit from "../../components/ShowQuizEdit"
 import { UserContext } from "../../UserContext"
+import { getDataWithToken } from "../../utils/fetch-API"
 
 const EditQuizzes = () => {
   const [quizzes, setQuizzes] = useState([])
@@ -18,13 +19,9 @@ const EditQuizzes = () => {
         const token = localStorage.getItem('token')
         let res
         if (user.isAdmin) {
-          res = await fetch(`http://localhost:4001/quizzes/admin`, {
-            headers: { 'Authorization': token }
-            })
+          res = await getDataWithToken('quizzes/admin', token)
         } else {
-          res = await fetch(`http://localhost:4001/quizzes/user/${user._id}`, {
-            headers: { 'Authorization': token }
-            })
+          res = await getDataWithToken(`quizzes/user/${user._id}`, token)
         }
         if (!res.ok) {
           throw new Error(res.status)

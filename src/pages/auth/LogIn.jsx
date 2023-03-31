@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { setLocalStorageItems } from '../../utils/auth-utils'
 import './login-register.css'
 import { UserContext } from '../../UserContext';
+import { postData } from '../../utils/fetch-API'
 
 const LogIn = () => {
 
@@ -15,15 +16,7 @@ const LogIn = () => {
 
 
   async function login(user) {
-    const res = await fetch(`http://localhost:4001/auth/login`, {
-      method: 'POST', 
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }, 
-      credentials: 'include',
-      body: JSON.stringify(user)
-    })
+    const res = await postData(user, 'auth/login')
     const data = await res.json()
     console.log(data)
     setMessage(data.message)

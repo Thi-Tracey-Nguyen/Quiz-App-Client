@@ -18,7 +18,7 @@ import Loading from './pages/loading/Loading'
 import Register from './pages/auth/Register'
 import LogIn from './pages/auth/Login'
 import UserProfile from './pages/user-profile/UserProfile'
-import { getDataTest } from './utils/fetch-API'
+import { getData } from './utils/fetch-API'
 import { UserContext } from './UserContext'
 
 
@@ -35,7 +35,8 @@ const App = () => {
   //fetch all quizzes, categories and questions using one-call API
   useEffect(() => {
     async function fetchAPI () {
-      const data = await getDataTest('onecall/')
+      const res = await getData('onecall/')
+      const data = await res.json()
       setQuizzes(data.quizzes)
       setCategories(data.categories)
       setQuestions(data.questions)
@@ -55,7 +56,7 @@ const App = () => {
 
     useEffect(() => {
       async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
+        const res = await getData(`quizzes/${quizId}`)
         const data = await res.json()
         setQuiz(data)
       }
@@ -73,7 +74,7 @@ const App = () => {
     
     useEffect(() => {
       async function getQuiz() {
-        const res = await fetch(`https://quiz-app-server.up.railway.app/quizzes/${quizId}`)
+        await getData(`quizzes/${quizId}`)
         const data = await res.json()
         setQuiz(data)
       }

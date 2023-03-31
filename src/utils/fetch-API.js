@@ -1,8 +1,14 @@
 async function getData(uri) {
   const res = await fetch(`https://quiz-app-server.up.railway.app/${uri}`)
-  return await res.json()
+  return res
 }
 
+async function getDataWithToken(uri, token) {
+  const res = await fetch(`https://quiz-app-server.up.railway.app/${uri}`, {
+    headers: { 'Authorization': token }
+  })
+  return res
+}
 
 async function postData(obj, uri) {
   const res = await fetch(`https://quiz-app-server.up.railway.app/${uri}`, {
@@ -11,9 +17,10 @@ async function postData(obj, uri) {
       Accept: 'application/json',
       'Content-Type': 'application/json'
     }, 
+    credentials: 'include',
     body: JSON.stringify(obj)
   })
-  return await res.json()
+  return res
 }
 
 // using during testing
@@ -35,4 +42,4 @@ async function postDataTest(obj, uri) {
   return await res.json()
 }
 
-export { getData, postData, postDataTest, getDataTest } 
+export { getData, postData, postDataTest, getDataTest, getDataWithToken } 
