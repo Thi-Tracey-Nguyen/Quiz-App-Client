@@ -17,18 +17,21 @@ const Result = ({ answers }) => {
 
   useEffect(() => {
     async function fetchQuiz() {
-      const data = await getData(`quizzes/${quizId}`)
+      const res = await getData(`quizzes/${quizId}`)
+      const data = await res.json()
       setQuiz(data)
     }
     fetchQuiz()
   }, [])
 
   function calculatePoints(answers, quiz) {
+    let points = 0
     for (let i = 0;i < answers.length;i++) {
       if (answers[i] === quiz.questions[i].correctAnswer) {
         points = points + 1
       }
     }
+    return points
   }
 
   useEffect(() => {
