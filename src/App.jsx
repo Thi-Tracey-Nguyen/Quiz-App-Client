@@ -84,8 +84,6 @@ const App = () => {
     return quiz ? <EditQuestions quiz={quiz} questions={questions} setQuestions={setQuestions} /> : <Loading />
   }
 
-console.log(answers)
-
   return (
     <>
       <UserContext.Provider value={value}>

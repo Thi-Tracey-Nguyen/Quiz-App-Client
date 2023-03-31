@@ -11,32 +11,36 @@ const Login = () => {
   const { user, setUser } = useContext(UserContext) 
   const [username, setUsername] = useState(localStorage.getItem('username'))
   const [password, setPassword] = useState('') 
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
   const nav = useNavigate()
 
 
   async function login(user) {
     const res = await postData(user, 'auth/login')
     const data = await res.json()
-    console.log(data)
-    setMessage(data.message)
+
     if (!res.ok) {
       const msg = `An error occurred ${res.status}`
+      setMessage(data.message)
       throw new Error(msg)
     } 
+    setMessage(null)
     setLocalStorageItems(data)
     setUser(data.user)
+
+    if (user) {
+      nav('/user')
+    }
   }
   
   function handleSubmit(e) {
     e.preventDefault()
 
-    const user = {
+    const loginUser = {
       username,
       password
     }
-    login(user)
-    nav('/user')
+    login(loginUser)
   }
 
   return (
@@ -45,7 +49,7 @@ const Login = () => {
       <form className='auth'>
           <input placeholder='username' onChange={e => setUsername(e.target.value)}/>
           <input placeholder='password' onChange={e => setPassword(e.target.value)}/>
-          {message !== '' ? <p>{message}</p> : ''}
+          {message ? <p>{message}</p> : ''}
           <div className='buttons-login'>
             <button className='random' onClick={handleSubmit}> Login </button>
             <p>Or</p>
