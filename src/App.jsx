@@ -102,7 +102,7 @@ const App = () => {
           <Route path='/add-questions/:quizId' element={<QuestionsForm questions={questions} quizzes={quizzes} setQuestions={setQuestions} />} />
           <Route path='/edit-a-quiz' element={<EditQuizzes />} />
           <Route path='/user' element={<UserProfile />} />
-          <Route path='/auth/login' element={<LogIn />} />
+          <Route path='/auth/login' element={<Login />} />
           <Route path='/auth/register' element={<Register />} />
           <Route path='*' element={<h4>Page not found</h4>} />
         </Routes>
