@@ -25,20 +25,24 @@ const UserProfile = () => {
 
   return (
     <>
+      {user ? 
       <div className="home">
-        {user !== null ? <h2>Welcome back, {user.username}!</h2> : <h2>Please log in to continue</h2>}
-        <h3>What would you like to do?</h3>
-        <div className='options'>
-          <button className='random'>
-            <Link to={'/make-a-quiz'}>Make a quiz</Link>
-          </button>
-          <button className='random'>
-            <Link to={'/edit-a-quiz'}>Edit my quizzes</Link>
-          </button>
-        </div>
-        <button className='random' onClick={handleLogOut}>Log out</button>
+          <h2>Welcome back, {user.username}!</h2> 
+          <h3>What would you like to do?</h3>
+          <div className='options'>
+            <button className='random'>
+              <Link to={'/make-a-quiz'}>Make a quiz</Link>
+            </button>
+            <button className='random'>
+              <Link to={'/edit-a-quiz'}>Edit my quizzes</Link>
+            </button>
+          </div>
+          <button className='random' onClick={handleLogOut}>Log out</button>
       </div>
+      : <h2 className='home'>Please log in to continue</h2>
+      }
     </>
+
   )
 }
 
