@@ -66,15 +66,13 @@ const App = () => {
     return quiz ? <TakeAQuiz quiz={quiz} onChange={getAnswers} /> : <Loading />
   }
 
-  
-
   const EditQuestionWrapper = () => {
     const { quizId } = useParams()
     const [quiz, setQuiz] = useState('')
     
     useEffect(() => {
       async function getQuiz() {
-        await getData(`quizzes/${quizId}`)
+        const res = await getData(`quizzes/${quizId}`)
         const data = await res.json()
         setQuiz(data)
       }

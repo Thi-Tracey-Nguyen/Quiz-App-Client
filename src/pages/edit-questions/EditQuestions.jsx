@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { postDataWithObj } from "../../utils/fetch-API"
 
 const EditQuestions = ({ quiz, questions, setQuestions }) => {
   const [index, setIndex] = useState(0);
@@ -21,19 +22,16 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
   async function updateQuestion() {
     // creates a new question object to send back to server
     const updatedQuestion = {
+      quizId: quiz._id,
       question: question, 
       correctAnswer: correctAnswer,
       incorrectAnswers: [incorrectAnswer1, incorrectAnswer2, incorrectAnswer3]
     }
     // fetch to API
-    const res = await fetch(`https://quiz-app-server.up.railway.app/questions/${questionObject._id}`, {
-      method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedQuestion)
-    })
+    const res = await postDataWithObj(
+      updatedQuestion, 
+      `questions/${questionObject._id}`, 
+      'PUT')
   }
 
   // updates index when user click next
@@ -103,7 +101,7 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
     }
     // Post new question to API
     await fetch(
-      "https://quiz-app-server.up.railway.app/questions",
+      "https://quiz-app-server-production-09e8.up.railway.app/questions",
       {
         method: "POST",
         headers: {
@@ -135,20 +133,19 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
       alert('Cannot delete this question. Quiz is required to have at least one question.')
     } else {
       try {
-        await fetch(`https://quiz-app-server.up.railway.app/questions/${questionObject._id}`, {
+        await fetch(`https://quiz-app-server-production-09e8.up.railway.app/questions/${questionObject._id}`, {
             method: "DELETE"
         })
-        // setIndex(index+1)
-        
+        setIndex(index+1)
+        setConfirm(false)
       } catch (error) {
         console.log(error)
       }
       // index === quiz.questions.length-1 ? resetForm() : setIndex(index+1) 
-      setConfirm(false)
       // checks if the question is the last before moving to next question. 
       if (index !== quiz.questions.length-1) {
-        setIndex(index-1)
-        // setQuestionObject(quiz.questions[index+1])
+        setIndex(index+1)
+        setQuestionObject(quiz.questions[index+1])
       } else {
         resetForm() //if last question, only reset form
       }
@@ -159,11 +156,12 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
   // handles click on delete a question
   const confirmForm = () => {
     return (
-      <div className='confirm'>
+      <>
         <p> Do you want to delete this question? </p>
-        <button className='random' onClick={handleConfirmDelete}> Confirm </button>
-        <button className='random' onClick={ () => setConfirm(false) }> Cancel </button>
-      </div>
+        <button onClick={handleConfirmDelete}> Confirm </button>
+        <button onClick={ () => setConfirm(false) }> Cancel </button>
+        <br />
+      </>
     );
   };
 
@@ -179,7 +177,7 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
     };
     // Post new question to API
 
-    const res = await fetch('https://quiz-app-server.up.railway.app/questions', {
+    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -187,71 +185,62 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
       },
       body: JSON.stringify(newQuestion)
     })
-    if (!res.ok) {
-      alert('Bad Request. Ensure question is longer than 5 characters, 1 correct answer and 3 incorrect answers are provided')
-    } else {
-      const data = await res.json()
-      setNewQuestion(false)
-      setQuestionObject(newQuestion)
-      quiz.questions.push(data)
-      setQuestions([...questions, data])
-      alert('Question added successfully')
-    }
+    const data = await res.json()
+    setNewQuestion(false)
+    setQuestionObject(newQuestion)
+    quiz.questions.push(data)
+    setQuestions([...questions, data])
+    alert('Question added successfully')
   } 
 
   return (
     <div className='home'>
       <h2>Edit {quiz.title}</h2>
       <div className='edit-container'>
-          <form
-            className='edit-form'
-            key={index}
-          >
-            <div className='edit-question'>
-              <label className='edit-label'> Question: </label>
-              <input
-                className='edit-input'
-                type="text"
-                defaultValue={questionObject.question}
-                // value={questionObject.question}
-                onChange={(e) => setQuestion(e.target.value)}
+        <form
+          className='edit-form'
+          key={index}
+        >
+          <div className='edit-question'>
+            <label className='edit-label'> Question: </label>
+            <input
+              className='edit-input'
+              type="text"
+              defaultValue={questionObject.question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className='edit-label'>Correct answer:</label>
+            <input
+              className='edit-input'
+              type="text"
+              defaultValue={questionObject.correctAnswer}
+              onChange={(e) => setCorrectAnswer(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className='edit-label'>Incorrect answers:</label>
+            <input
+              className='edit-input'
+              type='text'
+              defaultValue={questionObject.incorrectAnswers[0]}
+              onChange={(e) => setIncorrectAnswer1(e.target.value)} 
               />
-            </div>
-            <div>
-              <label className='edit-label'>Correct answer:</label>
-              <input
-                className='edit-input'
-                type="text"
-                defaultValue={questionObject.correctAnswer}
-                // value={questionObject.correctAnswer}
-                onChange={(e) => setCorrectAnswer(e.target.value)}
+            <input
+              className='edit-input'
+              type='text'
+              defaultValue={questionObject.incorrectAnswers[1]}
+              onChange={(e) => setIncorrectAnswer2(e.target.value)} 
               />
-            </div>
-            <div>
-              <label className='edit-label'>Incorrect answers:</label>
-              <input
-                className='edit-input'
-                type='text'
-                defaultValue={questionObject.incorrectAnswers[0]}
-                // value={questionObject.incorrectAnswers[2]}
-                onChange={(e) => setIncorrectAnswer1(e.target.value)} 
-                />
-              <input
-                className='edit-input'
-                type='text'
-                defaultValue={questionObject.incorrectAnswers[1]}
-                // value={questionObject.incorrectAnswers[2]}
-                onChange={(e) => setIncorrectAnswer2(e.target.value)} 
-                />
-              <input
-                className='edit-input'
-                type='text'
-                defaultValue={questionObject.incorrectAnswers[2]}
-                // value={questionObject.incorrectAnswers[2]}
-                onChange={(e) => setIncorrectAnswer3(e.target.value)} 
-                />
-            </div> 
-          </form>
+            <input
+              className='edit-input'
+              type='text'
+              defaultValue={questionObject.incorrectAnswers[2]}
+              onChange={(e) => setIncorrectAnswer3(e.target.value)} 
+              />
+          </div> 
+        </form>
       </div>
       { confirm && confirmForm() } 
       <div className='edit-button top'>
@@ -266,9 +255,8 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
         { (index < quiz.questions.length-1 && !confirm) && <button className='random' onClick={ handleClickSaveNext }> Save & Next </button> }
         {/* { (index !== quiz.questions.length-1 && !confirm) && <button className='random' onClick={ handleClickSave }> Save </button> } */}
       </div> 
-      
     </div>
-  )
+)
 }
 
 export default EditQuestions
