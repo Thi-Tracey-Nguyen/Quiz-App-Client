@@ -12,9 +12,9 @@ async function getDataWithToken(uri, token) {
   return res
 }
 
-async function postDataWithObj(obj, uri) {
+async function postDataWithObj(obj, uri, method) {
   const res = await fetch(`${URL.concat(uri)}`, {
-    method: 'POST', 
+    method: method, 
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'

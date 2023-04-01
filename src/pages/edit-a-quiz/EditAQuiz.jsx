@@ -1,5 +1,6 @@
-import React, { useState, Image, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, redirect, useNavigate, useParams } from 'react-router-dom'
+import { UserContext } from '../../UserContext'
 
 const EditAQuiz = ({ categories }) => {
   const [quiz, setQuiz] = useState('')
@@ -14,6 +15,7 @@ const EditAQuiz = ({ categories }) => {
     '/question-mark.png', '/test.png', '/tv.png'
   ]
   const { quizId } = useParams()
+  const { user } = useContext(UserContext)
   const nav = useNavigate()
 
   useEffect(() => {
@@ -25,20 +27,21 @@ const EditAQuiz = ({ categories }) => {
     getQuiz()
   }, [quizId])
 
-  // Function to check if category entered and if so call addQuiz function
+  // send edited quiz info back to the server
   async function submitQuiz(e) {
     e.preventDefault()
-    editQuiz(category, title, author, image)
+    editQuiz(category, title, quiz, user, image)
     nav('/quizzes/')
   }
 
-  // Add a new quiz to the API
-  const editQuiz = async (category, title, author, image) => {
+  // Edit quiz's information
+  const editQuiz = async (category, title, quiz, user, image) => {
     // create a new quiz
     const editedQuiz = {
       category: category || quiz.category.name,
       title: title || quiz.title,
-      author: author || quiz.author,
+      authorId: user && user._id,
+      author: quiz.author,
       image: image || quiz.image
     }
 
@@ -54,18 +57,17 @@ const EditAQuiz = ({ categories }) => {
     })
   }
 
-  // Uses the new quiz data to get the ID of the new quiz from the DB
-  function navToNewQuiz(data) {
-    // Find the quiz in the DB where the title matches the quiz just created
-    const quiz = quizzes.find((quiz) => quiz.title === data.title);
-    // Use the ID of that quiz to navigate to the correct Add Questions page
-    nav(`/add-questions/${quiz._id}`);
-  }
+  // // Uses the new quiz data to get the ID of the new quiz from the DB
+  // function navToNewQuiz(data) {
+  //   // Find the quiz in the DB where the title matches the quiz just created
+  //   const quiz = quizzes.find((quiz) => quiz.title === data.title);
+  //   // Use the ID of that quiz to navigate to the correct Add Questions page
+  //   nav(`/add-questions/${quiz._id}`);
+  // }
 
   function handleClickQuestions(event) {
     event.preventDefault()
-    // nav(`{edit-a-quiz/${quiz.id}/questions}`)
-    editQuiz(category, title, author, image)
+    editQuiz(category, title, quiz, user, image)
     nav('./questions')
   }
 
@@ -97,7 +99,7 @@ const EditAQuiz = ({ categories }) => {
               <input
                 type="text"
                 defaultValue={quiz.author}
-                onChange={(e) => setAuthor(e.target.value)}
+                readOnly = {true}
               />
             </div>
             <div className='image-form'>

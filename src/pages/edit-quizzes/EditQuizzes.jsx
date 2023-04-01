@@ -52,6 +52,10 @@ const EditQuizzes = () => {
           method: "DELETE",
         }
       )
+      if (!res.ok) {
+        throw new Error(res.status)
+      }
+      nav('/user')
     } catch (error) {
       console.error(error)
     }

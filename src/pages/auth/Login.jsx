@@ -16,7 +16,7 @@ const Login = () => {
 
 
   async function login(user) {
-    const res = await postDataWithObj(user, 'auth/login')
+    const res = await postDataWithObj(user, 'auth/login', 'POST')
     const data = await res.json()
 
     if (!res.ok) {

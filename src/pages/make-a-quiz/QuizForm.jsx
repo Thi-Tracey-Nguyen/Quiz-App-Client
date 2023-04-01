@@ -42,7 +42,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
     }
     console.log(newQuiz)
     // Post new quiz to the API
-    const res = await postDataWithObj(newQuiz, 'quizzes')
+    const res = await postDataWithObj(newQuiz, 'quizzes', 'POST')
     console.log(res)
     //catch error when quiz of the same name already exists
     if (res.status === 409) {
