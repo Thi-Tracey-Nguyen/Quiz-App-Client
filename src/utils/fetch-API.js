@@ -39,23 +39,5 @@ async function postData(uri) {
   return res
 }
 
-// using during testing
-async function getDataTest(uri) {
-  const res = await fetch(`http://localhost:4001/${uri}`)
-  return await res.json()
-}
-
-
-async function postDataTest(obj, uri) {
-  const res = await fetch(`http://localhost:4001/${uri}`, {
-    method: 'POST', 
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }, 
-    body: JSON.stringify(obj)
-  })
-  return await res.json()
-}
 
 export { getData, postData, postDataWithObj, getDataWithToken } 

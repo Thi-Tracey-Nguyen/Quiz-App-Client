@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { postDataWithObj } from '../../utils/fetch-API'
 import './login-register.css'
 
 const Register = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-
-  async function register(user) {
-    const res = await fetch(`http://localhost:4001/auth/register`, {
-      method: 'POST', 
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }, 
-      body: JSON.stringify(user)
-    })
-    const data = await res.json()
-    return res
-  }
+  const nav = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -27,12 +17,16 @@ const Register = () => {
       password
     }
 
-    const res = await register(newUser)
+    const res = await postDataWithObj(newUser, 'auth/register', 'POST')
     console.log(res)
+    const data = await res.json()
 
-    if (res.status === 201) {
-      alert('User created sucessfully!')
+    if (!res.ok) {
+      throw new Error (res.message)
     }
+
+    alert(data.message)
+    nav('/auth/login')
   }
   
 
