@@ -88,7 +88,7 @@ const App = () => {
       <NavBar />
         <Routes>
           <Route path='/' element={<Home quizzes={quizzes}/>} />
-          <Route path='/quizzes' element={<AllQuizzes quizzes={quizzes} questions={questions} setQuizzes={setQuizzes} setQuestions={setQuestions} />} />
+          <Route path='/quizzes' element={<AllQuizzes quizzes={quizzes} questions={questions} setQuizzes={setQuizzes} />} />
           <Route path='/categories' element={<Categories categories={categories}/>} />
           <Route path='/categories/:categoryName' element={<CategoryQuizzes categories={categories} quizzes={quizzes}/>} />
           <Route path='/quizzes/:quizId' element={<TakeAQuizWrapper />} />
