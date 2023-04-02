@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react"
 import RandomQuiz from "../../components/RandomQuiz"
 import ShowQuiz from "../../components/ShowQuiz"
 import ReturnToTop from "../../components/UI/ReturnToTop"
+import { getData } from "../../utils/fetch-API"
 
 const AllQuizzes = ({ quizzes, setQuizzes, questions }) => {
+  
   useEffect(() => {
     async function getQuizzes() {
-      const res = await fetch('https:quiz-app-server.up.railway.app/quizzes')
+      const res = await getData('quizzes/')
       const data = await res.json()
       setQuizzes(data)
     }
