@@ -35,8 +35,8 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
     const newQuiz = {
       category: category,
       title: title,
-      authorId: user && user._id,
-      author: user.username || 'Guest User',
+      authorId: user ? user._id : '0001',
+      author: user ? user.username : 'Guest User',
       questions: questions,
       image: image,
     }
@@ -58,9 +58,7 @@ const QuizForm = ({ quizzes, categories, setQuizzes }) => {
     }
   }
 
-  console.log(user)
-
-  // // Uses the new quiz data to get the ID of the new quiz from the DB
+  // Uses the new quiz data to get the ID of the new quiz from the DB
   function navToNewQuiz(data) {
     // Find the quiz in the DB where the title matches the quiz just created
     const quiz = quizzes.find((quiz) => quiz.title === data.title)
