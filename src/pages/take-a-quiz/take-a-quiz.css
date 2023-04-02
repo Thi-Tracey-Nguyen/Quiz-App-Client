@@ -99,6 +99,7 @@ button.submit {
   border: 0.2rem solid rgb(249,200,106);
   padding: 0.5rem;
   font-size: 1rem;
+  color: black;
 }
 
 @media only screen and (min-width: 600px) {

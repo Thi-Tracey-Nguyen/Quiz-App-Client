@@ -158,8 +158,8 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
     return (
       <>
         <p> Do you want to delete this question? </p>
-        <button onClick={handleConfirmDelete}> Confirm </button>
-        <button onClick={ () => setConfirm(false) }> Cancel </button>
+        <button className='random' onClick={handleConfirmDelete}> Confirm </button>
+        <button className='random' onClick={ () => setConfirm(false) }> Cancel </button>
         <br />
       </>
     );
@@ -177,14 +177,7 @@ const EditQuestions = ({ quiz, questions, setQuestions }) => {
     };
     // Post new question to API
 
-    const res = await fetch('https://quiz-app-server-production-09e8.up.railway.app/questions', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newQuestion)
-    })
+    const res = await postDataWithObj(newQuestion, 'questions/', 'POST')
     const data = await res.json()
     setNewQuestion(false)
     setQuestionObject(newQuestion)
