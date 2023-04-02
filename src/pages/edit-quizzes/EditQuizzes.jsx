@@ -19,9 +19,9 @@ const EditQuizzes = () => {
         const token = localStorage.getItem('token')
         let res
         if (user.isAdmin) {
-          res = await getDataWithToken('quizzes/admin', token)
+          res = await getDataWithToken('quizzes/admin')
         } else {
-          res = await getDataWithToken(`quizzes/user/${user._id}`, token)
+          res = await getDataWithToken(`quizzes/user/${user._id}`)
         }
         if (!res.ok) {
           throw new Error(res.status)

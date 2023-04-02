@@ -5,7 +5,9 @@ async function getData(uri) {
   return res
 }
 
-async function getDataWithToken(uri, token) {
+async function getDataWithToken(uri) {
+
+  const token = localStorage.getItem('token')
   const res = await fetch(`${URL.concat(uri)}`, {
     headers: { 'Authorization': token }
   })
